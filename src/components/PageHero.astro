@@ -1,0 +1,28 @@
+---
+import { site, telHref, cta } from '../data/site';
+interface Props {
+  eyebrow: string;
+  title: string;
+  lede: string;
+  primaryLabel?: string;
+  showPhone?: boolean;
+  meta?: string[];
+}
+const { eyebrow, title, lede, primaryLabel = cta.primary, showPhone = true, meta = [] } = Astro.props;
+---
+<section class="hero">
+  <div class="wrap hero__inner">
+    <p class="eyebrow eyebrow--light">{eyebrow}</p>
+    <h1>{title}</h1>
+    <p class="lede">{lede}</p>
+    <div class="btn-row">
+      <a class="btn btn--amber" href="/contact">{primaryLabel}</a>
+      {showPhone && <a class="btn btn--outline-light" href={telHref}>{cta.call} · {site.phoneDisplay}</a>}
+    </div>
+    {meta.length > 0 && (
+      <div class="hero__meta">
+        {meta.map((m) => <span>{m}</span>)}
+      </div>
+    )}
+  </div>
+</section>

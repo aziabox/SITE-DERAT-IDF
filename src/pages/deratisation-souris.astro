@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-souris', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Souris', href: '/deratisation-souris' },
+];
+
+const faq = [
+  {
+    q: 'Comment savoir si j’ai des souris ?',
+    a: 'Trois indices réunis suffisent presque toujours : de petites crottes noires de 3 à 6 mm, pointues aux extrémités, dispersées plutôt que regroupées ; des bruits de grattement légers dans une cloison, un plafond ou derrière un meuble, surtout en soirée ; et des emballages percés de petits trous nets dans un placard. L’odeur, ammoniaquée et tenace, apparaît plus tard.',
+  },
+  {
+    q: 'Une seule souris peut-elle poser problème ?',
+    a: 'Une souris isolée existe, mais c’est rare dans un logement occupé. La souris domestique se reproduit vite et une femelle peut avoir plusieurs portées par an. Surtout, la présence d’une souris signifie qu’un accès existe : si l’ouverture n’est pas fermée, d’autres individus emprunteront le même chemin.',
+  },
+  {
+    q: 'Pourquoi les souris reviennent-elles après un traitement ?',
+    a: 'Presque toujours pour l’une de ces trois raisons : le point d’entrée n’a pas été fermé, le traitement n’a couvert qu’une partie des zones fréquentées, ou une source de nourriture est restée accessible (sac de croquettes, réserve en vrac, miettes derrière un appareil). La souris a un territoire réduit : il suffit qu’une pièce n’ait pas été traitée pour que la population se maintienne.',
+  },
+  {
+    q: 'Les souris montent-elles dans les étages ?',
+    a: 'Oui. Contrairement au rat brun, qui reste majoritairement en bas, la souris grimpe très bien et circule dans les gaines, les doublages de cloison et les faux plafonds. Une présence au cinquième étage est parfaitement possible sans que la cave soit concernée.',
+  },
+  {
+    q: 'Les ultrasons fonctionnent-ils contre les souris ?',
+    a: 'Les résultats rapportés sont au mieux temporaires. Les rongeurs s’habituent rapidement à un stimulus qui ne s’accompagne d’aucune conséquence réelle, et les ondes sont arrêtées par les cloisons et les meubles. Ces appareils ne traitent ni la population en place, ni l’accès par lequel elle est entrée.',
+  },
+  {
+    q: 'Faut-il tout vider avant l’intervention ?',
+    a: 'Non, mais l’accès compte. Dégager les plinthes, laisser l’accès au dessous et à l’arrière des appareils ménagers, et mettre les denrées en vrac dans des contenants rigides permet de traiter les bons emplacements dès le premier passage.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation souris en Île-de-France',
+    serviceType: 'Traitement des souris',
+    description:
+      'Traitement des souris dans les logements et les locaux en Île-de-France : identification, couverture complète des zones fréquentées et fermeture des ouvertures.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation souris en Île-de-France : signes et traitement"
+  description="Reconnaître une infestation de souris, comprendre pourquoi elles reviennent et comment se déroule le traitement en Île-de-France. Logements, commerces, bureaux."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Rongeurs • Souris domestique"
+    title="Dératisation souris en Île-de-France"
+    lede="La souris est le rongeur le plus sous-estimé : discrète, minuscule, elle s’installe à l’intérieur sans jamais passer par la cave. Un traitement efficace se joue moins sur la quantité posée que sur la couverture réelle des zones qu’elle fréquente."
+    primaryLabel="Décrire ma situation"
+    meta={['Appartements et maisons', 'Commerces et bureaux', 'Traitement par zones']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow">
+      <div class="answer">
+        <p class="eyebrow">Réponse directe</p>
+        <p>
+          Une présence de souris se reconnaît à des crottes de 3 à 6 mm dispersées,
+          à des grattements légers dans les cloisons ou les plafonds en début de
+          nuit, et à des emballages percés dans les placards.
+        </p>
+        <p>
+          Le traitement doit couvrir <strong>toutes</strong> les pièces où des
+          indices apparaissent, et l’ouverture par laquelle elles sont entrées —
+          souvent 6 à 10&nbsp;mm — doit être fermée. C’est ce point qui décide du
+          résultat.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="wrap">
+      <div class="prose" style="max-width:none">
+        <div class="split split--wide-left">
+          <div class="prose">
+            <h2>Pourquoi la souris échappe si longtemps à l’attention</h2>
+            <p>
+              La souris domestique (<em>Mus musculus</em>) pèse quelques dizaines
+              de grammes. Elle consomme de très petites quantités, réparties sur
+              de nombreux points de la journée plutôt qu’en un seul repas. Elle ne
+              creuse pas, ne fait pas de bruit lourd, et ses déjections passent
+              facilement pour des miettes sombres.
+            </p>
+            <p>
+              Conséquence : au moment où l’on s’en aperçoit, la présence date
+              souvent de plusieurs semaines. C’est aussi pour cela que la question
+              « est-ce grave ? » est mal posée. La bonne question est : jusqu’où
+              circule-t-elle ?
+            </p>
+
+            <h2>Là où elle s’installe réellement</h2>
+            <p>
+              La souris cherche un espace clos, tempéré, proche d’une ressource.
+              Dans un logement francilien, cela signifie presque toujours :
+            </p>
+            <ul class="ticks">
+              <li>derrière et sous les appareils ménagers — moteur tiède, miettes, angles inaccessibles&nbsp;;</li>
+              <li>dans les doublages de cloison et les coffrages, notamment autour des canalisations&nbsp;;</li>
+              <li>sous les meubles bas de cuisine, en particulier au niveau des socles&nbsp;;</li>
+              <li>dans les faux plafonds et les caissons de volet roulant&nbsp;;</li>
+              <li>au fond des placards, derrière les réserves alimentaires en vrac&nbsp;;</li>
+              <li>dans les gaines techniques, qui lui servent d’ascenseur entre étages.</li>
+            </ul>
+            <p>
+              Dans un commerce ou un bureau, il faut y ajouter les zones de
+              stockage, les arrières de comptoir, les locaux de pause et les
+              chemins de câbles.
+            </p>
+
+            <h2>Ce qui distingue le traitement de celui des rats</h2>
+            <p>
+              Le rat parcourt des dizaines de mètres&nbsp;; la souris se contente
+              d’un territoire de quelques mètres. Cette différence a des
+              conséquences pratiques directes.
+            </p>
+            <div class="table-wrap">
+              <table>
+                <caption>Implications opérationnelles du comportement de chaque espèce.</caption>
+                <thead>
+                  <tr><th scope="col">Critère</th><th scope="col">Rat brun</th><th scope="col">Souris</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Rayon d’action</th><td>Plusieurs dizaines de mètres</td><td>Quelques mètres</td></tr>
+                  <tr><th scope="row">Densité de dispositifs</th><td>Faible, sur les axes</td><td>Élevée, dans chaque zone</td></tr>
+                  <tr><th scope="row">Réaction à la nouveauté</th><td>Méfiance marquée</td><td>Curiosité, exploration rapide</td></tr>
+                  <tr><th scope="row">Ouverture minimale</th><td>Environ 2 cm</td><td>Environ 6 mm</td></tr>
+                  <tr><th scope="row">Niveau occupé</th><td>Bas et sous-sol</td><td>Tous niveaux</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Autrement dit : contre le rat, on cherche l’axe&nbsp;; contre la
+              souris, on cherche la couverture. Un appartement traité dans la
+              seule cuisine alors que des indices existent dans le séjour reste
+              un appartement partiellement traité.
+            </p>
+
+            <h2>Le déroulé de l’intervention</h2>
+            <ol class="steps" style="margin-top:1.5rem">
+              <li>
+                <h3>Cartographie des indices</h3>
+                <p>
+                  Pièce par pièce, y compris là où rien n’a été signalé. Les
+                  crottes donnent la carte des déplacements réels, qui ne
+                  correspond pas toujours à ce qui a été observé.
+                </p>
+              </li>
+              <li>
+                <h3>Recherche des ouvertures</h3>
+                <p>
+                  Traversées de canalisation sous évier, socles de meubles,
+                  passages de câbles, seuils, coffres de volet, trappes de
+                  visite, arrivées de gaines.
+                </p>
+              </li>
+              <li>
+                <h3>Traitement couvrant</h3>
+                <p>
+                  Dispositifs répartis dans chaque zone concernée, placés au
+                  contact des parois et hors de portée des enfants et des
+                  animaux domestiques.
+                </p>
+              </li>
+              <li>
+                <h3>Obturation</h3>
+                <p>
+                  Fermeture des ouvertures avec grillage métallique fin, tôle ou
+                  mortier. La mousse expansive seule est traversée&nbsp;: elle ne
+                  ferme rien.
+                </p>
+              </li>
+              <li>
+                <h3>Contrôle</h3>
+                <p>
+                  Une à deux semaines plus tard, vérification des consommations
+                  et des nouveaux indices, extension éventuelle du périmètre.
+                </p>
+              </li>
+            </ol>
+
+            <h2>Ce qui fait échouer un traitement</h2>
+            <p>
+              Dans la grande majorité des cas de récidive que l’on nous décrit, la
+              cause est l’une des suivantes : une pièce oubliée, une ouverture non
+              fermée, ou une ressource alimentaire laissée accessible. Le sac de
+              croquettes ouvert dans un placard bas est, à lui seul, un motif
+              fréquent de réinstallation.
+            </p>
+            <p>
+              Le sujet est développé dans
+              <a href="/blog/pourquoi-les-souris-reviennent">pourquoi les souris reviennent-elles</a>.
+            </p>
+          </div>
+
+          <aside class="aside-card">
+            <h3>Situations courantes</h3>
+            <p>Chacune a sa réponse propre.</p>
+            <ul>
+              <li><a href="/blog/souris-dans-un-appartement-que-faire">Souris dans un appartement</a></li>
+              <li><a href="/infestation-souris">La présence s’étend</a></li>
+              <li><a href="/traitement-souris">Méthodes de traitement</a></li>
+              <li><a href="/prevention-rongeurs">Fermer les accès</a></li>
+              <li><a href="/deratisation-commerces">Souris dans un commerce</a></li>
+              <li><a href="/deratisation-rats">Ce n’est peut-être pas une souris</a></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq
+    items={faq}
+    title="Souris : ce qu’on nous demande le plus"
+    eyebrow="Questions fréquentes"
+  />
+
+  <RelatedLinks
+    title="Continuer"
+    eyebrow="Maillage"
+    items={[
+      { href: '/traitement-souris', label: 'Traitement contre les souris', note: 'Méthodes et couverture' },
+      { href: '/infestation-souris', label: 'Infestation de souris', note: 'Présence étendue' },
+      { href: '/inspection-rongeurs', label: 'Recherche des points d’entrée', note: 'Ouvertures de 6 mm' },
+      { href: '/deratisation-particuliers', label: 'Particuliers', note: 'Logement, cave, combles' },
+      { href: '/blog/reconnaitre-infestation-de-souris', label: 'Reconnaître une infestation', note: 'Guide' },
+      { href: '/blog/rat-ou-souris-difference', label: 'Rat ou souris : la différence', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Des bruits dans une cloison ? Décrivez l’heure et l’endroit"
+    text="Le niveau, le moment et le type de bruit permettent souvent de trancher entre souris, rat et cause non animale avant même le déplacement."
+    eyebrow="Premier tri"
+  />
+</BaseLayout>

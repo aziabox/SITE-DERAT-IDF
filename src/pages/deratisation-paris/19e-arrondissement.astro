@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { serviceSchema } from '../../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-paris/19e-arrondissement', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Paris', href: '/deratisation-paris' },
+  { label: '19e arrondissement', href: '/deratisation-paris/19e-arrondissement' },
+];
+
+const faq = [
+  {
+    q: 'Vivre près du bassin de la Villette ou du canal de l’Ourcq augmente-t-il le risque ?',
+    a: 'Les abords d’eau offrent au rat brun deux conditions favorables : un accès permanent à l’eau et des berges où creuser. Cela ne rend pas une présence inévitable dans les bâtiments voisins, mais cela rend la fermeture du pied de bâtiment nettement plus déterminante : soupiraux, regards, traversées de réseaux, trappes.',
+  },
+  {
+    q: 'Les grands ensembles du 19e se traitent-ils comme le reste de Paris ?',
+    a: 'Non, le périmètre est différent. Là où l’immeuble haussmannien pose la question des caves communicantes, le grand ensemble pose celle du vide sanitaire continu, des gaines verticales et des locaux déchets multiples. L’intervention doit couvrir l’ensemble de ces volumes, ce qui suppose une coordination avec le bailleur ou le syndic.',
+  },
+  {
+    q: 'Les espaces verts favorisent-ils les rongeurs ?',
+    a: 'Les espaces verts entretenus ne sont pas en eux-mêmes un facteur déterminant. Ce qui compte, ce sont les ressources en bordure : corbeilles, restes de nourriture, nourrissage d’animaux, dépôts. Pour un bâtiment riverain d’un parc, la priorité reste l’obturation et la gestion des déchets côté bâtiment.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation Paris 19e arrondissement',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris dans le 19e arrondissement de Paris : abords du bassin de la Villette et du canal de l’Ourcq, grands ensembles et habitat ancien.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Paris 19e : canaux et grands ensembles"
+  description="Dératisation dans le 19e arrondissement de Paris : bassin de la Villette, canal de l’Ourcq, grands ensembles et habitat ancien. Périmètre et prévention."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Paris 19e • 75019"
+    title="Dératisation Paris 19e : entre canaux et habitat collectif"
+    lede="Le 19e est l’un des rares arrondissements parisiens où l’on trouve à la fois de vastes abords d’eau, des grands ensembles avec vide sanitaire continu et un tissu ancien de faubourg. Trois configurations, trois périmètres d’intervention différents."
+    primaryLabel="Décrire mon bâtiment"
+    meta={['Abords de canaux', 'Grands ensembles', 'Tissu ancien']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Le contexte urbain</h2>
+      <p>
+        L’arrondissement s’organise autour du bassin de la Villette et du canal
+        de l’Ourcq, qui le traversent du sud-ouest au nord-est. Autour, on
+        trouve un tissu ancien de faubourg, des opérations de logement collectif
+        des années 1960 à 1980, des programmes plus récents et de grands espaces
+        publics.
+      </p>
+
+      <h2>Les abords d’eau</h2>
+      <p>
+        Les berges et les ouvrages hydrauliques constituent un environnement
+        favorable au rat brun : eau en permanence, sol meuble, végétation,
+        abris. Pour un bâtiment riverain, la question n’est donc pas de savoir
+        si une pression extérieure existe, mais si le bâtiment est correctement
+        fermé.
+      </p>
+      <p>
+        La priorité porte sur le pied de bâtiment : soupiraux grillagés,
+        regards scellés, traversées de réseaux obturées, trappes de cave
+        fermées, pas de dépôt de déchets au sol côté rue.
+      </p>
+
+      <h2>Les grands ensembles</h2>
+      <p>
+        Les opérations de logement collectif du 19e présentent les
+        caractéristiques habituelles de cette typologie : vide sanitaire
+        continu sous les bâtiments, gaines techniques verticales, locaux
+        déchets multiples, parfois d’anciennes colonnes de vide-ordures
+        condamnées sans avoir été obturées.
+      </p>
+      <p>
+        Le périmètre d’intervention est donc bien plus large que dans un
+        immeuble ancien, et l’accès aux volumes techniques conditionne le
+        résultat. Le déroulé adapté figure sur la page
+        <a href="/deratisation-coproprietes">copropriétés</a>.
+      </p>
+      <div class="keyline">
+        <p>
+          Dans un grand ensemble, traiter une cage d’escalier revient à traiter
+          une fraction du volume réellement concerné. C’est la cause la plus
+          fréquente des récidives signalées quelques semaines plus tard.
+        </p>
+      </div>
+
+      <h2>Le tissu ancien de faubourg</h2>
+      <p>
+        Les secteurs anciens de l’arrondissement — habitat de faubourg, cours,
+        anciennes activités reconverties — posent les questions classiques du
+        parc ancien parisien : caves communicantes, passages entre parcelles,
+        circulations verticales dans les planchers bois.
+      </p>
+
+      <h2>Prévention dans le 19e</h2>
+      <ul class="ticks">
+        <li>Grillager systématiquement les ventilations de vide sanitaire.</li>
+        <li>Obturer les anciennes colonnes de vide-ordures condamnées.</li>
+        <li>Fermer les locaux déchets : porte jointive, bas de porte métallique.</li>
+        <li>Sceller les regards, notamment côté berges et espaces publics.</li>
+        <li>Supprimer le stockage au sol dans les caves et locaux techniques.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Paris 19e : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Grands ensembles' },
+      { href: '/deratisation-paris/10e-arrondissement', label: 'Paris 10e', note: 'Canal Saint-Martin' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Pied de bâtiment' },
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Vide sanitaire continu' },
+    ]}
+  />
+
+  <CtaBand
+    title="Vide sanitaire ou abords de canal : deux périmètres différents"
+    text="Précisez la configuration du bâtiment : c’est ce qui détermine par où commence l’intervention."
+    eyebrow="Paris 19e"
+  />
+</BaseLayout>

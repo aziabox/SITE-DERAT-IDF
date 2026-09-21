@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import PageHero from '../../components/PageHero.astro';
+import { departementsHorsParis, villes } from '../../data/idf';
+
+const origin = Astro.site?.origin ?? '';
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+];
+
+const petite = departementsHorsParis.filter((d) => d.couronne === 'Petite couronne');
+const grande = departementsHorsParis.filter((d) => d.couronne === 'Grande couronne');
+
+const faq = [
+  {
+    q: 'Intervenez-vous dans toute l’Île-de-France ?',
+    a: 'Oui : Paris, les trois départements de la petite couronne (Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne) et les quatre de la grande couronne (Val-d’Oise, Yvelines, Essonne, Seine-et-Marne). Indiquez votre commune ou votre code postal lors de la prise de contact : c’est ce qui détermine l’organisation du déplacement.',
+  },
+  {
+    q: 'Pourquoi une page par département plutôt qu’une seule page régionale ?',
+    a: 'Parce que le bâti n’est pas le même. Un immeuble haussmannien parisien, une résidence des années 1970 en petite couronne et un pavillon avec vide sanitaire en grande couronne n’ont ni les mêmes accès, ni les mêmes zones à risque. Les pages départementales décrivent ces différences concrètes plutôt que de répéter un texte générique.',
+  },
+  {
+    q: 'Ma commune n’a pas de page dédiée, est-ce un problème ?',
+    a: 'Non. Nous intervenons dans toutes les communes d’Île-de-France. Nous n’avons créé des pages communales que là où un contexte réellement spécifique justifiait un contenu propre. Publier des dizaines de pages identiques avec seulement le nom de la ville changé n’apporterait rien, ni à vous, ni à la qualité de l’information.',
+  },
+  {
+    q: 'Le délai d’intervention dépend-il de la distance ?',
+    a: 'Il dépend surtout de la nature de la demande et de l’accessibilité du site. Une intervention en petite couronne s’organise généralement plus rapidement qu’un site éloigné de grande couronne, mais c’est le type de bâtiment et les créneaux d’accès (hors service pour un restaurant, présence d’un gardien pour un immeuble) qui pèsent le plus.',
+  },
+];
+---
+<BaseLayout
+  title="Zones d’intervention : dératisation en Île-de-France"
+  description="Dératisation à Paris, en petite et en grande couronne. Une page par département : contexte du bâti, zones à risque et communes couvertes en Île-de-France."
+  crumbs={crumbs}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Zones d’intervention"
+    title="Dératisation en Île-de-France : Paris, petite et grande couronne"
+    lede="L’Île-de-France ne se traite pas comme un territoire homogène. Entre un sous-sol haussmannien, un vide sanitaire de résidence des années 1970 et un comble de pavillon, ni les accès ni les zones à risque ne se ressemblent. Chaque département a donc sa page."
+    primaryLabel="Indiquer ma commune"
+    meta={['Paris + 7 départements', 'Petite et grande couronne', '12 pages communales']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left">
+        <div class="prose">
+          <h2>Trois logiques de bâti, trois manières d’intervenir</h2>
+          <p>
+            La géographie administrative est utile pour se repérer, mais ce qui
+            compte réellement pour une intervention, c’est la typologie du bâti.
+            En Île-de-France, elle se répartit assez nettement en trois familles.
+          </p>
+
+          <h3>Paris : la densité et le sous-sol</h3>
+          <p>
+            Immeubles anciens, caves voûtées souvent communicantes entre
+            plusieurs entrées, cours intérieures en cœur d’îlot, réseaux denses,
+            commerces en pied d’immeuble. La difficulté n’est presque jamais de
+            traiter : elle est d’accéder à l’ensemble du périmètre concerné.
+          </p>
+
+          <h3>Petite couronne : la mixité</h3>
+          <p>
+            Les Hauts-de-Seine, la Seine-Saint-Denis et le Val-de-Marne
+            juxtaposent des centres anciens, de grands ensembles construits
+            entre les années 1950 et 1980, des zones d’activité et des secteurs
+            en renouvellement urbain. Vides sanitaires, gaines verticales,
+            dalles et parkings souterrains dominent les problématiques.
+          </p>
+
+          <h3>Grande couronne : le pavillonnaire et les volumes</h3>
+          <p>
+            Dans le Val-d’Oise, les Yvelines, l’Essonne et la Seine-et-Marne,
+            l’habitat individuel occupe une place bien plus importante, avec
+            combles, garages, abris de jardin et abords végétalisés. S’y ajoutent
+            des zones logistiques et des centres anciens de villes préfectorales.
+          </p>
+
+          <div class="keyline">
+            <p>
+              Le point commun à toute la région : les accès se trouvent presque
+              toujours au même endroit — traversées de réseaux, ventilations
+              basses, seuils et locaux déchets. C’est leur nombre et leur
+              accessibilité qui changent d’un territoire à l’autre.
+            </p>
+          </div>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Accès direct</h3>
+          <p>Les pages les plus consultées.</p>
+          <ul>
+            <li><a href="/deratisation-paris">Dératisation à Paris</a></li>
+            <li><a href="/zones-intervention/seine-saint-denis">Seine-Saint-Denis (93)</a></li>
+            <li><a href="/zones-intervention/hauts-de-seine">Hauts-de-Seine (92)</a></li>
+            <li><a href="/zones-intervention/val-de-marne">Val-de-Marne (94)</a></li>
+            <li><a href="/contact">Ma commune n’est pas listée</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band band--marked">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--light">Paris</p>
+      <h2 style="max-width:22ch">Paris intra-muros</h2>
+      <p class="lede" style="margin-bottom:2rem">
+        Paris dispose de sa propre page, ainsi que de pages d’arrondissement
+        pour les secteurs dont le contexte urbain justifie un contenu spécifique.
+      </p>
+      <div class="btn-row" style="margin-top:0">
+        <a class="btn btn--amber" href="/deratisation-paris">Dératisation à Paris</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Petite couronne</p>
+      <h2>Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne</h2>
+      <p class="lede" style="margin-bottom:2.25rem">
+        Territoires denses, en contact direct avec Paris, où coexistent habitat
+        collectif, tissu ancien et zones d’activité.
+      </p>
+      <ul class="links-grid">
+        {petite.map((d) => (
+          <li>
+            <a href={`/zones-intervention/${d.slug}`}>
+              Dératisation {d.prep} {d.name} ({d.code})
+              <span>Préfecture&nbsp;: {d.prefecture}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--ruled">
+    <div class="wrap">
+      <p class="eyebrow">Grande couronne</p>
+      <h2>Val-d’Oise, Yvelines, Essonne, Seine-et-Marne</h2>
+      <p class="lede" style="margin-bottom:2.25rem">
+        Pavillonnaire dominant, centres anciens, zones logistiques et secteurs
+        périurbains où les abords jouent un rôle déterminant.
+      </p>
+      <ul class="links-grid">
+        {grande.map((d) => (
+          <li>
+            <a href={`/zones-intervention/${d.slug}`}>
+              Dératisation {d.prep} {d.name} ({d.code})
+              <span>Préfecture&nbsp;: {d.prefecture}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--ruled">
+    <div class="wrap">
+      <p class="eyebrow">Communes</p>
+      <h2>Pages communales publiées</h2>
+      <p class="lede" style="margin-bottom:2.25rem">
+        Nous intervenons dans l’ensemble des communes franciliennes. Ces pages
+        existent parce que le contexte local y appelait un contenu réellement
+        différent — et non pour multiplier les URL.
+      </p>
+      <ul class="links-grid">
+        {villes.map((v) => (
+          <li>
+            <a href={`/deratisation-${v.slug}`}>
+              Dératisation {v.prep} {v.name}
+              <span>{v.metaAngle.split(',')[0]}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Couverture géographique : vos questions" eyebrow="Questions fréquentes" />
+
+  <CtaBand
+    title="Indiquez votre commune, nous vous disons ce qui est possible"
+    text="Le code postal et le type de bâtiment suffisent pour organiser la suite. Toutes les communes d’Île-de-France sont couvertes."
+    eyebrow="Couverture"
+  />
+</BaseLayout>

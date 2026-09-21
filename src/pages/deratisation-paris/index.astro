@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { arrondissements } from '../../data/idf';
+import { serviceSchema } from '../../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-paris', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Paris', href: '/deratisation-paris' },
+];
+
+const faq = [
+  {
+    q: 'Pourquoi les caves parisiennes posent-elles autant de problèmes ?',
+    a: 'Parce qu’elles sont souvent communicantes. Dans beaucoup d’immeubles anciens, les caves de plusieurs escaliers — voire de plusieurs immeubles mitoyens — communiquent par des passages maçonnés, des anciennes portes condamnées ou les réseaux. Un occupant traite sa cave, les rongeurs se déplacent de quelques mètres et reviennent. C’est la raison pour laquelle le périmètre doit être établi avant tout traitement.',
+  },
+  {
+    q: 'Que faire si je vois un rat dans la rue ou dans une cour ?',
+    a: 'Une observation en espace public relève des services de la Ville ou du gestionnaire de l’espace concerné : vous pouvez le signaler via les canaux municipaux. Pour un immeuble privé, une cour ou une copropriété, c’est le syndic qui engage l’intervention. Si vous êtes occupant, le signalement écrit au syndic est le point de départ utile.',
+  },
+  {
+    q: 'Faut-il l’accord du syndic pour une intervention ?',
+    a: 'Pour les parties communes, oui : caves, cour, local poubelles, gaines, locaux techniques relèvent de la copropriété. Pour l’intérieur d’un logement ou d’un local commercial, non. En pratique, les deux doivent souvent être menés en parallèle, car traiter un lot sans traiter le sous-sol donne un résultat temporaire.',
+  },
+  {
+    q: 'Intervenez-vous dans les commerces et restaurants parisiens ?',
+    a: 'Oui, hors service, avant ouverture ou après fermeture, avec traçabilité pour le plan de maîtrise sanitaire. C’est une part importante de notre activité à Paris, où la majorité des établissements occupent un pied d’immeuble avec une réserve en sous-sol.',
+  },
+  {
+    q: 'Avez-vous une page pour chaque arrondissement ?',
+    a: 'Non, volontairement. Nous intervenons dans les vingt arrondissements, mais nous n’avons publié de pages que pour ceux dont le contexte urbain appelle un contenu réellement différent. Vingt pages identiques avec un numéro changé n’apporteraient rien.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Paris',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Paris : immeubles anciens, caves communicantes, cours, commerces de pied d’immeuble et restauration.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation à Paris : rats et souris, tous arrondissements"
+  description="Dératisation à Paris : caves communicantes, cours d’immeuble, réserves de commerces et restaurants. Contexte du bâti parisien et pages d’arrondissement."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Paris • 75"
+    title="Dératisation à Paris : le sous-sol décide de tout"
+    lede="Paris présente une particularité qu’on ne retrouve nulle part ailleurs en Île-de-France : la continuité du sous-sol. Caves communicantes, réseaux denses, cours en cœur d’îlot, réserves de commerces. Une intervention parisienne commence toujours par établir jusqu’où va réellement le périmètre."
+    primaryLabel="Décrire mon immeuble"
+    meta={['20 arrondissements', 'Immeubles, commerces, restaurants', 'Interventions hors service']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <h2>Ce que le bâti parisien change</h2>
+
+          <h3>Des caves qui ne s’arrêtent pas à l’immeuble</h3>
+          <p>
+            Dans une grande partie du parc ancien, les sous-sols de plusieurs
+            escaliers communiquent, et il n’est pas rare que deux immeubles
+            mitoyens partagent un passage maçonné, une ancienne porte condamnée
+            ou une traversée de réseau. Beaucoup d’occupants l’ignorent.
+          </p>
+          <p>
+            Conséquence directe : traiter une cave privative pendant que le
+            reste du sous-sol reste actif produit une accalmie de quelques
+            semaines. L’établissement du périmètre est donc la première étape,
+            avant la pose de tout dispositif.
+          </p>
+
+          <h3>Des cours en cœur d’îlot</h3>
+          <p>
+            La cour parisienne concentre plusieurs facteurs : local poubelles,
+            local vélos, parfois un jardinet, des regards, et une mitoyenneté
+            avec les cours voisines. C’est un point de passage naturel entre
+            parcelles, et souvent le lieu où la présence devient visible.
+          </p>
+
+          <h3>Des commerces en pied d’immeuble</h3>
+          <p>
+            La quasi-totalité des rez-de-chaussée commerciaux parisiens dispose
+            d’une réserve en sous-sol, fréquemment reliée aux caves de
+            l’immeuble d’habitation. Cela crée une interdépendance : le
+            commerce et la copropriété ne peuvent pas traiter chacun de son côté
+            sans se neutraliser mutuellement.
+          </p>
+          <p>
+            Ce point est développé sur les pages
+            <a href="/deratisation-commerces">commerces</a> et
+            <a href="/deratisation-restaurants">restaurants</a>.
+          </p>
+
+          <h3>Des réseaux denses</h3>
+          <p>
+            Assainissement, eau, chauffage urbain, télécoms : le sous-sol
+            parisien est parcouru de réseaux. Les traversées, regards et
+            fourreaux constituent autant de discontinuités potentielles entre
+            l’extérieur et le bâtiment. C’est là que l’<a href="/inspection-rongeurs">inspection</a>
+            porte l’essentiel de son attention.
+          </p>
+
+          <h2>Souris ou rat : la répartition parisienne</h2>
+          <p>
+            Schématiquement, le rat brun occupe les niveaux bas — caves,
+            sous-sols, cours, réserves, réseaux — tandis que la souris
+            domestique s’installe dans les volumes habités, en particulier dans
+            les immeubles anciens dont les planchers bois et les doublages
+            offrent de nombreux cheminements.
+          </p>
+          <p>
+            Les deux peuvent coexister dans un même immeuble sans se croiser,
+            ce qui explique que des indices très différents soient signalés par
+            des occupants d’étages différents.
+          </p>
+
+          <h2>Travaux et chantiers</h2>
+          <p>
+            Paris connaît un volume permanent d’opérations : ravalements,
+            réhabilitations, curages de réseaux, chantiers de voirie. Ces
+            interventions perturbent les populations installées et les
+            redistribuent vers les bâtiments voisins.
+          </p>
+          <p>
+            Une apparition soudaine d’indices dans un immeuble sans historique
+            coïncide très souvent avec un chantier proche. La bonne réponse est
+            alors l’obturation prioritaire du bâtiment, avant le traitement.
+          </p>
+
+          <h2>Prévention à l’échelle d’un immeuble parisien</h2>
+          <ul class="ticks">
+            <li>Local poubelles : porte jointive, bas de porte métallique, bacs à couvercle, sol dégagé.</li>
+            <li>Soupiraux et ventilations basses : grillage métallique fixé, en remplacement des grilles détériorées.</li>
+            <li>Caves : suppression du stockage au sol, éclairage fonctionnel, cloisonnement des passages inutilisés.</li>
+            <li>Cour : regards scellés, pas de dépôt au sol, végétation dégagée du pied de façade.</li>
+            <li>Réserves commerciales : rayonnage décollé du sol et des murs.</li>
+          </ul>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Vous êtes</h3>
+          <p>Le point d’entrée dépend de votre situation.</p>
+          <ul>
+            <li><a href="/deratisation-coproprietes">Syndic ou conseil syndical</a></li>
+            <li><a href="/deratisation-particuliers">Occupant d’un logement</a></li>
+            <li><a href="/deratisation-restaurants">Restaurateur</a></li>
+            <li><a href="/deratisation-commerces">Commerçant</a></li>
+            <li><a href="/deratisation-entreprises">Gestionnaire de bureaux</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band band--marked">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--light">Arrondissements</p>
+      <h2 style="max-width:24ch">Pages d’arrondissement publiées</h2>
+      <p class="lede" style="margin-bottom:2.25rem">
+        Nous intervenons dans les vingt arrondissements. Ces six pages existent
+        parce que leur contexte urbain — densité de restauration, gares,
+        sous-sols sur dalle, marchés, canaux — appelle des réponses réellement
+        différentes.
+      </p>
+      <ul class="stack-list">
+        {arrondissements.map((a) => (
+          <li>
+            <h3>
+              <a href={`/deratisation-paris/${a.slug}`} style="color:#fff;text-decoration:none">
+                {a.label} →
+              </a>
+            </h3>
+            <p>{a.quartiers}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="note" style="margin-top:2rem">
+        Vous êtes dans un autre arrondissement&nbsp;? L’intervention est
+        identique — <a href="/contact">décrivez votre situation</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Paris : questions fréquentes" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Continuer"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Caves et communs' },
+      { href: '/deratisation-restaurants', label: 'Restaurants', note: 'Réserves en sous-sol' },
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Sous-sols communicants' },
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Établir le périmètre' },
+      { href: '/zones-intervention', label: 'Petite et grande couronne', note: 'Hors Paris' },
+      { href: '/blog/rats-dans-une-cave-que-faire', label: 'Rats dans une cave', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Votre cave communique-t-elle avec celle des voisins ?"
+    text="C’est la question qui détermine le périmètre à Paris. Si vous ne savez pas, nous le vérifions lors de l’inspection."
+    eyebrow="Paris"
+    variant="petrol"
+  />
+</BaseLayout>

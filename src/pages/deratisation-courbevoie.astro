@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-courbevoie', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Hauts-de-Seine', href: '/zones-intervention/hauts-de-seine' },
+  { label: 'Courbevoie', href: '/deratisation-courbevoie' },
+];
+
+const faq = [
+  {
+    q: 'Comment intervenir dans une tour de bureaux sans perturber l’activité ?',
+    a: 'En travaillant par volumes techniques et hors heures de forte occupation. Le traitement se concentre sur les niveaux inférieurs, les locaux déchets, les zones de restauration et les chemins de câbles. En plateau, on procède par piégeage mécanique et obturation, sans dispositif visible pour les occupants.',
+  },
+  {
+    q: 'Pourquoi les espaces de restauration d’entreprise sont-ils un point sensible ?',
+    a: 'Parce qu’ils concentrent denrées, chaleur et déchets dans un bâtiment par ailleurs bien fermé. Une cafétéria, une tisanerie ou un local de pause crée une ressource permanente à l’intérieur même de l’immeuble. C’est souvent là que les premiers indices apparaissent, avant même les niveaux techniques.',
+  },
+  {
+    q: 'Les quartiers résidentiels de la commune relèvent-ils de la même approche ?',
+    a: 'Non. Dans les secteurs résidentiels plus anciens, on retrouve les problématiques classiques du collectif francilien : caves, local déchets, gaines, traversées de canalisation dans les logements. Le traitement y est plus proche de celui d’une copropriété ordinaire que de celui d’un immeuble de grande hauteur.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Courbevoie',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Courbevoie : immeubles tertiaires, restauration d’entreprise, quartiers résidentiels et volumes techniques.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Courbevoie (92400) : bureaux et résidentiel"
+  description="Dératisation à Courbevoie : immeubles tertiaires, restauration d’entreprise, faux plafonds et quartiers résidentiels. Intervention discrète et documentée."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Courbevoie • 92400"
+    title="Dératisation à Courbevoie"
+    lede="Courbevoie juxtapose deux mondes : celui des immeubles tertiaires de grande hauteur, avec leurs socles techniques et leur restauration d’entreprise, et celui des quartiers résidentiels plus anciens. Les méthodes n’y ont presque rien en commun."
+    primaryLabel="Décrire mon site"
+    meta={['Hauts-de-Seine (92)', 'Tertiaire et IGH', 'Résidentiel ancien']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left">
+        <div class="prose">
+          <h2>Les immeubles tertiaires</h2>
+          <p>
+            Un immeuble de grande hauteur est en général bien fermé sur
+            l’extérieur. Sa vulnérabilité se situe ailleurs : dans la continuité
+            de ses volumes techniques. Socle, parkings, galeries de livraison,
+            locaux déchets, gaines et chemins de câbles forment un réseau
+            interne parcourable sur toute la hauteur.
+          </p>
+          <p>
+            L’espèce dominante y est la souris. Les premiers indices
+            apparaissent presque toujours dans les zones de restauration —
+            cafétéria, tisanerie, local de pause — puis dans les faux plafonds
+            et les chemins de câbles.
+          </p>
+          <p>
+            Le risque principal n’est pas sanitaire mais matériel : le rongement
+            d’un faisceau dans un faux plafond peut provoquer une coupure et
+            constitue un risque d’incendie. C’est ce qui justifie une
+            intervention rapide. Voir
+            <a href="/deratisation-entreprises#bureaux">entreprises et bureaux</a>.
+          </p>
+
+          <h2>La restauration d’entreprise</h2>
+          <p>
+            Dès qu’un site comporte une cuisine collective ou une cafétéria, les
+            exigences se rapprochent de celles de la restauration commerciale :
+            protection des denrées, traçabilité des passages, absence de produit
+            en zone de production. Le traitement s’organise hors service et
+            porte en priorité sur la réserve, la plonge et le local déchets.
+          </p>
+
+          <h2>Les quartiers résidentiels</h2>
+          <p>
+            Dans les secteurs d’habitat plus ancien, on retrouve les
+            problématiques classiques du collectif francilien : caves, local
+            déchets, gaines techniques, traversées de canalisation non obturées
+            dans les logements. Le rat brun s’y rencontre en sous-sol, la souris
+            dans les volumes habités.
+          </p>
+
+          <h2>Prévention à Courbevoie</h2>
+          <ul class="ticks">
+            <li>Traiter les espaces de pause comme des zones à risque : contenants fermés, déchets sortis quotidiennement.</li>
+            <li>Obturer les traversées entre gaines et faux plafonds.</li>
+            <li>Sécuriser les rampes et accès de livraison des socles d’immeubles.</li>
+            <li>Bas de porte métallique sur les locaux déchets.</li>
+            <li>Dans le résidentiel : supprimer le stockage au sol en cave.</li>
+          </ul>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Vous êtes</h3>
+          <p>Le bon point d’entrée.</p>
+          <ul>
+            <li><a href="/deratisation-entreprises">Gestionnaire d’immeuble tertiaire</a></li>
+            <li><a href="/deratisation-restaurants">Responsable de restauration</a></li>
+            <li><a href="/deratisation-coproprietes">Syndic</a></li>
+            <li><a href="/zones-intervention/hauts-de-seine">Hauts-de-Seine</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Courbevoie : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-entreprises', label: 'Entreprises', note: 'Tertiaire et IGH' },
+      { href: '/deratisation-souris', label: 'Dératisation souris', note: 'Faux plafonds' },
+      { href: '/deratisation-nanterre', label: 'Nanterre', note: 'Commune voisine' },
+      { href: '/zones-intervention/hauts-de-seine', label: 'Hauts-de-Seine', note: 'Page départementale' },
+    ]}
+  />
+
+  <CtaBand
+    title="Des indices dans un faux plafond de bureaux ?"
+    text="Le risque porte d’abord sur les câbles. Une intervention rapide évite une coupure et un sinistre."
+    eyebrow="Courbevoie"
+  />
+</BaseLayout>

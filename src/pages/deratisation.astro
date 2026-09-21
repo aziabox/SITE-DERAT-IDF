@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+];
+
+const faq = [
+  {
+    q: 'Qu’est-ce que la dératisation exactement ?',
+    a: 'La dératisation est l’ensemble des opérations visant à supprimer une population de rongeurs dans un bâtiment et à empêcher son retour. Elle ne se limite pas à la pose d’appâts : elle comprend un diagnostic, la recherche des points d’entrée, un traitement adapté au site, la fermeture des accès et un contrôle. Sans l’étape de fermeture, le traitement se répète indéfiniment.',
+  },
+  {
+    q: 'Une dératisation supprime-t-elle le problème définitivement ?',
+    a: 'Elle supprime la population présente. Elle empêche le retour uniquement si les accès et les ressources qui ont permis l’installation sont traités. Un local dont la porte reste ouverte sur une cour avec des déchets accessibles redeviendra attractif, quel que soit le traitement réalisé.',
+  },
+  {
+    q: 'Combien de passages faut-il en général ?',
+    a: 'Le plus souvent, un premier passage de diagnostic et de traitement, puis au moins un passage de contrôle une à deux semaines plus tard. Un site étendu, une présence ancienne ou un bâtiment collectif demandent davantage de passages, parce qu’il faut vérifier plusieurs zones et adapter le dispositif à ce qui est constaté.',
+  },
+  {
+    q: 'Dératisation et désourisation, est-ce la même chose ?',
+    a: 'Dans le langage courant, « dératisation » désigne le traitement des rongeurs en général. Techniquement, le traitement des souris (parfois appelé désourisation) n’utilise ni les mêmes emplacements ni la même densité de dispositifs, parce que la souris a un rayon de déplacement beaucoup plus réduit que le rat.',
+  },
+  {
+    q: 'Dois-je prévenir mon syndic ou mon propriétaire ?',
+    a: 'Si les indices concernent des parties communes, des caves, une gaine technique ou un vide sanitaire, oui : ces zones relèvent de la copropriété ou du bailleur. Traiter uniquement l’intérieur d’un logement alors que la source est collective donne un résultat temporaire.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation professionnelle en Île-de-France',
+    serviceType: 'Dératisation',
+    description:
+      'Service de dératisation en Île-de-France : diagnostic sur site, identification des points d’entrée, traitement des rats et des souris, sécurisation mécanique et contrôle.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation en Île-de-France : le déroulé complet"
+  description="Comment se déroule une dératisation en Île-de-France : diagnostic, recherche des points d’entrée, traitement, sécurisation et contrôle des rongeurs."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Service principal"
+    title="Dératisation en Île-de-France"
+    lede="Une dératisation réussie ne se juge pas au nombre de dispositifs posés, mais à ce qui se passe trois mois plus tard. Voici ce que recouvre réellement l’intervention, étape par étape, et ce qui fait la différence entre un traitement qui tient et un traitement qui se répète."
+    meta={['Rats et souris', 'Particuliers et professionnels', 'Paris et les 7 départements']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <div class="answer">
+            <p class="eyebrow">En bref</p>
+            <p>
+              La dératisation consiste à supprimer une population de rongeurs dans
+              un bâtiment <strong>et</strong> à fermer ce qui lui a permis d’entrer.
+              Elle se déroule en cinq temps : diagnostic, repérage des accès,
+              traitement, sécurisation mécanique, contrôle.
+            </p>
+            <p>
+              L’étape déterminante n’est pas le traitement lui-même, mais la
+              recherche des points d’entrée. C’est elle qui décide si le résultat
+              tient dans la durée.
+            </p>
+          </div>
+
+          <h2>Ce que le mot recouvre — et ce qu’il ne recouvre pas</h2>
+          <p>
+            Dans l’usage courant, « dératisation » désigne le traitement de tous
+            les rongeurs commensaux : le rat brun, le rat noir et la souris
+            domestique. Ces trois espèces ne se comportent pas de la même manière,
+            ce qui change la nature de l’intervention.
+          </p>
+          <p>
+            Le rat brun vit majoritairement au niveau du sol et en sous-sol, se
+            déplace sur des distances importantes et utilise les réseaux
+            (assainissement, gaines, vides sanitaires). La souris domestique reste
+            à l’intérieur, occupe un territoire réduit, grignote de multiples
+            petites quantités et se glisse dans des ouvertures de quelques
+            millimètres. Un dispositif calé pour le rat passe à côté d’une
+            population de souris, et l’inverse est vrai.
+          </p>
+          <p>
+            En revanche, la dératisation n’est pas un traitement de désinsectisation.
+            Nous ne traitons ni les punaises, ni les blattes, ni les guêpes :
+            l’expertise repose ici sur la lecture du bâti et des circulations,
+            pas sur la biologie des insectes.
+          </p>
+
+          <h2>Diagnostic : lire le bâtiment avant de poser quoi que ce soit</h2>
+          <p>
+            Le diagnostic répond à quatre questions : quelle espèce, depuis combien
+            de temps, sur quelle étendue, et par où. Il s’appuie sur des éléments
+            concrets — crottes et leur fraîcheur, traces de grignotage, coulées
+            grasses le long des murs, empreintes, nids, odeur — et sur la structure
+            du bâtiment.
+          </p>
+          <p>
+            Un immeuble ancien parisien avec caves voûtées communicantes, une
+            résidence des années 1970 avec vide sanitaire et gaines verticales,
+            un pavillon avec comble perdu et dalle sur terre-plein : dans chaque
+            cas, les cheminements possibles sont différents. C’est cette lecture
+            qui oriente tout le reste.
+          </p>
+
+          <h2>Recherche des points d’entrée</h2>
+          <p>
+            C’est l’étape la plus souvent négligée, et celle qui explique la
+            majorité des récidives. Les accès récurrents sont connus :
+          </p>
+          <ul class="ticks">
+            <li>traversées de canalisations mal rebouchées, en cuisine comme en cave&nbsp;;</li>
+            <li>regards, siphons de sol et évacuations non équipés&nbsp;;</li>
+            <li>grilles de ventilation basse détériorées ou absentes&nbsp;;</li>
+            <li>bas de portes usés, seuils décollés, joints de dilatation ouverts&nbsp;;</li>
+            <li>gaines techniques verticales qui relient sous-sol et étages&nbsp;;</li>
+            <li>passages de câbles, coffrets et fourreaux non obturés&nbsp;;</li>
+            <li>abords : trous en pied de façade, terre tassée, végétation en contact.</li>
+          </ul>
+          <p>
+            Cette recherche est détaillée sur la page
+            <a href="/inspection-rongeurs">inspection et recherche des points d’entrée</a>.
+          </p>
+
+          <h2>Traitement : adapté au site, pas au catalogue</h2>
+          <p>
+            Le choix des dispositifs dépend du bâtiment, de l’espèce et surtout
+            de l’environnement : présence d’enfants, d’animaux domestiques, de
+            denrées alimentaires, de public. Un local technique fermé et une
+            cuisine professionnelle en activité n’autorisent pas les mêmes
+            solutions.
+          </p>
+          <p>
+            Les emplacements comptent autant que les dispositifs. Les rongeurs
+            longent les parois et évitent les espaces ouverts : un poste placé au
+            milieu d’une pièce ne sera pas visité. Chaque point posé est repéré
+            afin de pouvoir être contrôlé et retiré.
+          </p>
+          <p>
+            Le détail des méthodes figure sur les pages
+            <a href="/traitement-rats">traitement contre les rats</a> et
+            <a href="/traitement-souris">traitement contre les souris</a>.
+          </p>
+
+          <h2>Sécurisation : l’étape qui rend le résultat durable</h2>
+          <p>
+            Fermer un passage ne consiste pas à le boucher avec de la mousse
+            expansive ou du silicone : ces matériaux sont traversés sans
+            difficulté. La sécurisation utilise des matériaux que les incisives
+            n’entament pas — grillage métallique à maille fine, tôle, mortier,
+            plaques de fermeture — posés après vérification que la zone n’enferme
+            personne à l’intérieur.
+          </p>
+          <div class="keyline">
+            <p>
+              Un chiffre utile à retenir : une souris passe par une ouverture
+              d’environ 6 mm, un jeune rat par une ouverture d’environ 2 cm.
+              Un « petit trou » n’existe pas.
+            </p>
+          </div>
+
+          <h2>Contrôle et suivi</h2>
+          <p>
+            Le passage de contrôle vérifie ce qui a été consommé ou déclenché, si
+            de nouveaux indices apparaissent, et si le périmètre doit être étendu.
+            C’est aussi le moment où l’on corrige : un passage oublié, une zone
+            mal couverte, une source de nourriture qui n’avait pas été identifiée.
+          </p>
+          <p>
+            Le nombre de contrôles dépend de ce qui est observé. Annoncer un
+            nombre de passages avant d’avoir vu le site n’a pas de sens.
+          </p>
+
+          <h2>Ce que nous vous remettons</h2>
+          <p>
+            À l’issue de l’intervention, vous disposez du constat de départ, de
+            la liste des points traités et sécurisés, des consignes à appliquer
+            et des points à surveiller. Pour un professionnel soumis à un plan de
+            maîtrise sanitaire, ces éléments alimentent directement le dossier
+            nuisibles.
+          </p>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Où en êtes-vous&nbsp;?</h3>
+          <p>Chaque situation a sa page dédiée.</p>
+          <ul>
+            <li><a href="/deratisation-rats">J’ai des indices de rats</a></li>
+            <li><a href="/deratisation-souris">J’ai des indices de souris</a></li>
+            <li><a href="/infestation-rats">La présence est déjà installée</a></li>
+            <li><a href="/inspection-rongeurs">Je veux savoir par où ils entrent</a></li>
+            <li><a href="/prevention-rongeurs">Le traitement est fait, j’anticipe</a></li>
+            <li><a href="/zones-intervention">Je cherche ma commune</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band band--marked">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--light">Repères</p>
+      <h2 style="max-width:22ch">Ce qui change selon le type de bâtiment</h2>
+      <div class="table-wrap" style="margin-top:2rem">
+        <table>
+          <caption style="color:rgba(255,255,255,0.6)">
+            Points d’attention dominants selon la configuration rencontrée en Île-de-France.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col" style="color:#fff;border-bottom-color:rgba(255,255,255,0.35)">Configuration</th>
+              <th scope="col" style="color:#fff;border-bottom-color:rgba(255,255,255,0.35)">Zone critique</th>
+              <th scope="col" style="color:#fff;border-bottom-color:rgba(255,255,255,0.35)">Difficulté fréquente</th>
+            </tr>
+          </thead>
+          <tbody style="color:rgba(255,255,255,0.78)">
+            <tr><th scope="row" style="color:#fff;border-bottom-color:rgba(255,255,255,0.14);font-weight:600">Immeuble ancien</th><td style="border-bottom-color:rgba(255,255,255,0.14)">Caves, cour, local poubelles</td><td style="border-bottom-color:rgba(255,255,255,0.14)">Caves communicantes entre plusieurs entrées</td></tr>
+            <tr><th scope="row" style="color:#fff;border-bottom-color:rgba(255,255,255,0.14);font-weight:600">Résidence collective</th><td style="border-bottom-color:rgba(255,255,255,0.14)">Vide sanitaire, gaines verticales</td><td style="border-bottom-color:rgba(255,255,255,0.14)">Accès aux locaux techniques à coordonner</td></tr>
+            <tr><th scope="row" style="color:#fff;border-bottom-color:rgba(255,255,255,0.14);font-weight:600">Pavillon</th><td style="border-bottom-color:rgba(255,255,255,0.14)">Combles, garage, abords</td><td style="border-bottom-color:rgba(255,255,255,0.14)">Végétation et stockage extérieur en contact</td></tr>
+            <tr><th scope="row" style="color:#fff;border-bottom-color:rgba(255,255,255,0.14);font-weight:600">Commerce alimentaire</th><td style="border-bottom-color:rgba(255,255,255,0.14)">Réserve, plonge, local déchets</td><td style="border-bottom-color:rgba(255,255,255,0.14)">Traitement à mener sans interrompre l’activité</td></tr>
+            <tr><th scope="row" style="color:#fff;border-bottom:0;font-weight:600">Entrepôt</th><td style="border-bottom:0">Quais, palettes, abords</td><td style="border-bottom:0">Réintroduction permanente par les livraisons</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <Faq
+    items={faq}
+    title="Ce qu’il faut savoir avant d’engager une intervention"
+    eyebrow="Questions fréquentes"
+  />
+
+  <RelatedLinks
+    title="Poursuivre selon votre situation"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-rats', label: 'Dératisation rats', note: 'Indices, comportement, traitement' },
+      { href: '/deratisation-souris', label: 'Dératisation souris', note: 'Logements et locaux' },
+      { href: '/traitement-rats', label: 'Traitement contre les rats', note: 'Méthodes et étapes' },
+      { href: '/prevention-rongeurs', label: 'Prévention des rongeurs', note: 'Éviter la récidive' },
+      { href: '/deratisation-coproprietes', label: 'Dératisation en copropriété', note: 'Parties communes' },
+      { href: '/blog/comment-se-deroule-une-deratisation-professionnelle', label: 'Le déroulé vu de l’intérieur', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Un doute sur ce que vous avez vu ? Décrivez-le, nous le lisons pour vous"
+    text="Deux minutes au téléphone suffisent souvent pour savoir s’il s’agit d’un rat ou d’une souris, et quelle zone doit être inspectée en priorité."
+    eyebrow="Diagnostic"
+  />
+</BaseLayout>

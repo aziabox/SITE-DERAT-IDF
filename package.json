@@ -1,0 +1,19 @@
+{
+  "name": "site-derat-idf",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Site de deratisation specialise Ile-de-France - Astro static, zero JS bloquant",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/check-config.mjs && node scripts/build-og.mjs && astro build && node scripts/build-sitemap.mjs",
+    "preview": "astro preview",
+    "check:config": "node scripts/check-config.mjs",
+    "audit:seo": "node scripts/audit-seo.mjs",
+    "audit:dup": "node scripts/audit-duplication.mjs",
+    "audit": "npm run build && npm run audit:seo && npm run audit:dup"
+  },
+  "devDependencies": {
+    "astro": "^7.3.3"
+  }
+}

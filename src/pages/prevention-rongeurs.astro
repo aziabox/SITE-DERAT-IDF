@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/prevention-rongeurs', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Prévention', href: '/prevention-rongeurs' },
+];
+
+const faq = [
+  {
+    q: 'Comment empêcher les rats de revenir après une dératisation ?',
+    a: 'En agissant sur les trois ressources dont ils dépendent. Fermer les accès avec des matériaux non rongeables, supprimer la nourriture disponible (déchets, stockage au sol, nourrissage extérieur) et couper les points d’eau faciles (fuites, siphons asséchés). Un traitement sans ces trois actions protège quelques semaines, pas davantage.',
+  },
+  {
+    q: 'Quelle taille d’ouverture faut-il fermer ?',
+    a: 'Toute ouverture d’environ 6 mm ou plus pour une souris, 2 cm pour un jeune rat. En pratique, la règle utilisée sur le terrain est simple : si un crayon passe, une souris passe ; si deux doigts passent, un rat passe. Les points les plus souvent oubliés sont les traversées de canalisation, les grilles de ventilation basse et les bas de portes.',
+  },
+  {
+    q: 'La mousse expansive suffit-elle à boucher un trou ?',
+    a: 'Non. La mousse polyuréthane et le silicone sont traversés sans difficulté par un rongeur, parfois en une seule nuit. Ils n’ont d’intérêt qu’en complément d’étanchéité, après une fermeture mécanique en grillage métallique fin, tôle ou mortier.',
+  },
+  {
+    q: 'Les répulsifs, ultrasons et huiles essentielles fonctionnent-ils ?',
+    a: 'Leur effet, quand il existe, est temporaire et local. Les rongeurs s’habituent rapidement à un stimulus sans conséquence réelle, et ces solutions n’agissent ni sur l’accès, ni sur la ressource alimentaire. Elles peuvent au mieux retarder une installation, jamais la prévenir durablement.',
+  },
+  {
+    q: 'À quelle fréquence faut-il contrôler un site sensible ?',
+    a: 'Pour un site à enjeu — restaurant, commerce alimentaire, entrepôt, copropriété avec historique — un contrôle périodique permet de détecter une reprise avant qu’elle ne devienne une infestation. La fréquence se décide selon l’exposition réelle du site : proximité d’un réseau, volume de déchets, rotation des livraisons.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Prévention et sécurisation contre les rongeurs',
+    serviceType: 'Prévention des rongeurs',
+    description:
+      'Sécurisation mécanique des points d’entrée, suppression des ressources et surveillance périodique pour éviter la réinstallation des rats et des souris.',
+  }),
+];
+---
+<BaseLayout
+  title="Prévention des rongeurs : sécuriser et éviter la récidive"
+  description="Comment empêcher rats et souris de revenir : fermeture des points d’entrée, suppression des ressources, entretien des abords et contrôles périodiques."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Prévention • Sécurisation"
+    title="Prévention des rongeurs : ce qui empêche réellement le retour"
+    lede="Un traitement réduit une population. La prévention décide si elle revient. Trois leviers seulement comptent — l’accès, la nourriture, l’eau — mais ils doivent être traités ensemble, et sur le bon périmètre."
+    primaryLabel="Demander un diagnostic préventif"
+    meta={['Obturation mécanique', 'Gestion des ressources', 'Contrôles périodiques']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <div class="answer">
+        <p class="eyebrow">Réponse directe</p>
+        <p>
+          Pour empêcher le retour des rongeurs, il faut fermer les ouvertures
+          avec des matériaux non rongeables (grillage métallique fin, tôle,
+          mortier), supprimer la nourriture accessible et couper les points
+          d’eau faciles.
+        </p>
+        <p>
+          Les répulsifs et les appareils à ultrasons n’agissent sur aucun de ces
+          trois leviers&nbsp;: ils ne préviennent pas une installation.
+        </p>
+      </div>
+
+      <h2>Levier 1 — l’accès</h2>
+      <p>
+        C’est le seul levier réellement définitif. Une ouverture fermée
+        correctement reste fermée. Encore faut-il les trouver toutes : une
+        seule suffit à réalimenter un bâtiment.
+      </p>
+
+      <h3>Les points à vérifier, de bas en haut</h3>
+      <ul class="ticks">
+        <li><strong>Pied de façade</strong> : fissures, trous, terre rejetée, joints de dallage ouverts.</li>
+        <li><strong>Ventilations basses et soupiraux</strong> : grilles absentes, déformées ou à maille trop large.</li>
+        <li><strong>Traversées de réseaux</strong> : arrivées d’eau, évacuations, fourreaux électriques, gaines de télécom.</li>
+        <li><strong>Portes et seuils</strong> : jeu sous la porte, bas de porte rongé, seuil décollé.</li>
+        <li><strong>Regards et siphons de sol</strong> : tampons non scellés, siphons asséchés.</li>
+        <li><strong>Toiture et combles</strong> : rives, about de chevrons, passages de conduits, grillage anti-rongeur des ventilations.</li>
+      </ul>
+
+      <h3>Le choix du matériau n’est pas négociable</h3>
+      <p>
+        Les incisives des rongeurs poussent en continu et entament sans
+        difficulté le bois tendre, le PVC fin, la mousse et le mastic. Seuls
+        les matériaux métalliques ou maçonnés tiennent dans la durée. Le détail
+        des tenues figure sur la page
+        <a href="/traitement-rats">traitement contre les rats</a>.
+      </p>
+
+      <h2>Levier 2 — la nourriture</h2>
+      <p>
+        Une ressource alimentaire permanente annule l’effet de n’importe quel
+        traitement. Les sources les plus fréquentes en Île-de-France sont
+        rarement des stocks alimentaires : ce sont les déchets et les abords.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>Sources d’alimentation les plus courantes et action correspondante.</caption>
+          <thead>
+            <tr><th scope="col">Source</th><th scope="col">Action</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Local poubelles ouvert ou bacs sans couvercle</th><td>Fermeture du local, bacs à couvercle, bas de porte métallique</td></tr>
+            <tr><th scope="row">Sacs déposés au sol hors bac</th><td>Consigne de dépôt, horaires de sortie, contenants fermés</td></tr>
+            <tr><th scope="row">Stockage alimentaire au sol</th><td>Rayonnage à 15 cm minimum du sol, décollé des murs</td></tr>
+            <tr><th scope="row">Denrées en vrac ou en sachet</th><td>Contenants rigides à fermeture hermétique</td></tr>
+            <tr><th scope="row">Nourrissage d’oiseaux ou de chats en extérieur</th><td>Suppression ou distribution encadrée, retrait des restes</td></tr>
+            <tr><th scope="row">Compost non fermé</th><td>Bac fermé, à distance du bâtiment</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Levier 3 — l’eau</h2>
+      <p>
+        Le rat brun a besoin de boire quotidiennement. Une fuite en cave, une
+        condensation permanente, un regard en eau ou un siphon accessible
+        suffisent à fixer une population. Ce levier est souvent oublié parce
+        qu’il paraît anodin&nbsp;: il est pourtant celui qui explique certaines
+        installations dans des locaux sans aucune nourriture.
+      </p>
+
+      <h2>La surveillance, pour les sites exposés</h2>
+      <p>
+        Certains sites ne peuvent pas être mis totalement à l’abri : quai de
+        livraison, restaurant en rez-de-chaussée d’immeuble, entrepôt à portes
+        ouvertes, copropriété donnant sur une voie avec dépôts récurrents. Pour
+        ceux-là, la prévention prend la forme d’une surveillance : points de
+        contrôle repérés, vérification périodique, intervention dès le premier
+        indice.
+      </p>
+      <p>
+        L’objectif n’est pas de traiter en permanence, mais de détecter tôt —
+        quand une intervention courte suffit encore.
+      </p>
+
+      <h2>Ce que vous pouvez faire vous-même dès aujourd’hui</h2>
+      <ol class="steps" style="margin-top:1.5rem">
+        <li>
+          <h3>Faire le tour du bas de vos murs</h3>
+          <p>Extérieur comme intérieur, en cherchant les ouvertures, la terre rejetée et les jours sous les portes.</p>
+        </li>
+        <li>
+          <h3>Vérifier sous l’évier et derrière les appareils</h3>
+          <p>Ce sont les traversées de canalisation les plus souvent laissées ouvertes après une installation ou un remplacement.</p>
+        </li>
+        <li>
+          <h3>Mettre les denrées en contenants rigides</h3>
+          <p>Y compris la nourriture pour animaux, souvent stockée en sac ouvert dans un placard bas.</p>
+        </li>
+        <li>
+          <h3>Revoir la gestion des déchets</h3>
+          <p>Bacs fermés, local maintenu propre, pas de sac déposé au sol en dehors des horaires de collecte.</p>
+        </li>
+        <li>
+          <h3>Dégager les abords</h3>
+          <p>Végétation en contact avec la façade, palettes, encombrants, stockage au sol : autant d’abris immédiats.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Prévention : questions fréquentes" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Compléter"
+    eyebrow="Maillage"
+    items={[
+      { href: '/inspection-rongeurs', label: 'Inspection des points d’entrée', note: 'Les trouver tous' },
+      { href: '/deratisation', label: 'Dératisation', note: 'Le service complet' },
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Prévention collective' },
+      { href: '/deratisation-restaurants', label: 'Restaurants', note: 'Sites à enjeu sanitaire' },
+      { href: '/blog/comment-securiser-les-points-dentree', label: 'Sécuriser les points d’entrée', note: 'Guide' },
+      { href: '/blog/que-faire-apres-une-deratisation', label: 'Que faire après une dératisation', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Faire sécuriser un bâtiment avant qu’il y ait un problème"
+    text="Un diagnostic préventif identifie les ouvertures et les ressources avant qu’une population ne s’installe. C’est l’intervention la plus courte, et la moins coûteuse."
+    eyebrow="Anticiper"
+    variant="petrol"
+  />
+</BaseLayout>

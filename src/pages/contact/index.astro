@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import Faq from '../../components/Faq.astro';
+import { site, telHref } from '../../data/site';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const faq = [
+  {
+    q: 'Quelles informations dois-je préparer avant d’appeler ?',
+    a: 'Quatre éléments suffisent pour un premier diagnostic : ce que vous avez constaté (crottes, bruits, grignotage, odeur), où exactement, depuis quand, et le type de bâtiment. Si vous avez une photo des traces, elle permet souvent de trancher immédiatement entre rat et souris.',
+  },
+  {
+    q: 'Puis-je envoyer une photo ?',
+    a: 'Oui, le formulaire accepte une pièce jointe. Les photos les plus utiles sont celles des déjections (avec un objet de taille connue à côté, une pièce de monnaie par exemple), des traces de grignotage et des ouvertures suspectes.',
+  },
+  {
+    q: 'Intervenez-vous en urgence ?',
+    a: 'Nous organisons les interventions selon l’urgence réelle de la situation : un établissement soumis à contrôle sanitaire, une présence dans une cuisine professionnelle ou un risque électrique constaté sont traités en priorité. Précisez-le lors de la prise de contact.',
+  },
+  {
+    q: 'Que se passe-t-il après ma demande ?',
+    a: 'Un premier échange permet d’identifier l’espèce probable, l’étendue et l’urgence. Nous convenons ensuite d’un créneau pour le diagnostic sur site — hors service pour un établissement, sur rendez-vous pour un logement, avec le gestionnaire pour un immeuble.',
+  },
+];
+---
+<BaseLayout
+  title="Contact : demander une intervention en Île-de-France"
+  description="Décrivez votre situation : espèce constatée, zone concernée, type de bâtiment. Réponse et organisation du diagnostic sur site en Île-de-France."
+  crumbs={crumbs}
+  faq={faq}
+>
+  <section class="hero">
+    <div class="wrap hero__inner" style="padding-block:clamp(2.5rem,6vw,4.5rem)">
+      <p class="eyebrow eyebrow--light">Contact</p>
+      <h1 style="font-size:var(--step-4)">Décrivez votre problème de rongeurs</h1>
+      <p class="lede">
+        Plus la description est précise, plus le premier échange est utile.
+        L’espèce, la zone et l’ancienneté suffisent souvent à orienter
+        l’intervention avant même le déplacement.
+      </p>
+      <div class="hero__meta">
+        <span>Téléphone&nbsp;: <b>{site.phoneDisplay}</b></span>
+        <span>{site.openingHours}</span>
+        <span>Paris, petite et grande couronne</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div>
+          <h2 style="font-size:var(--step-3)">Formulaire de demande</h2>
+          <p class="lede" style="margin-bottom:2rem">
+            Les champs marqués d’un astérisque sont nécessaires pour vous
+            rappeler et préparer l’intervention.
+          </p>
+          <ContactForm id="form-contact" />
+        </div>
+
+        <div>
+          <div class="aside-card" style="margin-bottom:1.75rem">
+            <h3>Par téléphone</h3>
+            <p style="margin-bottom:1rem">
+              Le plus direct pour un premier diagnostic, en particulier si la
+              situation concerne un établissement en activité.
+            </p>
+            <p style="margin-bottom:1.25rem">
+              <a href={telHref} style="font-size:var(--step-2);font-weight:800;letter-spacing:-0.02em;text-decoration:none">
+                {site.phoneDisplay}
+              </a><br />
+              <span style="font-size:0.9rem;color:var(--grey-600)">{site.openingHours}</span>
+            </p>
+            <a class="btn btn--amber" href={telHref} style="width:100%">Appeler maintenant</a>
+          </div>
+
+          <div class="aside-card">
+            <h3>Les quatre informations utiles</h3>
+            <p>À préparer avant l’appel.</p>
+            <ul>
+              <li><a href="/deratisation-rats">Ce que vous avez constaté</a></li>
+              <li><a href="/inspection-rongeurs">Où exactement</a></li>
+              <li><a href="/infestation-rats">Depuis quand</a></li>
+              <li><a href="/deratisation-coproprietes">Type de bâtiment</a></li>
+            </ul>
+          </div>
+
+          <p class="note" style="margin-top:1.75rem">
+            Nous traitons exclusivement les rongeurs — rats, souris et,
+            ponctuellement, mulots. Pour les insectes, nous vous orientons vers
+            un confrère plutôt que d’intervenir hors de notre spécialité.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Avant de nous contacter" eyebrow="Questions fréquentes" />
+</BaseLayout>

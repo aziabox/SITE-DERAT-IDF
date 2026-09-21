@@ -1,0 +1,494 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import { site, telHref, cta } from '../data/site';
+import { departementsHorsParis } from '../data/idf';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/', origin).href;
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime())
+  .slice(0, 3);
+
+const faq = [
+  {
+    q: 'Comment savoir si j’ai des rats ou des souris ?',
+    a: 'La taille des crottes tranche presque toujours : environ 1,5 à 2 cm et en forme de grain de riz allongé pour un rat brun, 3 à 6 mm et pointues aux deux extrémités pour une souris domestique. Les bruits diffèrent aussi : une souris gratte plutôt en hauteur, dans les cloisons et les faux plafonds, un rat se déplace plus lourdement, au niveau des sous-sols, des gaines et des canalisations.',
+  },
+  {
+    q: 'Que faire immédiatement si je vois un rat chez moi ?',
+    a: 'Ne bouchez rien avec de la mousse expansive ou du carton : cela déplace le problème sans le régler. Mettez les denrées à l’abri dans des contenants rigides, notez où et à quelle heure vous avez vu l’animal, photographiez les traces, et faites établir un diagnostic. La localisation exacte du passage compte davantage que la pose immédiate d’un piège.',
+  },
+  {
+    q: 'Combien de temps faut-il pour traiter une infestation ?',
+    a: 'Cela dépend de l’espèce, du volume à traiter et de l’accès aux zones concernées. Une présence de souris circonscrite à un logement se règle généralement en quelques passages espacés de une à deux semaines. Une colonie de rats installée dans les sous-sols d’un immeuble ou alimentée par un réseau d’assainissement demande un suivi plus long, parce qu’il faut à la fois réduire la population et couper les accès.',
+  },
+  {
+    q: 'Intervenez-vous partout en Île-de-France ?',
+    a: 'Oui : Paris, la petite couronne (Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne) et la grande couronne (Val-d’Oise, Yvelines, Essonne, Seine-et-Marne). Indiquez votre ville ou votre code postal lors de la prise de contact.',
+  },
+  {
+    q: 'Faut-il quitter les lieux pendant l’intervention ?',
+    a: 'Dans la très grande majorité des cas, non. Les dispositifs sont installés dans des zones non accessibles aux occupants, sécurisés et repérés. Les consignes précises (délais d’accès à une cave, protection des animaux domestiques, gestion des denrées) vous sont données sur place, en fonction de ce qui est réellement posé.',
+  },
+  {
+    q: 'Traitez-vous d’autres nuisibles ?',
+    a: 'Notre activité est centrée sur les rongeurs : rats, souris et, ponctuellement, mulots en périphérie. C’est un choix : le diagnostic des rongeurs repose sur la lecture du bâti et des circulations, un savoir-faire qui n’est pas le même que pour les insectes.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation en Île-de-France',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris en Île-de-France : diagnostic, identification des points d’entrée, traitement adapté au bâtiment, sécurisation et prévention.',
+  }),
+];
+
+const dateFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<BaseLayout
+  title="Dératisation Île-de-France : rats et souris | DÉRAT·IDF"
+  description="Dératisation à Paris et en Île-de-France : diagnostic, traitement des rats et des souris, sécurisation des points d’entrée et prévention. Appelez le 07 56 82 27 85."
+  schema={schema}
+  faq={faq}
+>
+  <!-- ======================= HERO ======================= -->
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <div class="split split--wide-left">
+        <div>
+          <p class="eyebrow eyebrow--light">Dératisation • Île-de-France</p>
+          <h1>Dératisation en Île-de-France : intervention contre les rats et souris</h1>
+          <p class="lede">
+            Un rat aperçu dans une cour, des bruits derrière une cloison, des crottes
+            au fond d’un placard&nbsp;: ces signes se lisent. Nous intervenons à Paris,
+            en petite et en grande couronne pour identifier l’espèce en cause, traiter
+            l’infestation et fermer les accès par lesquels les rongeurs entrent.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn--amber" href="/contact">{cta.primary}</a>
+            <a class="btn btn--outline-light" href={telHref}>{cta.call} · {site.phoneDisplay}</a>
+          </div>
+          <div class="hero__meta">
+            <span><b>Rats et souris</b> — et rien d’autre</span>
+            <span>Paris <b>+ 7 départements</b></span>
+            <span>{site.openingHours}</span>
+          </div>
+        </div>
+
+        <aside aria-labelledby="signal-titre" style="border:1px solid rgba(255,255,255,0.14);border-top:3px solid var(--amber);padding:clamp(1.4rem,3vw,2rem);background:rgba(255,255,255,0.03)">
+          <p class="eyebrow eyebrow--light" style="margin-bottom:0.9rem">Premier repère</p>
+          <h2 id="signal-titre" style="font-size:var(--step-2);margin-bottom:1.1rem">Rat ou souris&nbsp;?</h2>
+          <div class="table-wrap" style="margin-bottom:0">
+            <table style="min-width:0">
+              <caption class="visually-hidden">Comparaison des indices laissés par le rat brun et la souris domestique</caption>
+              <thead>
+                <tr>
+                  <th scope="col" style="color:#fff;border-bottom-color:rgba(255,255,255,0.35)">Indice</th>
+                  <th scope="col" style="color:#fff;border-bottom-color:rgba(255,255,255,0.35)">Rat brun</th>
+                  <th scope="col" style="color:#fff;border-bottom-color:rgba(255,255,255,0.35)">Souris</th>
+                </tr>
+              </thead>
+              <tbody style="color:rgba(255,255,255,0.78)">
+                <tr style="border-color:rgba(255,255,255,0.14)">
+                  <th scope="row" style="color:rgba(255,255,255,0.9);border-bottom:1px solid rgba(255,255,255,0.14);font-weight:600">Crotte</th>
+                  <td style="border-bottom:1px solid rgba(255,255,255,0.14)">1,5 à 2 cm</td>
+                  <td style="border-bottom:1px solid rgba(255,255,255,0.14)">3 à 6 mm</td>
+                </tr>
+                <tr>
+                  <th scope="row" style="color:rgba(255,255,255,0.9);border-bottom:1px solid rgba(255,255,255,0.14);font-weight:600">Niveau</th>
+                  <td style="border-bottom:1px solid rgba(255,255,255,0.14)">Sous-sols, réseaux</td>
+                  <td style="border-bottom:1px solid rgba(255,255,255,0.14)">Cloisons, plafonds</td>
+                </tr>
+                <tr>
+                  <th scope="row" style="color:rgba(255,255,255,0.9);border-bottom:0;font-weight:600">Passage</th>
+                  <td style="border-bottom:0">Dès 2 cm</td>
+                  <td style="border-bottom:0">Dès 6 mm</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top:1.25rem;font-size:0.95rem">
+            <a href="/deratisation-rats" style="color:var(--amber)">Indices de rats</a> ·
+            <a href="/deratisation-souris" style="color:var(--amber)">Indices de souris</a>
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= PROBLÈME ======================= -->
+  <section class="section" aria-labelledby="probleme-titre">
+    <div class="wrap">
+      <div class="split split--wide-left">
+        <div>
+          <p class="eyebrow">Ce que vous avez constaté</p>
+          <h2 id="probleme-titre">Vous avez vu un rat ou des traces de rongeurs&nbsp;?</h2>
+          <p class="lede">
+            On appelle rarement pour un animal vu en pleine lumière. Dans la plupart
+            des cas, ce sont des indices indirects qui alertent — et chacun raconte
+            quelque chose de différent sur l’ancienneté et l’ampleur de la présence.
+          </p>
+          <div class="keyline">
+            <p>
+              Un seul indice isolé peut être anodin. Trois indices qui se recoupent
+              au même endroit indiquent presque toujours un passage régulier.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <ul class="stack-list">
+            <li>
+              <h3>Des crottes</h3>
+              <p>
+                C’est l’indice le plus fiable, parce qu’il donne l’espèce et la
+                fraîcheur. Une crotte récente est sombre et souple, une ancienne est
+                grise, sèche et s’effrite. Regardez le long des plinthes, derrière
+                l’électroménager, dans les tiroirs bas et au fond des caves.
+              </p>
+            </li>
+            <li>
+              <h3>Des bruits</h3>
+              <p>
+                Grattements, trottinements, petits chocs sourds. L’heure compte&nbsp;:
+                l’activité se concentre le plus souvent au crépuscule et en début de
+                nuit. La localisation compte encore plus — cloison, plafond, gaine
+                technique ou vide sanitaire.
+              </p>
+            </li>
+            <li>
+              <h3>Des traces de grignotage</h3>
+              <p>
+                Bas de porte entamé, angle de plinthe rongé, emballage percé, gaine
+                électrique dénudée. Les incisives des rongeurs poussent en continu&nbsp;:
+                ils doivent les user, y compris sur des matériaux non alimentaires.
+              </p>
+            </li>
+            <li>
+              <h3>Une odeur persistante</h3>
+              <p>
+                Odeur ammoniaquée qui ne part pas au nettoyage, souvent dans un local
+                fermé&nbsp;: cave, local poubelles, placard technique, vide sanitaire.
+                Elle signale une zone de stationnement, pas seulement un passage.
+              </p>
+            </li>
+            <li>
+              <h3>Des passages répétés</h3>
+              <p>
+                Traînées grasses foncées le long d’un mur, terre tassée contre une
+                façade, trou net dans un bas de cloison, empreintes dans la poussière.
+                Les rongeurs empruntent les mêmes itinéraires, souvent en longeant
+                les parois.
+              </p>
+            </li>
+            <li>
+              <h3>Des dégâts matériels</h3>
+              <p>
+                Isolant tassé ou déplacé dans des combles, câbles attaqués,
+                joints de canalisation abîmés, nid de matériaux déchiquetés. À ce
+                stade, la présence n’est plus récente.
+              </p>
+            </li>
+          </ul>
+          <div class="btn-row">
+            <a class="btn btn--ink" href="/inspection-rongeurs">Faire identifier les traces</a>
+            <a class="btn btn--outline" href="/blog/reconnaitre-crottes-de-rats">Reconnaître des crottes de rats</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= INTERVENTIONS ======================= -->
+  <section class="section band band--marked" aria-labelledby="interventions-titre">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--light">Nos interventions</p>
+      <h2 id="interventions-titre" style="max-width:20ch">Quatre situations, quatre approches</h2>
+      <p class="lede" style="margin-bottom:2.5rem">
+        Le traitement n’est pas le même selon l’espèce, le volume concerné et
+        l’ancienneté de la présence. Voici ce que recouvre concrètement chaque
+        intervention.
+      </p>
+      <ul class="stack-list">
+        <li>
+          <h3><a href="/deratisation-rats" style="color:#fff;text-decoration:none">Rats →</a></h3>
+          <p>
+            Le rat brun circule au niveau des sous-sols, des réseaux et des abords.
+            L’intervention commence par la lecture des circulations&nbsp;: regards,
+            canalisations, joints de dallage, ouvertures de ventilation, abords de
+            local poubelles. Traiter sans couper ces accès revient à traiter en boucle.
+            <a href="/deratisation-rats">Voir la page rats</a>
+          </p>
+        </li>
+        <li>
+          <h3><a href="/deratisation-souris" style="color:#fff;text-decoration:none">Souris →</a></h3>
+          <p>
+            La souris s’installe à l’intérieur, se contente de très peu de nourriture
+            et passe par des ouvertures de quelques millimètres. L’enjeu est moins la
+            quantité posée que la couverture&nbsp;: une pièce traitée à moitié
+            entretient l’infestation.
+            <a href="/deratisation-souris">Voir la page souris</a>
+          </p>
+        </li>
+        <li>
+          <h3><a href="/infestation-rats" style="color:#fff;text-decoration:none">Infestation installée →</a></h3>
+          <p>
+            Présence ancienne, plusieurs zones touchées, activité en journée&nbsp;:
+            le traitement doit être planifié par étapes, avec un suivi et une
+            coordination entre les parties (occupants, syndic, gestionnaire).
+            <a href="/infestation-rats">Rats</a> · <a href="/infestation-souris">Souris</a>
+          </p>
+        </li>
+        <li>
+          <h3><a href="/prevention-rongeurs" style="color:#fff;text-decoration:none">Prévention →</a></h3>
+          <p>
+            Après traitement, ou en amont pour un site sensible&nbsp;: sécurisation
+            mécanique des ouvertures, révision de la gestion des déchets, points de
+            contrôle périodiques. C’est ce qui décide si le problème revient.
+            <a href="/prevention-rongeurs">Voir la prévention</a>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= DÉROULÉ ======================= -->
+  <section class="section" aria-labelledby="deroule-titre">
+    <div class="wrap">
+      <div class="split split--wide-right split--sticky">
+        <div>
+          <p class="eyebrow">Déroulé type</p>
+          <h2 id="deroule-titre">Comment se déroule une intervention&nbsp;?</h2>
+          <p class="lede">
+            Ce déroulé est une trame, pas un protocole figé. Une cave de copropriété,
+            une cuisine de restaurant et des combles de pavillon n’appellent ni les
+            mêmes dispositifs, ni le même nombre de passages.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn--ink" href="/deratisation">Le service en détail</a>
+          </div>
+        </div>
+        <ol class="steps">
+          <li>
+            <h3>Évaluation</h3>
+            <p>
+              Lecture des indices sur place, espèce en cause, ancienneté probable,
+              zones réellement concernées. C’est aussi le moment où l’on écarte les
+              fausses pistes — un bruit de plafond n’est pas toujours un rongeur.
+            </p>
+          </li>
+          <li>
+            <h3>Identification des passages</h3>
+            <p>
+              Recherche des points d’entrée et des circulations&nbsp;: gaines, vides
+              sanitaires, joints de dilatation, traversées de canalisations, bas de
+              portes, grilles de ventilation, regards extérieurs.
+            </p>
+          </li>
+          <li>
+            <h3>Mise en place du traitement</h3>
+            <p>
+              Choix des dispositifs et des emplacements selon le bâtiment, la présence
+              d’enfants ou d’animaux, et les contraintes du site (denrées, public,
+              activité en continu).
+            </p>
+          </li>
+          <li>
+            <h3>Sécurisation</h3>
+            <p>
+              Fermeture durable des accès identifiés avec des matériaux que les
+              rongeurs ne peuvent pas entamer. Une intervention sans cette étape
+              n’a qu’un effet temporaire.
+            </p>
+          </li>
+          <li>
+            <h3>Contrôle</h3>
+            <p>
+              Passage de vérification&nbsp;: consommation des dispositifs, nouveaux
+              indices, zones à étendre. Le nombre de contrôles dépend de ce qui est
+              constaté, pas d’un forfait décidé à l’avance.
+            </p>
+          </li>
+          <li>
+            <h3>Prévention</h3>
+            <p>
+              Consignes concrètes et durables&nbsp;: stockage, gestion des déchets,
+              entretien des abords, points à surveiller. Transmises à l’occupant
+              comme au gestionnaire quand les deux sont concernés.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= POUR QUI ======================= -->
+  <section class="section section--ruled" aria-labelledby="pourqui-titre">
+    <div class="wrap">
+      <p class="eyebrow">Pour qui</p>
+      <h2 id="pourqui-titre">Qui nous appelle</h2>
+      <p class="lede" style="margin-bottom:2.5rem">
+        Les contraintes ne sont pas les mêmes selon que l’on protège un logement,
+        un immeuble entier ou une activité soumise à contrôle sanitaire.
+      </p>
+      <ul class="links-grid">
+        <li><a href="/deratisation-particuliers">Particuliers<span>Maison, appartement, cave, combles</span></a></li>
+        <li><a href="/deratisation-coproprietes">Copropriétés<span>Parties communes, caves, local poubelles</span></a></li>
+        <li><a href="/deratisation-restaurants">Restaurants<span>Cuisine, réserve, plonge, local déchets</span></a></li>
+        <li><a href="/deratisation-commerces">Commerces<span>Alimentaire et non alimentaire</span></a></li>
+        <li><a href="/deratisation-entreprises">Entreprises<span>Bureaux, sites tertiaires, restauration collective</span></a></li>
+        <li><a href="/deratisation-entreprises#entrepots">Entrepôts et logistique<span>Quais, stockage, zones de transit</span></a></li>
+        <li><a href="/deratisation-entreprises#locaux">Locaux professionnels<span>Ateliers, laboratoires, réserves</span></a></li>
+        <li><a href="/contact">Collectivités et bailleurs<span>Patrimoine, écoles, équipements</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= ZONE ======================= -->
+  <section class="section band band--bone" aria-labelledby="zone-titre">
+    <div class="wrap">
+      <div class="split split--wide-left">
+        <div>
+          <p class="eyebrow">Zone d’intervention</p>
+          <h2 id="zone-titre">Toute l’Île-de-France, département par département</h2>
+          <p class="lede">
+            Le bâti francilien n’est pas homogène&nbsp;: un immeuble haussmannien
+            parisien, une résidence des années 1970 en petite couronne et un pavillon
+            de grande couronne ne se traitent pas de la même façon. C’est pour cette
+            raison que chaque département dispose de sa propre page.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn--ink" href="/zones-intervention">Voir la zone d’intervention</a>
+            <a class="btn btn--outline" href="/deratisation-paris">Dératisation à Paris</a>
+          </div>
+        </div>
+        <div>
+          <ul class="links-grid" style="border-top-color:var(--grey-200)">
+            <li><a href="/deratisation-paris">Paris (75)<span>20 arrondissements</span></a></li>
+            {departementsHorsParis.map((d) => (
+              <li>
+                <a href={`/zones-intervention/${d.slug}`}>
+                  {d.name} ({d.code})<span>{d.couronne}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= URGENCE ======================= -->
+  <section class="section" aria-labelledby="rapidite-titre">
+    <div class="wrap">
+      <div class="split split--wide-right">
+        <div>
+          <p class="eyebrow">Délai</p>
+          <h2 id="rapidite-titre">Pourquoi intervenir rapidement&nbsp;?</h2>
+          <p class="lede">
+            Non par dramatisation&nbsp;: parce qu’une présence installée devient
+            simplement plus difficile et plus coûteuse à traiter qu’une présence
+            détectée tôt.
+          </p>
+        </div>
+        <div class="prose">
+          <h3>La population progresse tant que la ressource est disponible</h3>
+          <p>
+            Rats et souris sont des rongeurs à reproduction rapide. Tant qu’un site
+            offre nourriture, eau et abri, la présence se maintient et s’étend.
+            Intervenir sur quelques individus mobilise beaucoup moins de moyens que
+            sur une population établie répartie sur plusieurs niveaux.
+          </p>
+
+          <h3>Les dégâts matériels ne sont pas réversibles</h3>
+          <p>
+            Le rongement porte sur les isolants, les gaines, les câbles électriques,
+            les joints de canalisation et les emballages. Un câble dénudé dans un
+            comble ou un faux plafond crée un risque qui n’a plus rien à voir avec
+            une simple nuisance.
+          </p>
+
+          <h3>Le risque sanitaire est documenté</h3>
+          <p>
+            Les rongeurs peuvent contaminer des denrées et des surfaces par leurs
+            déjections et leur urine. La leptospirose fait partie des maladies dont
+            la transmission par l’urine de rongeurs est documentée par les autorités
+            sanitaires. Ce n’est pas une raison de paniquer, c’est une raison de ne
+            pas laisser une situation s’installer.
+          </p>
+
+          <h3>En copropriété et en collectif, le problème se déplace</h3>
+          <p>
+            Caves communicantes, gaines techniques verticales, vides sanitaires
+            partagés&nbsp;: un logement traité isolément voit souvent le problème
+            revenir si l’immeuble n’est pas pris dans son ensemble. Plus on attend,
+            plus le périmètre à traiter s’élargit.
+          </p>
+
+          <h3>Pour un professionnel, l’enjeu est aussi réglementaire</h3>
+          <p>
+            Les établissements manipulant des denrées alimentaires sont tenus de
+            maîtriser le risque nuisibles dans leur plan de maîtrise sanitaire.
+            Un constat lors d’un contrôle n’attend pas la fin d’un traitement.
+            <a href="/deratisation-restaurants">Voir les enjeux en restauration</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq
+    items={faq}
+    title="Les questions qu’on nous pose le plus"
+    eyebrow="Questions fréquentes"
+    intro="Des réponses directes, sans détour commercial. Chaque sujet est développé plus longuement dans le blog."
+  />
+
+  <!-- ======================= BLOG ======================= -->
+  {posts.length > 0 && (
+    <section class="section section--ruled" aria-labelledby="blog-titre">
+      <div class="wrap">
+        <p class="eyebrow">Ressources</p>
+        <h2 id="blog-titre">Comprendre avant d’agir</h2>
+        <p class="lede" style="margin-bottom:2.5rem">
+          Des guides pratiques écrits pour répondre à une question précise,
+          pas pour occuper une page.
+        </p>
+        <ul class="post-list">
+          {posts.map((p) => (
+            <li>
+              <article>
+                <p class="post-list__meta">
+                  <b>{p.data.category}</b>
+                  {dateFmt.format(p.data.datePublished)} · {p.data.readingTime} min
+                </p>
+                <div>
+                  <h3><a href={`/blog/${p.id}`}>{p.data.title}</a></h3>
+                  <p>{p.data.description}</p>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn--outline" href="/blog">Tous les articles</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CtaBand
+    title="Décrivez votre situation, nous vous disons ce qu’elle implique"
+    text="Quelques indices bien décrits suffisent souvent à identifier l’espèce et à cibler la zone à traiter. Appelez ou envoyez une photo des traces."
+    eyebrow="Passer à l’action"
+  />
+</BaseLayout>

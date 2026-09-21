@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Politique de confidentialité', href: '/politique-de-confidentialite' },
+];
+---
+<BaseLayout
+  title="Politique de confidentialité — Dératisation Île-de-France"
+  description="Traitement des données transmises via le formulaire : finalité, base légale, destinataires, durée de conservation et exercice de vos droits."
+  crumbs={crumbs}
+>
+  <section class="section">
+    <div class="wrap wrap--narrow prose" style="padding-block:clamp(2rem,5vw,3.5rem)">
+      <p class="eyebrow">Données personnelles</p>
+      <h1 style="font-size:var(--step-4)">Politique de confidentialité</h1>
+      <p class="lede">
+        Ce site collecte le minimum d’informations nécessaires pour répondre à
+        une demande d’intervention. Aucune donnée n’est vendue ni utilisée à des
+        fins publicitaires.
+      </p>
+
+      <h2>Quelles données sont collectées</h2>
+      <p>
+        Uniquement celles que vous transmettez volontairement via le formulaire
+        de contact ou lors d’un appel :
+      </p>
+      <ul class="ticks">
+        <li>identité déclarée (nom) et coordonnées (téléphone, e-mail si fourni)&nbsp;;</li>
+        <li>localisation de l’intervention (ville ou code postal)&nbsp;;</li>
+        <li>éléments techniques de la demande : espèce constatée, type de bâtiment, zone concernée, description&nbsp;;</li>
+        <li>photographie éventuellement jointe.</li>
+      </ul>
+      <p>
+        Le site ne dépose aucun cookie publicitaire ni traceur tiers, et
+        n’embarque aucun script de mesure d’audience externe.
+      </p>
+
+      <h2>Pourquoi elles sont collectées</h2>
+      <p>
+        Pour répondre à votre demande, évaluer la situation, organiser une
+        intervention et en assurer le suivi. La base légale est l’exécution de
+        mesures précontractuelles prises à votre demande, puis, le cas échéant,
+        l’exécution du contrat.
+      </p>
+
+      <h2>Combien de temps elles sont conservées</h2>
+      <ul class="ticks">
+        <li><strong>Demande sans suite</strong> : suppression dans un délai raisonnable après le dernier échange.</li>
+        <li><strong>Intervention réalisée</strong> : conservation pendant la durée nécessaire au suivi technique et aux obligations légales et comptables applicables.</li>
+        <li><strong>Photographies transmises</strong> : conservées uniquement le temps nécessaire au diagnostic et au dossier d’intervention.</li>
+      </ul>
+
+      <h2>Qui y a accès</h2>
+      <p>
+        Les personnes intervenant dans le traitement de votre demande. Les
+        données peuvent être hébergées par un prestataire technique agissant
+        pour notre compte. Elles ne sont ni cédées, ni louées, ni transmises à
+        des tiers à des fins commerciales.
+      </p>
+
+      <h2>Vos droits</h2>
+      <p>
+        Conformément au règlement général sur la protection des données, vous
+        disposez d’un droit d’accès, de rectification, d’effacement, de
+        limitation et d’opposition, ainsi que du droit à la portabilité de vos
+        données.
+      </p>
+      <p>
+        Pour les exercer, contactez-nous
+        {site.email ? <> à l’adresse <a href={`mailto:${site.email}`}>{site.email}</a></> : <> par téléphone au <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></>}.
+        Vous pouvez également introduire une réclamation auprès de la CNIL.
+      </p>
+
+      <h2>Sécurité</h2>
+      <p>
+        Les échanges avec ce site sont chiffrés (HTTPS). L’accès aux demandes
+        reçues est restreint aux personnes qui en ont besoin pour traiter votre
+        dossier.
+      </p>
+
+      <h2>Mise à jour</h2>
+      <p>
+        Cette politique peut être ajustée pour refléter une évolution technique
+        ou réglementaire. La version en ligne est celle qui fait foi.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

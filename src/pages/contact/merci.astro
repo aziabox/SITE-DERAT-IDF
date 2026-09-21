@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site, telHref } from '../../data/site';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Demande envoyée', href: '/contact/merci' },
+];
+---
+<BaseLayout
+  title="Demande envoyée — Dératisation Île-de-France"
+  description="Votre demande d’intervention a bien été transmise. Nous revenons vers vous pour organiser le diagnostic."
+  crumbs={crumbs}
+  noindex={true}
+>
+  <section class="section">
+    <div class="wrap wrap--narrow prose" style="padding-block:clamp(2rem,6vw,4rem)">
+      <p class="eyebrow">Demande reçue</p>
+      <h1 style="font-size:var(--step-4)">Merci, votre demande est transmise</h1>
+      <p class="lede">
+        Nous revenons vers vous pour préciser la situation et convenir d’un
+        créneau. Si votre demande est urgente — établissement en activité,
+        risque constaté — appelez directement.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--amber" href={telHref}>Appeler le {site.phoneDisplay}</a>
+        <a class="btn btn--outline" href="/">Retour à l’accueil</a>
+      </div>
+
+      <h2>En attendant</h2>
+      <p>Trois gestes simples qui font gagner du temps sur le diagnostic :</p>
+      <ul class="ticks">
+        <li>Photographier les traces, avec un objet de taille connue à côté.</li>
+        <li>Noter les pièces concernées et l’heure des bruits éventuels.</li>
+        <li>Mettre les denrées en contenants rigides, y compris la nourriture pour animaux.</li>
+      </ul>
+      <p>
+        Ne bouchez rien à la mousse expansive&nbsp;: cela masque l’accès sans le
+        fermer et complique le repérage. Voir
+        <a href="/prevention-rongeurs">prévention des rongeurs</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

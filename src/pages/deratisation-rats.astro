@@ -1,0 +1,247 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-rats', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Rats', href: '/deratisation-rats' },
+];
+
+const faq = [
+  {
+    q: 'Comment savoir si j’ai des rats et pas des souris ?',
+    a: 'Regardez les crottes : celles d’un rat brun mesurent environ 1,5 à 2 cm, sont épaisses et souvent regroupées, celles d’une souris font 3 à 6 mm et sont dispersées. Le niveau aussi diffère : le rat occupe les caves, les sous-sols et les abords, la souris les cloisons et les meubles. Enfin, un rat laisse des traces grasses foncées le long des murs qu’il longe, ce que la souris produit beaucoup moins nettement.',
+  },
+  {
+    q: 'Où les rats se cachent-ils dans un bâtiment ?',
+    a: 'Dans les zones sombres, peu fréquentées et proches d’une source d’eau : caves, vides sanitaires, locaux techniques, gaines, faux plafonds de sous-sol, doublages de cloison, local poubelles, et à l’extérieur les terriers en pied de façade, sous une dalle ou dans un massif. Le nid est presque toujours à moins d’une trentaine de mètres d’un point d’eau et de nourriture.',
+  },
+  {
+    q: 'Un rat vu en pleine journée, est-ce grave ?',
+    a: 'C’est un signal à prendre au sérieux. Le rat brun est majoritairement actif au crépuscule et la nuit. Une activité diurne visible indique souvent une population dense où la compétition pousse certains individus à sortir aux heures où ils devraient rester à l’abri, ou une perturbation du nid (travaux, curage, démolition proche).',
+  },
+  {
+    q: 'Les rats viennent-ils des égouts ?',
+    a: 'C’est une voie possible parmi d’autres. Le rat brun circule dans les réseaux d’assainissement et peut remonter par une canalisation défectueuse, un regard non étanche ou une évacuation abandonnée. Mais beaucoup d’installations viennent simplement de l’extérieur : cour, jardin, local déchets, chantier voisin, stockage au sol.',
+  },
+  {
+    q: 'Puis-je traiter moi-même une présence de rats ?',
+    a: 'Sur un individu isolé et récent, parfois. Dès qu’il y a plusieurs indices dans plusieurs zones, le traitement en autonomie a deux limites : les emplacements choisis au hasard sont rarement sur les circulations réelles, et les points d’entrée ne sont pas traités. Résultat fréquent : une accalmie de quelques semaines, puis le retour.',
+  },
+  {
+    q: 'Faut-il traiter tout l’immeuble ou seulement mon logement ?',
+    a: 'Si les indices sont en cave, en parties communes ou dans une gaine, la réponse est l’immeuble. Une intervention limitée à un lot privatif ne fait que déplacer les circulations. C’est la raison pour laquelle nous travaillons régulièrement avec les syndics et les gestionnaires.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation rats en Île-de-France',
+    serviceType: 'Traitement des rats',
+    description:
+      'Identification et traitement des infestations de rats en Île-de-France : lecture des indices, repérage des circulations, traitement et fermeture des points d’entrée.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation rats en Île-de-France : indices et traitement"
+  description="Reconnaître une présence de rats, comprendre où ils se cachent et comment se déroule le traitement en Île-de-France. Caves, sous-sols, cours, parties communes."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Rongeurs • Rat brun"
+    title="Dératisation rats en Île-de-France"
+    lede="Le rat brun ne s’installe jamais au hasard. Il suit des circulations précises, entre par des accès identifiables et occupe des zones prévisibles. Savoir les lire, c’est traiter au bon endroit plutôt que partout."
+    primaryLabel="Décrire ce que j’ai vu"
+    meta={['Caves et sous-sols', 'Cours et abords', 'Parties communes']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow">
+      <div class="answer">
+        <p class="eyebrow">Réponse directe</p>
+        <p>
+          On reconnaît une présence de rats à quatre éléments&nbsp;: des crottes
+          de 1,5 à 2 cm regroupées, des traces grasses foncées le long des murs,
+          des grignotages sur des matériaux durs (bas de porte, gaine, joint),
+          et des bruits lourds en sous-sol ou dans les gaines.
+        </p>
+        <p>
+          Le traitement consiste à réduire la population <strong>et</strong> à
+          fermer les accès. Sans la seconde partie, la première ne tient pas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="wrap">
+      <div class="split split--wide-left">
+        <div class="prose">
+          <h2>Le rat brun, celui que l’on rencontre en Île-de-France</h2>
+          <p>
+            L’espèce dominante en milieu urbain francilien est le rat brun
+            (<em>Rattus norvegicus</em>), aussi appelé surmulot. C’est un rongeur
+            robuste, bon nageur, excellent fouisseur, qui privilégie les niveaux
+            bas : sous-sols, caves, vides sanitaires, réseaux, terriers en pleine
+            terre. Le rat noir, plus grimpeur, se rencontre nettement moins dans
+            l’habitat urbain dense.
+          </p>
+          <p>
+            Trois traits de comportement expliquent l’essentiel de la stratégie
+            d’intervention.
+          </p>
+
+          <h3>Il longe les parois</h3>
+          <p>
+            Le rat se déplace au contact des murs, des plinthes, des tuyaux et des
+            angles. Il traverse rarement une pièce en son centre. C’est pour cette
+            raison que les traces grasses apparaissent à hauteur de plinthe, et
+            que tout dispositif posé au milieu d’un local reste ignoré.
+          </p>
+
+          <h3>Il se méfie de la nouveauté</h3>
+          <p>
+            Un objet inconnu dans un environnement familier est d’abord évité
+            pendant plusieurs jours. Cette néophobie explique qu’un traitement
+            puisse sembler sans effet la première semaine, et qu’il faille éviter
+            de déplacer sans cesse les dispositifs.
+          </p>
+
+          <h3>Il reste près de ses ressources</h3>
+          <p>
+            Nourriture, eau et abri : tant que les trois sont réunis, la colonie
+            reste. Un local poubelles mal fermé, une fuite dans une cave, un
+            stockage au sol suffisent à entretenir la présence même après
+            traitement.
+          </p>
+
+          <h2>Les indices, et ce qu’ils vous disent</h2>
+          <p>
+            Tous les indices n’ont pas la même valeur. Certains donnent l’espèce,
+            d’autres l’ancienneté, d’autres encore le trajet.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <caption>Lecture des indices de présence de rats.</caption>
+              <thead>
+                <tr><th scope="col">Indice</th><th scope="col">Ce qu’il indique</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Crottes de 1,5 à 2 cm</th><td>Espèce confirmée. Sombres et souples = activité récente.</td></tr>
+                <tr><th scope="row">Traces grasses sur mur ou plinthe</th><td>Passage régulier et ancien sur ce trajet précis.</td></tr>
+                <tr><th scope="row">Trou net d’environ 5 à 8 cm</th><td>Entrée de terrier ou percement d’une cloison basse.</td></tr>
+                <tr><th scope="row">Terre meuble rejetée en pied de mur</th><td>Terrier actif à l’extérieur du bâtiment.</td></tr>
+                <tr><th scope="row">Gaine ou câble dénudé</th><td>Présence installée depuis plusieurs semaines. Risque électrique.</td></tr>
+                <tr><th scope="row">Animal visible en journée</th><td>Densité élevée ou nid perturbé à proximité.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Pour l’identification précise des déjections, voir
+            <a href="/blog/reconnaitre-crottes-de-rats">comment reconnaître des crottes de rats</a>.
+          </p>
+
+          <h2>Où chercher, dans l’ordre</h2>
+          <p>
+            En Île-de-France, les zones suivantes concentrent la majorité des
+            découvertes, dans un ordre assez stable d’un bâtiment à l’autre :
+          </p>
+          <ul class="ticks">
+            <li><strong>La cave et le sous-sol</strong> : angles, arrivées de canalisations, cartons stockés au sol, zones non éclairées.</li>
+            <li><strong>Le local poubelles</strong> : bas de porte, sol, dessous des bacs, siphon de sol.</li>
+            <li><strong>La cour et les abords</strong> : pied de façade, massifs, dalle, regards, local vélos.</li>
+            <li><strong>Les gaines techniques</strong> : colonnes verticales, trémies, passages de fluides entre niveaux.</li>
+            <li><strong>Les faux plafonds de sous-sol</strong> : rarement inspectés, souvent traversés.</li>
+            <li><strong>Les abords de chantier</strong> : un terrassement voisin déplace les populations existantes.</li>
+          </ul>
+          <p>
+            Pour une cave, le détail des vérifications est décrit dans
+            <a href="/blog/rats-dans-une-cave-que-faire">rats dans une cave : que faire</a>.
+          </p>
+
+          <h2>Comment se déroule le traitement</h2>
+          <p>
+            L’intervention commence par la localisation des circulations, pas par
+            la pose. Les dispositifs sont ensuite installés le long des trajets
+            identifiés, dans des emplacements protégés, repérés et contrôlables.
+            Le choix entre appâtage sécurisé, piégeage mécanique ou combinaison
+            des deux dépend du contexte : présence d’animaux domestiques, de
+            denrées, de public, sensibilité du site.
+          </p>
+          <p>
+            En parallèle, les accès identifiés sont fermés avec des matériaux non
+            rongeables. Le détail technique est développé sur la page
+            <a href="/traitement-rats">traitement contre les rats</a>.
+          </p>
+          <div class="keyline">
+            <p>
+              Une intervention qui ne comporte pas d’étape de fermeture des accès
+              n’est pas une dératisation : c’est une réduction temporaire de la
+              population.
+            </p>
+          </div>
+
+          <h2>Quand la situation est déjà installée</h2>
+          <p>
+            Plusieurs zones touchées, activité en journée, indices dans les
+            parties communes et chez plusieurs occupants : on ne parle plus d’une
+            présence isolée. La démarche change — périmètre élargi, passages
+            échelonnés, coordination entre les parties. C’est l’objet de la page
+            <a href="/infestation-rats">infestation de rats</a>.
+          </p>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Repères rapides</h3>
+          <p>Ordres de grandeur utiles pour le rat brun.</p>
+          <ul>
+            <li><a href="/inspection-rongeurs">Passe par une ouverture d’environ 2 cm</a></li>
+            <li><a href="/traitement-rats">Ronge le plastique, le plomb, le bois</a></li>
+            <li><a href="/prevention-rongeurs">Reste près de l’eau et de la nourriture</a></li>
+            <li><a href="/deratisation-coproprietes">Circule entre caves communicantes</a></li>
+            <li><a href="/deratisation-souris">Ce n’est peut-être pas un rat</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq
+    items={faq}
+    title="Rats : les questions les plus fréquentes"
+    eyebrow="Questions fréquentes"
+    intro="Les réponses ci-dessous portent uniquement sur le rat brun, l’espèce que l’on rencontre en milieu urbain francilien."
+  />
+
+  <RelatedLinks
+    title="Approfondir"
+    eyebrow="Aller plus loin"
+    items={[
+      { href: '/traitement-rats', label: 'Traitement contre les rats', note: 'Méthodes, emplacements, suivi' },
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Quand la présence est installée' },
+      { href: '/inspection-rongeurs', label: 'Recherche des points d’entrée', note: 'L’étape déterminante' },
+      { href: '/prevention-rongeurs', label: 'Prévention des rongeurs', note: 'Éviter le retour' },
+      { href: '/blog/rats-dans-les-murs-comment-savoir', label: 'Rats dans les murs : comment savoir', note: 'Guide' },
+      { href: '/blog/pourquoi-les-rats-entrent-dans-les-maisons', label: 'Pourquoi les rats entrent', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Envoyez une photo des traces, nous vous dirons ce qu’elles indiquent"
+    text="Crottes, trou dans une cloison, grignotage sur un bas de porte : une image suffit souvent à trancher entre rat et souris, et à cibler la zone à inspecter."
+    eyebrow="Identification"
+    variant="petrol"
+  />
+</BaseLayout>

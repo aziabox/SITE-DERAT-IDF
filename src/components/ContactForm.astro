@@ -1,0 +1,139 @@
+---
+import { site } from '../data/site';
+interface Props {
+  id?: string;
+  compact?: boolean;
+  /** Pré-remplit la ville depuis une page locale. */
+  defaultVille?: string;
+}
+const { id = 'formulaire', compact = false, defaultVille = '' } = Astro.props;
+const action = site.formEndpoint ?? '/contact/merci';
+const method = site.formEndpoint ? 'POST' : 'GET';
+---
+<form
+  id={id}
+  class="form form--2"
+  action={action}
+  method={method}
+  enctype="multipart/form-data"
+  novalidate={false}
+>
+  <!-- Piège à robots : champ invisible pour les humains, rempli par les bots. -->
+  <p class="visually-hidden" aria-hidden="true">
+    <label for={`${id}-site`}>Ne pas remplir ce champ</label>
+    <input type="text" id={`${id}-site`} name="_gotcha" tabindex="-1" autocomplete="off" />
+  </p>
+
+  <div class="field">
+    <label for={`${id}-nom`}>Nom <span class="req" aria-hidden="true">*</span></label>
+    <input type="text" id={`${id}-nom`} name="nom" autocomplete="name" required />
+  </div>
+
+  <div class="field">
+    <label for={`${id}-tel`}>Téléphone <span class="req" aria-hidden="true">*</span></label>
+    <input
+      type="tel"
+      id={`${id}-tel`}
+      name="telephone"
+      autocomplete="tel"
+      inputmode="tel"
+      pattern="[0-9 +().-]{8,20}"
+      required
+    />
+  </div>
+
+  <div class="field">
+    <label for={`${id}-email`}>E-mail</label>
+    <input type="email" id={`${id}-email`} name="email" autocomplete="email" />
+    <span class="hint">Facultatif — utile pour envoyer un compte rendu écrit.</span>
+  </div>
+
+  <div class="field">
+    <label for={`${id}-ville`}>Ville ou code postal <span class="req" aria-hidden="true">*</span></label>
+    <input
+      type="text"
+      id={`${id}-ville`}
+      name="ville"
+      autocomplete="address-level2"
+      value={defaultVille}
+      required
+    />
+  </div>
+
+  <fieldset class="field field--full">
+    <legend>Ce que vous avez constaté <span class="req" aria-hidden="true">*</span></legend>
+    <div class="choices">
+      {['Rat', 'Souris', 'Je ne sais pas', 'Traces de rongeurs', 'Infestation'].map((v, i) => (
+        <label>
+          <input type="radio" name="nuisible" value={v} required={i === 0} />
+          {v}
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  <div class="field field--full">
+    <label for={`${id}-batiment`}>Type de bâtiment <span class="req" aria-hidden="true">*</span></label>
+    <select id={`${id}-batiment`} name="batiment" required>
+      <option value="">Sélectionner…</option>
+      <option>Appartement</option>
+      <option>Maison / pavillon</option>
+      <option>Copropriété (parties communes)</option>
+      <option>Commerce</option>
+      <option>Restaurant / métier de bouche</option>
+      <option>Bureaux / locaux professionnels</option>
+      <option>Entrepôt / local d’activité</option>
+      <option>Bâtiment public ou collectivité</option>
+      <option>Autre</option>
+    </select>
+  </div>
+
+  {!compact && (
+    <div class="field field--full">
+      <label for={`${id}-zone`}>Où se situe le problème&nbsp;?</label>
+      <input
+        type="text"
+        id={`${id}-zone`}
+        name="zone"
+        placeholder="Cave, cuisine, combles, parties communes, local poubelles…"
+      />
+    </div>
+  )}
+
+  <div class="field field--full">
+    <label for={`${id}-message`}>Décrivez votre situation <span class="req" aria-hidden="true">*</span></label>
+    <textarea
+      id={`${id}-message`}
+      name="message"
+      required
+      placeholder="Depuis quand ? Qu’avez-vous vu ou entendu ? Y a-t-il déjà eu un traitement ?"
+    ></textarea>
+    <span class="hint">
+      Plus la description est précise, plus le diagnostic au téléphone est rapide.
+    </span>
+  </div>
+
+  <div class="field field--full">
+    <label for={`${id}-photo`}>Photo (facultatif)</label>
+    <input type="file" id={`${id}-photo`} name="photo" accept="image/*" />
+    <span class="hint">Crottes, grignotage, trou dans une cloison : une photo aide beaucoup.</span>
+  </div>
+
+  <div class="field field--full">
+    <label style="display:flex;gap:0.6rem;align-items:flex-start;font-weight:400;font-size:0.9rem">
+      <input type="checkbox" name="consentement" required style="width:auto;min-height:auto;margin-top:0.25rem" />
+      <span>
+        J’accepte que mes informations soient utilisées pour être recontacté au sujet de ma demande.
+        Voir la <a href="/politique-de-confidentialite">politique de confidentialité</a>.
+      </span>
+    </label>
+  </div>
+
+  <div class="field field--full">
+    <button class="btn btn--amber" type="submit">Envoyer ma demande</button>
+    <p class="form__legal" style="margin-top:0.85rem">
+      Vous préférez expliquer de vive voix&nbsp;? Appelez le
+      <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a>.
+    </p>
+  </div>
+</form>

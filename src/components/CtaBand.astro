@@ -1,0 +1,38 @@
+---
+import { site, telHref, cta } from '../data/site';
+interface Props {
+  title: string;
+  text: string;
+  primaryLabel?: string;
+  eyebrow?: string;
+  variant?: 'ink' | 'petrol';
+}
+const {
+  title,
+  text,
+  primaryLabel = cta.primary,
+  eyebrow = 'Intervention',
+  variant = 'ink',
+} = Astro.props;
+---
+<section class={`section band band--marked cta-final ${variant === 'petrol' ? 'band--petrol' : ''}`}>
+  <div class="wrap">
+    <div class="split split--wide-left">
+      <div>
+        <p class="eyebrow eyebrow--light">{eyebrow}</p>
+        <h2>{title}</h2>
+        <p class="lede">{text}</p>
+      </div>
+      <div>
+        <p style="font-size:var(--step-3);font-weight:800;letter-spacing:-0.03em;color:#fff;margin-bottom:0.35rem">
+          <a href={telHref} style="color:var(--amber);text-decoration:none">{site.phoneDisplay}</a>
+        </p>
+        <p style="margin-bottom:1.5rem">{site.openingHours} — Paris, petite et grande couronne.</p>
+        <div class="btn-row" style="margin-top:0">
+          <a class="btn btn--amber" href="/contact">{primaryLabel}</a>
+          <a class="btn btn--outline-light" href={telHref}>{cta.call}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

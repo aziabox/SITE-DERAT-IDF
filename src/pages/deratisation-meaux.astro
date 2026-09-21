@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-meaux', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Seine-et-Marne', href: '/zones-intervention/seine-et-marne' },
+  { label: 'Meaux', href: '/deratisation-meaux' },
+];
+
+const faq = [
+  {
+    q: 'Le centre historique pose-t-il des difficultés particulières ?',
+    a: 'Principalement en sous-sol. Les caves du centre ancien sont parfois profondes, reprises à plusieurs époques et communicantes entre parcelles mitoyennes. Comme dans tout bâti de ce type, les passages sont des discontinuités de maçonnerie plutôt que des ouvertures nettes, ce qui rend l’inspection plus longue et plus déterminante.',
+  },
+  {
+    q: 'La proximité de la Marne et du canal change-t-elle quelque chose ?',
+    a: 'Pour les bâtiments riverains, oui : eau permanente et berges meubles favorisent l’installation de rats bruns en extérieur. La priorité porte alors sur la fermeture du pied de bâtiment — soupiraux, regards, traversées — et sur la gestion des déchets côté rue.',
+  },
+  {
+    q: 'Intervenez-vous pour les commerces de bouche du centre-ville ?',
+    a: 'Oui, hors horaires d’ouverture. Le traitement porte sur la réserve, souvent en cave, le local déchets et les accès de livraison. Chaque passage est documenté pour alimenter le plan de maîtrise sanitaire de l’établissement.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Meaux',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Meaux : centre historique, caves anciennes, bords de Marne et canal, commerces de bouche et habitat collectif.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Meaux (77100) : centre ancien et bords de Marne"
+  description="Dératisation à Meaux : centre historique, caves anciennes, bords de Marne et canal, commerces de bouche et quartiers collectifs. Inspection et sécurisation."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Meaux • 77100"
+    title="Dératisation à Meaux"
+    lede="Meaux réunit un centre historique aux sous-sols anciens, un cours d’eau et un canal qui la traversent, et des quartiers collectifs plus récents. Trois contextes qui demandent chacun une lecture différente du bâtiment."
+    primaryLabel="Décrire mon bâtiment"
+    meta={['Seine-et-Marne (77)', 'Centre historique', 'Bords de Marne et canal']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Le centre historique</h2>
+      <p>
+        Le cœur de ville présente un bâti ancien avec des sous-sols parfois
+        profonds, repris à plusieurs époques, et fréquemment communicants entre
+        parcelles mitoyennes. Les passages y prennent la forme de
+        discontinuités de maçonnerie : joints creusés, pierres descellées,
+        anciennes traversées de réseaux abandonnées.
+      </p>
+      <p>
+        L’inspection y est donc plus longue qu’ailleurs, et la fermeture relève
+        du rebouchage maçonné avec armature métallique. C’est l’étape décisive :
+        sans elle, le traitement se répète. Voir
+        <a href="/inspection-rongeurs">inspection des points d’entrée</a>.
+      </p>
+
+      <h2>Les commerces de bouche</h2>
+      <p>
+        Le centre-ville compte une densité notable de commerces alimentaires et
+        de restauration. La plupart disposent d’une réserve en cave, reliée au
+        sous-sol de l’immeuble.
+      </p>
+      <p>
+        Il en découle la même interdépendance que dans tout centre ancien : le
+        commerce et la copropriété ne peuvent pas traiter chacun de leur côté
+        sans se neutraliser. Nous établissons le constat pour permettre une
+        démarche coordonnée. Voir
+        <a href="/deratisation-restaurants">restaurants et métiers de bouche</a>.
+      </p>
+
+      <h2>Les bords de Marne et le canal</h2>
+      <p>
+        Les berges offrent au rat brun un accès permanent à l’eau et un sol
+        meuble où creuser. Pour un bâtiment riverain, la question n’est pas de
+        savoir si une pression extérieure existe, mais si le bâtiment est
+        correctement fermé en partie basse.
+      </p>
+
+      <h2>Les quartiers collectifs</h2>
+      <p>
+        Les ensembles de logement collectif de la commune présentent la
+        configuration habituelle : vide sanitaire, gaines verticales, caves,
+        locaux déchets. Le périmètre d’intervention doit couvrir ces volumes,
+        ce qui suppose une coordination avec le bailleur ou le syndic. Voir
+        <a href="/deratisation-coproprietes">copropriétés</a>.
+      </p>
+
+      <h2>Prévention à Meaux</h2>
+      <ul class="ticks">
+        <li>Faire reboucher les discontinuités de maçonnerie en cave, avec armature.</li>
+        <li>Fermer les trappes et soupiraux donnant sur voirie.</li>
+        <li>Rayonner les réserves commerciales, décollées du sol et des murs.</li>
+        <li>Sceller les regards, notamment côté berges.</li>
+        <li>En collectif : tenir le local déchets et grillager les ventilations.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Meaux : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/zones-intervention/seine-et-marne', label: 'Seine-et-Marne', note: 'Page départementale' },
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Caves anciennes' },
+      { href: '/deratisation-commerces', label: 'Commerces', note: 'Réserves en cave' },
+      { href: '/deratisation-rats', label: 'Dératisation rats', note: 'Bords d’eau' },
+    ]}
+  />
+
+  <CtaBand
+    title="Cave ancienne ou bâtiment riverain : deux priorités différentes"
+    text="Dans le premier cas, tout se joue sur l’inspection. Dans le second, sur la fermeture du pied de bâtiment."
+    eyebrow="Meaux"
+  />
+</BaseLayout>

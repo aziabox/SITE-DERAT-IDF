@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-versailles', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Yvelines', href: '/zones-intervention/yvelines' },
+  { label: 'Versailles', href: '/deratisation-versailles' },
+];
+
+const faq = [
+  {
+    q: 'Pourquoi les caves anciennes de Versailles demandent-elles plus de temps ?',
+    a: 'Parce que les passages n’y sont pas des trous nets mais des discontinuités de maçonnerie : joints creusés, pierres descellées, anciennes traversées de réseaux abandonnées, voûtes reprises à plusieurs époques. Les repérer exige un examen point par point, et les fermer relève du rebouchage maçonné avec armature métallique.',
+  },
+  {
+    q: 'Les commerces de bouche du centre-ville sont-ils concernés ?',
+    a: 'Oui, et souvent par le sous-sol. La plupart des commerces de centre-ville disposent d’une réserve en cave, fréquemment reliée aux sous-sols de l’immeuble d’habitation. Le commerce et la copropriété s’influencent donc mutuellement : traiter l’un sans l’autre donne un résultat partiel.',
+  },
+  {
+    q: 'Intervenez-vous dans les hôtels et restaurants du secteur touristique ?',
+    a: 'Oui, hors service et sans dispositif visible dans les espaces clients. Le traitement se concentre sur les réserves, la plonge, les locaux déchets et les vides techniques, avec une traçabilité des passages exploitable dans le plan de maîtrise sanitaire.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Versailles',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Versailles : bâti ancien, caves voûtées, commerces de centre-ville, hôtellerie et restauration.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Versailles (78000) : bâti ancien et commerces"
+  description="Dératisation à Versailles : caves voûtées, maçonneries anciennes, commerces de centre-ville, hôtels et restaurants. Inspection minutieuse et rebouchage durable."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Versailles • 78000"
+    title="Dératisation à Versailles"
+    lede="À Versailles, la difficulté n’est pas le traitement : c’est de trouver les passages. Dans des sous-sols maçonnés depuis plusieurs siècles, les accès ne ressemblent pas à des trous mais à des discontinuités — et ils se trouvent à l’examen, pas au premier regard."
+    primaryLabel="Demander une inspection"
+    meta={['Yvelines (78)', 'Caves voûtées', 'Commerces et hôtellerie']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Le bâti ancien et ses sous-sols</h2>
+      <p>
+        Le centre de Versailles présente un parc ancien avec des sous-sols
+        maçonnés, parfois voûtés, repris à différentes époques. Ce type de
+        construction a une caractéristique qui change la méthode d’inspection :
+        les passages ne sont pas nets.
+      </p>
+      <p>
+        Là où un immeuble récent présente une traversée de canalisation franche
+        et repérable, une cave ancienne présente des joints creusés, des pierres
+        descellées, d’anciennes traversées abandonnées, des reprises de
+        maçonnerie mal jointoyées. Ces discontinuités se découvrent en examinant
+        les parois point par point.
+      </p>
+      <div class="keyline">
+        <p>
+          Conséquence directe : l’inspection prend plus de temps ici
+          qu’ailleurs, et la fermeture relève du rebouchage maçonné avec
+          armature, jamais du calfeutrement.
+        </p>
+      </div>
+
+      <h2>Les commerces de centre-ville</h2>
+      <p>
+        Le centre compte une densité importante de commerces de bouche et de
+        restauration, dont la plupart disposent d’une réserve en sous-sol. Ces
+        réserves sont fréquemment reliées aux caves de l’immeuble d’habitation.
+      </p>
+      <p>
+        Il en résulte une interdépendance : un commerce irréprochable dans sa
+        tenue peut rester exposé si le sous-sol de l’immeuble est actif. Nous
+        formalisons alors le constat pour permettre au commerçant de saisir le
+        syndic sur une base technique. Voir
+        <a href="/deratisation-commerces">commerces</a> et
+        <a href="/deratisation-coproprietes">copropriétés</a>.
+      </p>
+
+      <h2>Hôtellerie et restauration</h2>
+      <p>
+        Les établissements accueillant du public ont une contrainte
+        supplémentaire : l’image. Le traitement se fait hors service, sans
+        dispositif visible dans les espaces clients, et porte sur les volumes
+        techniques — réserve, plonge, local déchets, gaines.
+      </p>
+      <p>
+        Chaque passage est documenté pour le plan de maîtrise sanitaire. Voir
+        <a href="/deratisation-restaurants">restaurants et métiers de bouche</a>.
+      </p>
+
+      <h2>Les quartiers résidentiels</h2>
+      <p>
+        En dehors du centre, l’habitat comprend des maisons et des petits
+        collectifs avec jardins. Les points d’entrée redeviennent ceux, plus
+        classiques, de la maison individuelle : ventilation de vide sanitaire,
+        garage, toiture, abords.
+      </p>
+
+      <h2>Prévention à Versailles</h2>
+      <ul class="ticks">
+        <li>Faire reboucher les discontinuités de maçonnerie en cave, avec armature.</li>
+        <li>Fermer les trappes et soupiraux donnant sur voirie.</li>
+        <li>Rayonner les réserves commerciales, décollées du sol et des murs.</li>
+        <li>Tenir la discipline déchets en centre-ville : bacs fermés, horaires.</li>
+        <li>Dans le résidentiel : grillager les ventilations et dégager les abords.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Versailles : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/zones-intervention/yvelines', label: 'Yvelines', note: 'Page départementale' },
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Maçonneries anciennes' },
+      { href: '/deratisation-restaurants', label: 'Restaurants et hôtels', note: 'Hors service' },
+      { href: '/deratisation-commerces', label: 'Commerces', note: 'Réserves en cave' },
+    ]}
+  />
+
+  <CtaBand
+    title="Cave voûtée ? L’inspection est la partie décisive"
+    text="Dans le bâti ancien, trouver le passage vaut plus que n’importe quel dispositif. Nous prenons le temps qu’il faut."
+    eyebrow="Versailles"
+    variant="petrol"
+  />
+</BaseLayout>

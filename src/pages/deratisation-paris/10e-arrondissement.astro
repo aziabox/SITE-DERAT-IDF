@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { serviceSchema } from '../../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-paris/10e-arrondissement', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Paris', href: '/deratisation-paris' },
+  { label: '10e arrondissement', href: '/deratisation-paris/10e-arrondissement' },
+];
+
+const faq = [
+  {
+    q: 'Les abords du canal Saint-Martin sont-ils plus exposés ?',
+    a: 'Les berges et les ouvrages hydrauliques offrent au rat brun un accès permanent à l’eau et des abris en pleine terre. Pour un immeuble ou un établissement riverain, cela ne signifie pas une présence automatique, mais cela déplace la priorité vers la protection du pied de bâtiment : regards, soupiraux, traversées, gestion des déchets côté rue.',
+  },
+  {
+    q: 'Pourquoi le secteur des gares est-il un cas à part ?',
+    a: 'Parce qu’il cumule une restauration rapide très dense, des flux permanents et une production de déchets répartie sur une grande partie de la journée et de la nuit. La ressource alimentaire est donc quasi continue, ce qui rend la discipline sur les déchets encore plus déterminante qu’ailleurs.',
+  },
+  {
+    q: 'Intervenez-vous dans les hôtels du 10e ?',
+    a: 'Oui. Les établissements hôteliers demandent une approche discrète : traitement des volumes techniques, des réserves, des locaux déchets et des vides de gaines, avec des passages programmés hors des heures de forte occupation et aucun dispositif visible dans les espaces clients.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation Paris 10e arrondissement',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris dans le 10e arrondissement de Paris : secteur des gares, canal Saint-Martin, restauration et hôtellerie.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Paris 10e : gares, canal Saint-Martin"
+  description="Dératisation dans le 10e arrondissement de Paris : secteur des gares du Nord et de l’Est, canal Saint-Martin, restauration, hôtels et immeubles anciens."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Paris 10e • 75010"
+    title="Dératisation Paris 10e : flux continus et abords d’eau"
+    lede="Le 10e réunit deux configurations rarement voisines : un secteur de gares où la production de déchets ne s’arrête jamais vraiment, et des abords de canal qui offrent eau et terrain meuble. Deux pressions différentes, sur un même arrondissement."
+    primaryLabel="Décrire ma situation"
+    meta={['Secteur des gares', 'Canal Saint-Martin', 'Hôtels et restauration']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Le contexte urbain</h2>
+      <p>
+        Le 10e s’organise autour de trois pôles distincts. Au nord, le secteur
+        des gares du Nord et de l’Est, avec une restauration rapide dense, une
+        hôtellerie nombreuse et des flux permanents. Au centre et à l’est, le
+        canal Saint-Martin et ses abords, bordés de commerces et de logements.
+        Entre les deux, un tissu résidentiel ancien avec cours, passages et
+        caves.
+      </p>
+
+      <h2>Ce que cela implique concrètement</h2>
+
+      <h3>Une ressource alimentaire quasi continue</h3>
+      <p>
+        Dans le secteur des gares, la production de déchets s’étale sur une
+        amplitude horaire bien plus large qu’ailleurs. Là où un quartier
+        résidentiel connaît des pics nets, ce secteur alimente en continu. La
+        gestion des bacs et l’absence de dépôt au sol y pèsent donc davantage
+        que n’importe quel traitement.
+      </p>
+
+      <h3>Des abords d’eau</h3>
+      <p>
+        Le canal et ses ouvrages constituent un environnement favorable au rat
+        brun : eau accessible, berges où creuser, végétation. Pour un bâtiment
+        riverain, la priorité n’est pas le traitement intérieur mais la fermeture
+        du pied de bâtiment — soupiraux, regards, traversées de réseaux, trappes
+        de cave sur trottoir.
+      </p>
+
+      <h3>Un parc ancien avec cours</h3>
+      <p>
+        Le tissu résidentiel du 10e comporte de nombreux immeubles anciens
+        organisés autour de cours et de passages, avec des caves fréquemment
+        communicantes. Le périmètre d’une intervention y dépasse presque toujours
+        le lot concerné. Voir <a href="/deratisation-coproprietes">copropriétés</a>.
+      </p>
+
+      <h2>Hôtellerie et restauration</h2>
+      <p>
+        Ces établissements ont une contrainte supplémentaire : l’image. Le
+        traitement se fait donc hors des heures de forte occupation, sans
+        dispositif visible dans les espaces clients, et se concentre sur les
+        volumes techniques : réserves, plonge, local déchets, gaines, locaux
+        de service.
+      </p>
+      <p>
+        Chaque passage est documenté, ce qui permet à l’établissement de
+        justifier la maîtrise du risque en cas de contrôle. Voir
+        <a href="/deratisation-restaurants">restaurants</a>.
+      </p>
+
+      <h2>Prévention dans le 10e</h2>
+      <ul class="ticks">
+        <li>Bacs fermés et sortis aux horaires, aucun sac déposé au sol.</li>
+        <li>Fermeture des trappes de cave donnant sur trottoir.</li>
+        <li>Grillage métallique sur les soupiraux et ventilations basses.</li>
+        <li>Regards scellés dans les cours et les passages.</li>
+        <li>Réserves sur rayonnage, décollées du sol et des murs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Paris 10e : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-paris', label: 'Dératisation à Paris', note: 'Vue d’ensemble' },
+      { href: '/deratisation-paris/19e-arrondissement', label: 'Paris 19e', note: 'Bassin de la Villette' },
+      { href: '/deratisation-restaurants', label: 'Restaurants et hôtels', note: 'Hors service' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Pied de bâtiment' },
+    ]}
+  />
+
+  <CtaBand
+    title="Immeuble riverain du canal ? Commencez par le pied de bâtiment"
+    text="Soupiraux, regards et trappes de cave sont les points décisifs dans ce secteur. Nous les vérifions en premier."
+    eyebrow="Paris 10e"
+    variant="petrol"
+  />
+</BaseLayout>

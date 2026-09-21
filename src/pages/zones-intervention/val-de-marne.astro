@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getDepartement, villesOf } from '../../data/idf';
+import { serviceSchema } from '../../lib/seo';
+
+const dep = getDepartement('val-de-marne')!;
+const villes = villesOf(dep.slug);
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/zones-intervention/val-de-marne', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Val-de-Marne', href: '/zones-intervention/val-de-marne' },
+];
+
+const faq = [
+  {
+    q: 'Les bords de Marne sont-ils plus exposés ?',
+    a: 'Les abords des cours d’eau réunissent deux conditions favorables au rat brun : un accès permanent à l’eau et des berges où il peut creuser. Pour une maison ou un immeuble riverain, cela ne signifie pas une présence automatique, mais cela rend la protection des accès en pied de bâtiment plus déterminante qu’ailleurs.',
+  },
+  {
+    q: 'Intervenez-vous sur les zones d’activité et les marchés ?',
+    a: 'Oui. Les sites qui manipulent des produits frais et génèrent des déchets organiques en volume demandent une approche périmétrique : protection de l’enveloppe, gestion stricte des déchets, points de contrôle repérés et détection précoce plutôt que traitement curatif répété.',
+  },
+  {
+    q: 'Comment traiter un logement sur dalle avec parking en dessous ?',
+    a: 'En commençant par le volume technique. Sur les ensembles construits sur dalle, les circulations se font sous les cheminements piétons : galeries, locaux techniques, parkings. Un traitement limité aux logements ne rencontre pas les animaux, qui circulent un niveau plus bas.',
+  },
+  {
+    q: 'Les pavillons de la boucle de la Marne relèvent-ils de la même méthode ?',
+    a: 'Non. À Saint-Maur-des-Fossés, Nogent-sur-Marne ou Champigny-sur-Marne, le tissu pavillonnaire déplace l’enjeu vers les combles, le garage, le vide sanitaire et les abords végétalisés. La souris domine à l’intérieur, le rat brun se rencontre plutôt en extérieur et en sous-sol.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation dans le Val-de-Marne (94)',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris dans le Val-de-Marne : ensembles sur dalle, pavillonnaire des bords de Marne, zones d’activité et commerces.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Val-de-Marne (94) : rats et souris"
+  description="Dératisation dans le Val-de-Marne : ensembles sur dalle, pavillonnaire des bords de Marne, zones d’activité. Contexte local et communes couvertes."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Val-de-Marne • 94"
+    title="Dératisation dans le Val-de-Marne"
+    lede="Deux Val-de-Marne coexistent : celui des grands ensembles sur dalle, avec ses volumes techniques en sous-face, et celui des boucles de la Marne, pavillonnaire et végétalisé. Les points d’entrée n’y sont pas les mêmes, les méthodes non plus."
+    primaryLabel="Décrire mon bâtiment"
+    meta={[`Préfecture : ${dep.prefecture}`, 'Petite couronne', `${dep.communes.length}+ communes couvertes`]}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <h2>Les ensembles sur dalle</h2>
+          <p>
+            Créteil, Villejuif, Ivry-sur-Seine ou Vitry-sur-Seine comptent
+            plusieurs ensembles organisés autour de dalles piétonnes, avec des
+            volumes techniques, des parkings et des galeries situés directement
+            en dessous.
+          </p>
+          <p>
+            Cette configuration a une conséquence opérationnelle simple : les
+            circulations principales se font au niveau inférieur, hors de vue.
+            Un occupant constate des indices dans son logement, mais la
+            population vit sous la dalle. Traiter l’un sans l’autre donne un
+            résultat provisoire.
+          </p>
+          <p>
+            L’inspection commence donc par les niveaux techniques : locaux
+            déchets, locaux d’exploitation, gaines, trémies, passages de
+            réseaux, rampes d’accès.
+          </p>
+
+          <h2>Les boucles de la Marne</h2>
+          <p>
+            Saint-Maur-des-Fossés, Nogent-sur-Marne, Joinville-le-Pont,
+            Champigny-sur-Marne : ici, le bâti est majoritairement individuel ou
+            en petit collectif, avec jardins, sous-sols, garages et une
+            végétation abondante.
+          </p>
+          <p>
+            Les points d’entrée typiques changent radicalement :
+          </p>
+          <ul class="ticks">
+            <li>ventilations de vide sanitaire sans grillage ou détériorées&nbsp;;</li>
+            <li>jeu sous la porte de garage&nbsp;;</li>
+            <li>about de toiture et passages de conduits, pour les combles&nbsp;;</li>
+            <li>abri de jardin, bûcher, composteur non fermé&nbsp;;</li>
+            <li>haies et lierres en contact direct avec la façade.</li>
+          </ul>
+          <p>
+            Dans ce contexte, la prévention pèse plus lourd que le traitement :
+            une maison correctement fermée et aux abords dégagés se réinfeste
+            rarement.
+          </p>
+
+          <h2>Les zones d’activité et le commerce alimentaire</h2>
+          <p>
+            Le département accueille des sites de distribution, des zones
+            d’activité et un tissu commercial dense, notamment le long des axes
+            et autour des pôles de transport. Les sites manipulant des produits
+            frais et générant des déchets organiques demandent une approche
+            spécifique : protection de l’enveloppe, discipline sur les déchets,
+            points de contrôle repérés.
+          </p>
+          <p>
+            Le principe applicable est décrit sur les pages
+            <a href="/deratisation-commerces">commerces</a> et
+            <a href="/deratisation-entreprises">entreprises</a>.
+          </p>
+
+          <h2>Les abords de l’eau</h2>
+          <p>
+            La Seine et la Marne traversent le département sur une grande
+            partie de sa longueur. Les berges offrent au rat brun ce qu’il
+            recherche : de l’eau en permanence et un sol meuble où creuser.
+          </p>
+          <p>
+            Pour un bâtiment riverain, cela ne signifie pas qu’une présence est
+            inévitable, mais que la protection du pied de bâtiment — obturation,
+            regards, stockage extérieur, gestion des déchets — devient le point
+            décisif.
+          </p>
+
+          <h2>Qui nous appelle dans le 94</h2>
+          <ul class="ticks">
+            <li><strong>Syndics et bailleurs</strong> — sous-sols, dalles, locaux déchets.</li>
+            <li><strong>Propriétaires de pavillons</strong> — combles, garages, abords.</li>
+            <li><strong>Commerces et restaurants</strong> — réserves, locaux déchets, pied d’immeuble.</li>
+            <li><strong>Sites d’activité</strong> — quais, stockage, abords.</li>
+            <li><strong>Collectivités</strong> — équipements, écoles, locaux techniques.</li>
+          </ul>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Pages communales</h3>
+          <p>Contexte détaillé par ville.</p>
+          <ul>
+            {villes.map((v) => (
+              <li><a href={`/deratisation-${v.slug}`}>Dératisation {v.prep} {v.name}</a></li>
+            ))}
+            <li><a href="/contact">Autre commune du 94</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band band--bone">
+    <div class="wrap">
+      <p class="eyebrow">Couverture</p>
+      <h2>Communes desservies dans le Val-de-Marne</h2>
+      <p class="lede" style="margin-bottom:1.75rem">
+        Liste non exhaustive — l’ensemble du département est couvert.
+      </p>
+      <ul class="inline-list">
+        {dep.communes.map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Val-de-Marne : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Continuer"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-creteil', label: 'Créteil', note: 'Page communale' },
+      { href: '/deratisation-vitry-sur-seine', label: 'Vitry-sur-Seine', note: 'Page communale' },
+      { href: '/deratisation-particuliers', label: 'Particuliers', note: 'Pavillons et appartements' },
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Ensembles sur dalle' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Abords et vide sanitaire' },
+      { href: '/zones-intervention', label: 'Toutes les zones', note: 'Île-de-France' },
+    ]}
+  />
+
+  <CtaBand
+    title="Pavillon ou grand ensemble : deux diagnostics différents"
+    text="Précisez le type de bâtiment et la présence d’un sous-sol ou d’un vide sanitaire. C’est la première information qui oriente l’intervention."
+    eyebrow="Val-de-Marne"
+  />
+</BaseLayout>

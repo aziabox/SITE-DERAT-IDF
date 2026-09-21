@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getDepartement, villesOf } from '../../data/idf';
+import { serviceSchema } from '../../lib/seo';
+
+const dep = getDepartement('seine-et-marne')!;
+const villes = villesOf(dep.slug);
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/zones-intervention/seine-et-marne', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Seine-et-Marne', href: '/zones-intervention/seine-et-marne' },
+];
+
+const faq = [
+  {
+    q: 'La Seine-et-Marne étant très étendue, intervenez-vous partout ?',
+    a: 'Oui, de l’ouest urbanisé jusqu’aux secteurs ruraux de l’est. L’organisation du déplacement se planifie simplement en fonction de la distance : indiquez votre commune lors de la prise de contact. Pour les sites éloignés, nous regroupons diagnostic et première intervention sur le même passage lorsque c’est techniquement possible.',
+  },
+  {
+    q: 'Les bâtiments agricoles relèvent-ils de la dératisation classique ?',
+    a: 'Le principe est le même, mais les conditions diffèrent : volumes ouverts, stockage de céréales ou de fourrage, présence d’animaux d’élevage, pression extérieure permanente. Le traitement doit tenir compte de la faune non ciblée et privilégie l’enveloppe, la gestion des stocks et des dispositifs sécurisés en périphérie.',
+  },
+  {
+    q: 'Mulots et campagnols concernent-ils la Seine-et-Marne ?',
+    a: 'Sur les franges rurales, oui, de façon saisonnière. Ces rongeurs vivent à l’extérieur et entrent ponctuellement dans les dépendances, garages et abris quand les températures baissent. Ils ne s’installent pas comme la souris domestique. La réponse tient dans l’obturation et la surélévation des stockages plutôt que dans un traitement prolongé.',
+  },
+  {
+    q: 'Les centres historiques comme Meaux, Provins ou Melun posent-ils des difficultés ?',
+    a: 'Principalement en sous-sol. Ces centres comportent des caves anciennes, parfois profondes et communicantes, ainsi que des réseaux et des maçonneries de plusieurs époques. L’inspection y est plus longue, et la fermeture relève du rebouchage maçonné avec armature.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation en Seine-et-Marne (77)',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris en Seine-et-Marne : villes nouvelles de l’ouest, centres historiques, zones logistiques et secteurs ruraux.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Seine-et-Marne (77) : rats, souris, mulots"
+  description="Dératisation en Seine-et-Marne : villes nouvelles de l’ouest, centres historiques, logistique et secteurs ruraux. Contexte local et communes couvertes."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Seine-et-Marne • 77"
+    title="Dératisation en Seine-et-Marne"
+    lede="C’est de loin le plus vaste département francilien, et le plus contrasté : villes nouvelles denses à l’ouest, centres historiques au bord de la Marne et de la Seine, plateformes logistiques le long des axes, puis un vaste espace rural à l’est."
+    primaryLabel="Indiquer ma commune"
+    meta={[`Préfecture : ${dep.prefecture}`, 'Grande couronne', `${dep.communes.length}+ communes couvertes`]}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <h2>L’ouest urbanisé</h2>
+          <p>
+            Chelles, Champs-sur-Marne, Torcy, Noisiel, Bussy-Saint-Georges,
+            Pontault-Combault : ce secteur s’inscrit dans la continuité de la
+            petite couronne, avec de l’habitat collectif récent, des centres
+            commerciaux, des zones d’activité et des équipements publics.
+          </p>
+          <p>
+            On y retrouve les problématiques classiques du collectif : locaux
+            déchets, gaines verticales, parkings, vides sanitaires. Le périmètre
+            d’intervention doit couvrir ces volumes techniques, sinon le
+            traitement reste superficiel. Voir
+            <a href="/deratisation-coproprietes">copropriétés</a>.
+          </p>
+
+          <h2>Les centres historiques</h2>
+          <p>
+            Meaux, Melun, Provins, Fontainebleau, Coulommiers, Nemours
+            conservent des cœurs de ville anciens, souvent installés au bord de
+            l’eau — la Marne, la Seine, le canal de l’Ourcq, le Loing.
+          </p>
+          <p>
+            Trois caractéristiques y reviennent : des caves anciennes parfois
+            profondes et communicantes, des réseaux de plusieurs époques
+            superposés, et une densité de commerces de bouche en rez-de-chaussée
+            dont les réserves occupent ces mêmes sous-sols.
+          </p>
+          <p>
+            La conséquence est directe : un commerce peut être irréprochable et
+            rester exposé si la cave communique avec l’immeuble ou avec la
+            parcelle voisine.
+          </p>
+
+          <h2>Les plateformes logistiques</h2>
+          <p>
+            Le département accueille d’importants sites de stockage et de
+            distribution, en particulier le long des grands axes routiers. Ces
+            sites cumulent volumes importants, quais ouverts pendant les
+            opérations, flux entrants quotidiens et abords étendus.
+          </p>
+          <p>
+            La stratégie est celle décrite sur la page
+            <a href="/deratisation-entreprises#entrepots">entrepôts et logistique</a> :
+            protéger l’enveloppe, tenir les abords, détecter tôt à l’intérieur
+            grâce à des points de contrôle repérés.
+          </p>
+
+          <h2>Le rural et les bâtiments agricoles</h2>
+          <p>
+            L’est et le sud du département sont largement agricoles. Les
+            exploitations, silos, hangars et dépendances présentent des
+            conditions très différentes du milieu urbain : volumes ouverts,
+            stockage de céréales ou de fourrage, présence d’animaux d’élevage,
+            pression extérieure permanente.
+          </p>
+          <p>
+            Deux principes guident l’intervention dans ce contexte. D’abord, la
+            protection de la faune non ciblée : chats de ferme, chiens, rapaces
+            et petits carnivores imposent des dispositifs strictement sécurisés
+            et bien positionnés. Ensuite, la priorité donnée à la gestion des
+            stocks et à l’enveloppe des bâtiments, seules mesures réellement
+            durables sur ce type de site.
+          </p>
+
+          <h2>Mulots et campagnols : la saisonnalité</h2>
+          <p>
+            Sur les franges rurales, l’entrée de rongeurs extérieurs dans les
+            dépendances à l’approche du froid est un phénomène saisonnier
+            courant. Il ne s’agit pas d’une infestation au sens où on l’entend
+            pour la souris domestique.
+          </p>
+          <div class="keyline">
+            <p>
+              Un mulot entre, cherche un abri, et repart si l’environnement
+              intérieur ne lui offre rien. Fermer les accès et surélever les
+              stockages règle la plupart de ces situations.
+            </p>
+          </div>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Pages communales</h3>
+          <p>Contexte détaillé par ville.</p>
+          <ul>
+            {villes.map((v) => (
+              <li><a href={`/deratisation-${v.slug}`}>Dératisation {v.prep} {v.name}</a></li>
+            ))}
+            <li><a href="/contact">Autre commune du 77</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band band--bone">
+    <div class="wrap">
+      <p class="eyebrow">Couverture</p>
+      <h2>Communes desservies en Seine-et-Marne</h2>
+      <p class="lede" style="margin-bottom:1.75rem">
+        Liste non exhaustive — l’ensemble du département est couvert.
+      </p>
+      <ul class="inline-list">
+        {dep.communes.map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Seine-et-Marne : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Continuer"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-meaux', label: 'Meaux', note: 'Page communale' },
+      { href: '/deratisation-entreprises', label: 'Logistique', note: 'Plateformes et entrepôts' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Stockage et enveloppe' },
+      { href: '/deratisation-commerces', label: 'Commerces', note: 'Centres historiques' },
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Caves anciennes' },
+      { href: '/zones-intervention', label: 'Toutes les zones', note: 'Île-de-France' },
+    ]}
+  />
+
+  <CtaBand
+    title="Site éloigné ? Nous regroupons diagnostic et intervention"
+    text="Sur les communes de l’est du département, le premier passage combine autant que possible relevé, traitement et premières fermetures."
+    eyebrow="Seine-et-Marne"
+  />
+</BaseLayout>

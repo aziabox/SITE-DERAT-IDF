@@ -1,0 +1,27 @@
+---
+interface LinkItem { href: string; label: string; note?: string }
+interface Props {
+  items: LinkItem[];
+  title?: string;
+  eyebrow?: string;
+  intro?: string;
+}
+const { items, title = 'À lire ensuite', eyebrow = 'Aller plus loin', intro } = Astro.props;
+---
+<section class="section section--ruled" aria-labelledby="liens-titre">
+  <div class="wrap">
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 id="liens-titre">{title}</h2>
+    {intro && <p class="lede" style="margin-bottom:2.25rem">{intro}</p>}
+    <ul class="links-grid">
+      {items.map((i) => (
+        <li>
+          <a href={i.href}>
+            {i.label}
+            {i.note && <span>{i.note}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

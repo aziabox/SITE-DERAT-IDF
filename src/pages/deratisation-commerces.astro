@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-commerces', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Commerces', href: '/deratisation-commerces' },
+];
+
+const faq = [
+  {
+    q: 'Un commerce non alimentaire peut-il avoir des rongeurs ?',
+    a: 'Oui, et c’est fréquent. Le rongeur cherche d’abord un abri : une réserve encombrée, un faux plafond, une arrière-boutique chauffée conviennent parfaitement, même sans denrées. Dans un commerce de textile ou de papeterie, les dégâts portent sur la marchandise elle-même, rongée pour la construction du nid.',
+  },
+  {
+    q: 'Peut-on intervenir pendant les heures d’ouverture ?',
+    a: 'Le diagnostic, oui, discrètement. La pose de dispositifs en zone de vente se fait de préférence avant ouverture ou après fermeture. Les réserves, arrière-boutiques et locaux techniques peuvent en revanche être traités en journée sans gêne pour la clientèle.',
+  },
+  {
+    q: 'Comment éviter qu’un client aperçoive un dispositif ?',
+    a: 'En traitant par la périphérie. En zone de vente, on privilégie l’obturation et les dispositifs discrets placés hors champ — derrière les gondoles, sous les meubles bas, dans les plinthes techniques. Les postes visibles restent en réserve et en local technique.',
+  },
+  {
+    q: 'Ma galerie commerciale traite déjà, dois-je faire quelque chose ?',
+    a: 'Le traitement d’une galerie porte sur les parties communes : couloirs techniques, locaux déchets, quais. Il ne couvre pas l’intérieur de votre local ni vos propres accès. Les deux sont complémentaires, et la coordination avec le gestionnaire de site améliore nettement le résultat.',
+  },
+  {
+    q: 'Quel est le premier point à vérifier dans un commerce ?',
+    a: 'La réserve, et plus précisément le stockage au sol. Cartons posés à même le sol contre un mur, palettes, marchandise en vrac : c’est à la fois l’abri idéal et la zone où les indices sont les plus lisibles. Un rayonnage décollé du sol et des murs change tout, en prévention comme en détection.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation de commerces',
+    serviceType: 'Dératisation commerce',
+    description:
+      'Traitement des rongeurs dans les commerces alimentaires et non alimentaires en Île-de-France : réserve, zone de vente, local déchets, arrière-boutique.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation de commerces : réserve, vente, arrière-boutique"
+  description="Traitement des rats et souris en commerce alimentaire ou non alimentaire en Île-de-France : réserve, zone de vente, accès et local déchets. Discrétion et suivi."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Commerces"
+    title="Dératisation de commerce : protéger la marchandise et la vitrine"
+    lede="Dans un commerce, deux enjeux se superposent : la marchandise, qui peut être rongée ou souillée, et la perception des clients. L’intervention doit donc être efficace en réserve et invisible en surface de vente."
+    primaryLabel="Organiser une intervention"
+    meta={['Alimentaire et non alimentaire', 'Réserve et arrière-boutique', 'Hors horaires possible']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <div class="answer">
+        <p class="eyebrow">Réponse directe</p>
+        <p>
+          Dans un commerce, le traitement commence par la
+          <strong>réserve</strong> et le <strong>local déchets</strong>, puis par
+          l’obturation des accès (bas de rideau, porte de livraison, traversées).
+          La zone de vente est traitée en périphérie, sans dispositif visible.
+        </p>
+      </div>
+
+      <h2>Alimentaire ou non : deux profils de risque</h2>
+      <p>
+        On associe spontanément les rongeurs aux commerces de bouche. En
+        réalité, les deux profils sont exposés, mais différemment.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>Nature du risque selon le type de commerce.</caption>
+          <thead>
+            <tr><th scope="col">Type</th><th scope="col">Ce qui attire</th><th scope="col">Dommage principal</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Alimentation générale</th><td>Denrées, vrac, déchets</td><td>Contamination, retrait de marchandise</td></tr>
+            <tr><th scope="row">Boulangerie, primeur</th><td>Farines, fruits, déchets organiques</td><td>Contamination, conformité sanitaire</td></tr>
+            <tr><th scope="row">Textile, prêt-à-porter</th><td>Abri, matériaux de nid</td><td>Marchandise rongée, souillures</td></tr>
+            <tr><th scope="row">Papeterie, librairie</th><td>Papier, cartons</td><td>Stock endommagé</td></tr>
+            <tr><th scope="row">Pharmacie, parapharmacie</th><td>Abri, réserve dense</td><td>Emballages percés, retrait de lots</td></tr>
+            <tr><th scope="row">Bricolage, quincaillerie</th><td>Abri, stockage au sol</td><td>Gaines et câbles rongés</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Dans un commerce non alimentaire, le motif d’installation est presque
+        toujours l’abri, pas la nourriture. Cela change les emplacements de
+        traitement : on cible les volumes calmes et encombrés plutôt que les
+        zones de stockage de denrées.
+      </p>
+
+      <h2>La réserve, point de départ systématique</h2>
+      <p>
+        Une réserve encombrée est à la fois le meilleur abri et la zone la plus
+        lisible. Trois vérifications suffisent à orienter l’essentiel du
+        diagnostic :
+      </p>
+      <ul class="ticks">
+        <li><strong>Sous et derrière les cartons posés au sol</strong> — déjections, matériaux déchiquetés, emballages entamés.</li>
+        <li><strong>Le long des murs</strong> — coulées grasses, empreintes dans la poussière, crottes alignées.</li>
+        <li><strong>Aux traversées techniques</strong> — arrivées de fluides, gaines, trappes, regards.</li>
+      </ul>
+      <p>
+        La recommandation la plus rentable en commerce est également la plus
+        simple : stocker sur rayonnage, à distance du sol et des murs. Elle
+        supprime l’abri et rend tout indice immédiatement visible.
+      </p>
+
+      <h2>La zone de vente : traiter sans se voir</h2>
+      <p>
+        En surface de vente, l’approche est différente. On ne pose pas de
+        dispositif apparent. On agit sur trois plans :
+      </p>
+      <ol class="steps" style="margin-top:1.5rem">
+        <li>
+          <h3>Fermeture des accès</h3>
+          <p>Bas de rideau métallique, seuils, jours sous porte de livraison, passages de câbles en façade.</p>
+        </li>
+        <li>
+          <h3>Traitement périphérique</h3>
+          <p>Dispositifs placés en limite de zone, dans les volumes techniques adjacents et en plinthe technique.</p>
+        </li>
+        <li>
+          <h3>Contrôle hors horaires</h3>
+          <p>Relevés programmés avant ouverture ou après fermeture, pour ne jamais croiser la clientèle.</p>
+        </li>
+      </ol>
+
+      <h2>Le cas des locaux en pied d’immeuble</h2>
+      <p>
+        Une grande partie des commerces franciliens occupe un rez-de-chaussée
+        d’immeuble d’habitation, avec une cave donnant sur les sous-sols
+        communs et parfois un local déchets partagé. Dans cette configuration,
+        le commerce peut être traité correctement et rester exposé.
+      </p>
+      <p>
+        Nous formalisons alors le constat pour que le commerçant puisse saisir
+        le syndic ou le bailleur sur une base technique. Le sujet est traité sur
+        la page <a href="/deratisation-coproprietes">copropriétés</a>.
+      </p>
+
+      <h2>En galerie ou en centre commercial</h2>
+      <p>
+        Le gestionnaire traite généralement les parties communes : couloirs
+        techniques, quais, locaux déchets. Votre local et vos propres accès
+        restent à votre charge. La bonne pratique consiste à coordonner les deux
+        interventions, notamment sur les périodes de traitement, pour éviter que
+        les rongeurs ne se reportent simplement d’une zone à l’autre.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Commerces : questions fréquentes" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Sujets liés"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-restaurants', label: 'Restaurants', note: 'Métiers de bouche' },
+      { href: '/deratisation-entreprises', label: 'Entreprises', note: 'Bureaux, entrepôts, locaux' },
+      { href: '/traitement-souris', label: 'Traitement souris', note: 'Réserves et faux plafonds' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Stockage et accès' },
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Avant ouverture d’un local' },
+      { href: '/blog/comment-empecher-les-rats-dentrer', label: 'Empêcher les rats d’entrer', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Intervention avant ouverture ou après fermeture"
+    text="Les commerces se traitent en dehors des heures de clientèle. Indiquez vos horaires, nous calons les passages dessus."
+    eyebrow="Organisation"
+    variant="petrol"
+  />
+</BaseLayout>

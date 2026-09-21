@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import PageHero from '../../components/PageHero.astro';
+import { CATEGORIES } from '../../content.config';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Blog', href: '/blog' },
+];
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime()
+);
+
+const dateFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+const cats = Object.values(CATEGORIES);
+const countOf = (key: string) => posts.filter((p) => p.data.category === key).length;
+---
+<BaseLayout
+  title="Blog dératisation : rats, souris et prévention"
+  description="Guides pratiques sur les rats, les souris, la prévention et la dératisation. Chaque article répond à une question précise, avec une réponse directe en tête."
+  crumbs={crumbs}
+>
+  <PageHero
+    eyebrow="Ressources"
+    title="Comprendre les rongeurs avant d’agir"
+    lede="Des guides écrits pour répondre à une question précise. Chacun commence par une réponse courte, puis développe ce qu’il faut savoir pour décider de la suite."
+    primaryLabel="Décrire mon problème"
+    showPhone={false}
+    meta={[`${posts.length} articles`, '7 catégories', 'Mis à jour régulièrement']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Catégories</p>
+      <ul class="chips" style="margin-bottom:3rem">
+        {cats.map((c) => (
+          <li><a href={`/blog/${c.slug}`}>{c.label} ({countOf(c.slug)})</a></li>
+        ))}
+      </ul>
+
+      <h2 class="visually-hidden">Tous les articles</h2>
+      <ul class="post-list">
+        {posts.map((p) => (
+          <li>
+            <article>
+              <p class="post-list__meta">
+                <b>{CATEGORIES[p.data.category].label}</b>
+                {dateFmt.format(p.data.datePublished)} · {p.data.readingTime} min de lecture
+              </p>
+              <div>
+                <h3><a href={`/blog/${p.id}`}>{p.data.title}</a></h3>
+                <p>{p.data.description}</p>
+              </div>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Une question qui n’a pas sa réponse ici ?"
+    text="Décrivez votre situation. Si le sujet revient souvent, il finit généralement par devenir un article."
+    eyebrow="Contact"
+  />
+</BaseLayout>

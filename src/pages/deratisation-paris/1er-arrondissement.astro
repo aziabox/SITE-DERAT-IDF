@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { serviceSchema } from '../../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-paris/1er-arrondissement', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Paris', href: '/deratisation-paris' },
+  { label: '1er arrondissement', href: '/deratisation-paris/1er-arrondissement' },
+];
+
+const faq = [
+  {
+    q: 'Pourquoi le secteur des Halles est-il particulier ?',
+    a: 'À cause de l’étendue de ses volumes souterrains. Le quartier superpose des niveaux de commerces, de circulations et d’équipements techniques sur plusieurs étages, en liaison avec un pôle de transport majeur. Ces espaces offrent des cheminements continus et protégés, ce qui rend l’établissement du périmètre plus complexe qu’ailleurs.',
+  },
+  {
+    q: 'Comment intervenir dans un restaurant du quartier sans fermer ?',
+    a: 'En travaillant hors service, très tôt le matin ou après la fermeture, et en concentrant le traitement sur la réserve, la plonge, le local déchets et les vides techniques. En salle et en zone de préparation, seules l’obturation et le piégeage mécanique sont employés, avec retrait avant la reprise du service.',
+  },
+  {
+    q: 'Les immeubles anciens du 1er ont-ils des caves communicantes ?',
+    a: 'C’est fréquent. Le parc ancien du centre de Paris comporte des sous-sols anciens, parfois sur plusieurs niveaux, avec des passages maçonnés entre escaliers et des mitoyennetés. Un traitement limité à une cave privative n’a pratiquement jamais d’effet durable dans ce contexte.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation Paris 1er arrondissement',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris dans le 1er arrondissement de Paris : restauration dense, réserves en sous-sol, immeubles anciens du centre.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Paris 1er : Les Halles, Châtelet, Palais-Royal"
+  description="Dératisation dans le 1er arrondissement de Paris : restauration dense, réserves en sous-sol et caves anciennes. Intervention hors service pour les commerces."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Paris 1er • 75001"
+    title="Dératisation Paris 1er : un arrondissement qui se traite par le sous-sol"
+    lede="Entre Les Halles, Châtelet et le Palais-Royal, le 1er cumule une densité de restauration parmi les plus fortes de Paris et des volumes souterrains d’une ampleur inhabituelle. Ici, l’intervention se joue presque entièrement sous le niveau de la rue."
+    primaryLabel="Intervention hors service"
+    meta={['Restauration dense', 'Réserves en sous-sol', 'Immeubles anciens']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left">
+        <div class="prose">
+          <h2>Le contexte urbain</h2>
+          <p>
+            Le 1er arrondissement associe trois réalités : un cœur commercial et
+            de transit très fréquenté autour des Halles et de Châtelet, un tissu
+            de rues anciennes à forte densité de commerces de bouche — le secteur
+            Montorgueil en est l’exemple le plus connu — et un parc résidentiel
+            ancien, avec des immeubles dont les sous-sols datent parfois de
+            plusieurs siècles.
+          </p>
+          <p>
+            Cette combinaison produit une situation spécifique : beaucoup de
+            déchets organiques, beaucoup de réserves alimentaires en sous-sol,
+            et un réseau souterrain particulièrement continu.
+          </p>
+
+          <h2>Les difficultés typiques du secteur</h2>
+          <ul class="ticks">
+            <li><strong>Réserves en sous-sol reliées aux caves d’habitation</strong> — le commerce et la copropriété s’influencent mutuellement.</li>
+            <li><strong>Gestion des déchets en voirie</strong> — dépôts fréquents, horaires de collecte serrés, forte production dans un espace contraint.</li>
+            <li><strong>Sous-sols anciens sur plusieurs niveaux</strong> — accès difficile, éclairage absent, cloisonnements incomplets.</li>
+            <li><strong>Livraisons continues</strong> — portes maintenues ouvertes, trappes de cave sur trottoir.</li>
+            <li><strong>Vides techniques et extractions</strong> — nombreux dans les établissements de restauration anciens.</li>
+          </ul>
+
+          <h2>Comment nous intervenons ici</h2>
+          <p>
+            La séquence est presque toujours la même. On commence par
+            l’établissement du périmètre : jusqu’où va le sous-sol, avec quels
+            voisins communique-t-il, quelles trappes donnent sur la voirie. On
+            traite ensuite le local déchets et les réserves, qui constituent la
+            ressource, avant de sécuriser les accès.
+          </p>
+          <p>
+            Pour les établissements de restauration, l’intervention est
+            programmée hors service. Aucun dispositif n’est visible en salle, et
+            chaque passage est documenté pour le plan de maîtrise sanitaire.
+            Voir <a href="/deratisation-restaurants">restaurants et métiers de bouche</a>.
+          </p>
+
+          <h2>Prévention dans le 1er</h2>
+          <p>
+            Trois mesures produisent ici l’essentiel du résultat : la fermeture
+            des trappes de cave donnant sur trottoir, le rayonnage des réserves
+            décollé du sol et des murs, et la discipline sur les déchets — bacs
+            fermés, sortie aux horaires, aucun sac au sol.
+          </p>
+        </div>
+
+        <div>
+          <div class="aside-card" style="margin-bottom:2rem">
+            <h3>Alentours immédiats</h3>
+            <p>Autres pages utiles.</p>
+            <ul>
+              <li><a href="/deratisation-paris">Paris, toutes zones</a></li>
+              <li><a href="/deratisation-paris/10e-arrondissement">Paris 10e</a></li>
+              <li><a href="/deratisation-paris/11e-arrondissement">Paris 11e</a></li>
+              <li><a href="/deratisation-restaurants">Restaurants</a></li>
+              <li><a href="/deratisation-commerces">Commerces</a></li>
+            </ul>
+          </div>
+          <h2 id="demande" style="font-size:var(--step-2)">Demander une intervention</h2>
+          <ContactForm id="form-p1" compact={true} defaultVille="Paris 1er (75001)" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Paris 1er : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-restaurants', label: 'Restaurants', note: 'Hors service, PMS' },
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Sous-sols étendus' },
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Périmètre souterrain' },
+      { href: '/blog/rats-dans-un-restaurant-quelles-mesures', label: 'Rats dans un restaurant', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Un indice en réserve avant l’ouverture ?"
+    text="Les interventions dans le 1er se calent tôt le matin ou en fin de service. Indiquez vos créneaux."
+    eyebrow="Paris 1er"
+  />
+</BaseLayout>

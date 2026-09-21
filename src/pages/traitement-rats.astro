@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/traitement-rats', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Traitement rats', href: '/traitement-rats' },
+];
+
+const faq = [
+  {
+    q: 'Quelles méthodes utilise-t-on contre les rats ?',
+    a: 'Trois familles, le plus souvent combinées : le piégeage mécanique en poste sécurisé, l’appâtage rodenticide en poste fermé et verrouillé lorsque le contexte l’autorise, et la fermeture mécanique des accès. La part de chacune dépend du site : en présence d’enfants, d’animaux ou de denrées, le piégeage prend une place plus importante.',
+  },
+  {
+    q: 'Les produits utilisés sont-ils dangereux pour mes animaux ?',
+    a: 'Les rodenticides ne sont jamais laissés à nu. Ils sont placés dans des postes d’appâtage fermés, verrouillés et fixés, inaccessibles à un chien ou à un chat. Lorsque le risque ne peut pas être écarté — animal fouisseur, enfant en bas âge, local de production alimentaire — on privilégie des solutions mécaniques. Les emplacements vous sont indiqués et repérés.',
+  },
+  {
+    q: 'Combien de temps avant de voir un résultat ?',
+    a: 'Le rat brun se méfie des objets nouveaux : il est fréquent que rien ne se passe pendant trois à cinq jours, le temps que les dispositifs soient intégrés à l’environnement. La baisse d’activité devient généralement perceptible au bout d’une à deux semaines. Un résultat immédiat est plutôt le signe d’une population très affamée, donc importante.',
+  },
+  {
+    q: 'Que deviennent les rats traités ?',
+    a: 'Les individus capturés en piège sont retirés à chaque passage. Après un appâtage, les animaux meurent généralement dans leur zone de refuge. C’est l’une des raisons pour lesquelles le contrôle et, si nécessaire, le retrait et la désodorisation font partie de l’intervention.',
+  },
+  {
+    q: 'Le traitement est-il encadré réglementairement ?',
+    a: 'Oui. L’emploi de produits rodenticides à usage professionnel relève de la réglementation biocide européenne et nationale, qui impose notamment la détention du certificat Certibiocide pour l’achat et l’application de ces produits, la sécurisation des points d’appâtage et leur retrait en fin de traitement.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Traitement contre les rats',
+    serviceType: 'Traitement rodenticide et piégeage',
+    description:
+      'Méthodes de traitement contre le rat brun : piégeage sécurisé, appâtage en poste fermé, obturation mécanique et contrôle, en Île-de-France.',
+  }),
+];
+---
+<BaseLayout
+  title="Traitement contre les rats : méthodes et déroulé"
+  description="Les méthodes réellement employées contre le rat brun : piégeage sécurisé, appâtage en poste fermé, obturation des accès, contrôle. Cadre réglementaire et délais."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Méthodes • Rats"
+    title="Traitement contre les rats : ce qui est réellement mis en œuvre"
+    lede="Il n’existe pas un traitement unique contre le rat brun, mais une combinaison à doser selon le site. Cette page décrit les méthodes, leurs limites, et ce qui fait qu’un traitement tient dans le temps."
+    primaryLabel="Demander une évaluation"
+    meta={['Piégeage', 'Appâtage sécurisé', 'Obturation mécanique']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <div class="answer">
+        <p class="eyebrow">Réponse directe</p>
+        <p>
+          Un traitement contre les rats repose sur trois leviers&nbsp;: réduire la
+          population (piégeage et/ou appâtage en poste sécurisé), supprimer les
+          ressources (nourriture, eau, abri), et fermer les accès.
+        </p>
+        <p>
+          Les deux premiers agissent vite mais temporairement. Seul le troisième
+          produit un effet durable.
+        </p>
+      </div>
+
+      <h2>1. Le piégeage mécanique</h2>
+      <p>
+        Le piège reste la méthode de référence dès qu’un risque d’exposition
+        existe — logement occupé avec enfants, animal domestique, cuisine
+        professionnelle, local recevant du public. Il présente trois avantages
+        opérationnels : le résultat est immédiatement visible, l’animal est
+        retiré du site, et aucune substance active n’est introduite.
+      </p>
+      <p>
+        Sa limite tient au comportement du rat : la néophobie fait qu’un piège
+        posé le jour J n’est souvent visité qu’à J+3 ou J+5. Un piégeage mal
+        conduit — déplacé chaque jour, mal positionné, mal appâté — donne
+        l’impression que « ça ne marche pas » alors que le dispositif n’a
+        simplement pas eu le temps d’être adopté.
+      </p>
+      <p>
+        Le positionnement est décisif : contre une paroi, dans l’axe d’un
+        passage repéré, jamais au milieu d’un espace ouvert.
+      </p>
+
+      <h2>2. L’appâtage en poste fermé</h2>
+      <p>
+        Lorsque le contexte l’autorise, l’appâtage rodenticide est réalisé
+        exclusivement dans des postes fermés, verrouillés et fixés au sol ou à
+        une paroi. Les appâts ne sont jamais déposés en vrac, ni dans une zone
+        accessible à un enfant, un animal domestique ou la faune non ciblée.
+      </p>
+      <p>
+        Cette méthode est adaptée aux volumes importants et aux zones peu
+        fréquentées : sous-sols, locaux techniques, abords, réseaux, quais de
+        livraison. Chaque poste est numéroté et consigné, ce qui permet le suivi
+        de la consommation et le retrait complet en fin de traitement.
+      </p>
+      <p class="note">
+        L’emploi de produits rodenticides à usage professionnel est encadré par
+        la réglementation biocide (certificat Certibiocide, sécurisation et
+        traçabilité des points d’appâtage, retrait en fin de traitement).
+      </p>
+
+      <h2>3. L’obturation : là où se joue la durabilité</h2>
+      <p>
+        L’obturation consiste à supprimer physiquement les accès identifiés lors
+        de l’<a href="/inspection-rongeurs">inspection</a>. Les matériaux ne sont
+        pas interchangeables.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>Tenue des matériaux face au rongement.</caption>
+          <thead>
+            <tr><th scope="col">Matériau</th><th scope="col">Tenue</th><th scope="col">Usage</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Mousse expansive seule</th><td>Nulle</td><td>À proscrire comme fermeture</td></tr>
+            <tr><th scope="row">Silicone, mastic</th><td>Nulle</td><td>Étanchéité uniquement</td></tr>
+            <tr><th scope="row">Bois tendre, PVC fin</th><td>Faible</td><td>Traversé en quelques nuits</td></tr>
+            <tr><th scope="row">Grillage métallique fin</th><td>Bonne</td><td>Traversées, gaines, ventilations</td></tr>
+            <tr><th scope="row">Tôle, plaque métallique</th><td>Très bonne</td><td>Bas de porte, angles, seuils</td></tr>
+            <tr><th scope="row">Mortier avec armature</th><td>Très bonne</td><td>Percements maçonnés</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Une règle simple : si le matériau se raye à l’ongle, il ne résistera pas
+        à des incisives à croissance continue.
+      </p>
+
+      <h2>4. Le retrait des ressources</h2>
+      <p>
+        Aucun traitement ne tient face à une ressource permanente. Concrètement,
+        cela veut dire : bacs à déchets fermés et sortis selon un horaire,
+        stockage sur étagères plutôt qu’au sol, fuites réparées, siphons de sol
+        maintenus en eau, abords dégagés. Ces points sont détaillés dans
+        <a href="/prevention-rongeurs">la prévention des rongeurs</a>.
+      </p>
+
+      <h2>Le calendrier réel d’un traitement</h2>
+      <ol class="steps" style="margin-top:1.5rem">
+        <li>
+          <h3>Jour 0 — diagnostic et pose</h3>
+          <p>Relevé des indices, repérage des circulations et des accès, installation des dispositifs, premières obturations quand elles sont possibles immédiatement.</p>
+        </li>
+        <li>
+          <h3>Jours 3 à 7 — phase d’acceptation</h3>
+          <p>Les dispositifs sont intégrés à l’environnement. Peu d’effet visible, c’est normal. Aucun déplacement de matériel pendant cette période.</p>
+        </li>
+        <li>
+          <h3>Jours 7 à 15 — premier contrôle</h3>
+          <p>Relevé des consommations et des captures, recherche de nouveaux indices, extension ou repositionnement, poursuite des obturations.</p>
+        </li>
+        <li>
+          <h3>Semaines 3 à 6 — consolidation</h3>
+          <p>Contrôles espacés jusqu’à absence d’indice frais. Fermeture des derniers accès, retrait des dispositifs, consignes de suivi.</p>
+        </li>
+      </ol>
+      <p>
+        Ce calendrier s’allonge dès que le site est étendu, que plusieurs
+        bâtiments communiquent ou qu’une source extérieure alimente la présence —
+        chantier voisin, réseau défectueux, dépôt sauvage.
+      </p>
+
+      <h2>Ce qu’un traitement ne peut pas faire</h2>
+      <p>
+        Il ne peut pas empêcher une réintroduction si un accès reste ouvert. Il
+        ne peut pas régler seul une situation dont la source se trouve dans une
+        partie commune ou chez un voisin. Et il ne remplace pas une réparation :
+        une canalisation défectueuse ou une ventilation détériorée relève des
+        travaux, pas du traitement.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Traitement rats : questions pratiques" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Dans le même parcours"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-rats', label: 'Dératisation rats', note: 'Identifier la présence' },
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Présence installée' },
+      { href: '/inspection-rongeurs', label: 'Inspection des points d’entrée', note: 'Avant le traitement' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Après le traitement' },
+      { href: '/traitement-souris', label: 'Traitement contre les souris', note: 'Autre espèce, autre logique' },
+      { href: '/blog/combien-de-temps-pour-eliminer-des-rats', label: 'Combien de temps faut-il ?', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Un traitement déjà tenté sans résultat ?"
+    text="Dites-nous ce qui a été posé, où et depuis quand. Dans la plupart des cas, l’explication tient à un emplacement ou à un accès resté ouvert."
+    eyebrow="Reprise de dossier"
+    variant="petrol"
+  />
+</BaseLayout>

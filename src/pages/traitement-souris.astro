@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/traitement-souris', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Traitement souris', href: '/traitement-souris' },
+];
+
+const faq = [
+  {
+    q: 'Quelle méthode fonctionne le mieux contre les souris ?',
+    a: 'Aucune méthode isolée. Ce qui fonctionne, c’est la densité et la couverture : de nombreux points de traitement répartis dans toutes les pièces où des indices apparaissent, plutôt que quelques dispositifs concentrés dans la cuisine. La souris ayant un territoire de quelques mètres, un dispositif situé à dix mètres d’elle ne sera jamais rencontré.',
+  },
+  {
+    q: 'Combien de pièges faut-il dans un appartement ?',
+    a: 'Il n’y a pas de chiffre universel, mais le raisonnement est constant : il faut au moins un point de traitement par zone d’indices, et plusieurs dans les pièces où la concentration de crottes est forte. Un T3 avec des traces en cuisine, dans l’entrée et dans un placard de chambre demande une répartition sur les trois zones, pas un piège sous l’évier.',
+  },
+  {
+    q: 'Le piégeage suffit-il, ou faut-il des produits ?',
+    a: 'Dans un logement, le piégeage suffit très souvent, à condition qu’il soit correctement réparti et maintenu plusieurs semaines. L’appâtage devient pertinent sur des volumes plus importants ou des zones inaccessibles — faux plafonds, gaines, réserves — et toujours en dispositif fermé et sécurisé.',
+  },
+  {
+    q: 'Une souris peut-elle éviter les pièges ?',
+    a: 'La souris est curieuse plutôt que méfiante : elle explore rapidement les nouveautés, contrairement au rat. En revanche, elle apprend vite. Un piège qui se déclenche sans capturer, ou un dispositif mal calibré, peut créer une méfiance durable sur cet emplacement précis. Mieux vaut peu de dispositifs bien posés que beaucoup mal posés.',
+  },
+  {
+    q: 'Faut-il traiter aussi les combles et la cave ?',
+    a: 'Uniquement si des indices y apparaissent. Contrairement au rat, la souris n’utilise pas systématiquement les niveaux bas. Beaucoup d’installations en appartement se limitent aux volumes intérieurs et aux gaines. Traiter des zones sans indice disperse l’effort sans gain.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Traitement contre les souris',
+    serviceType: 'Traitement des souris',
+    description:
+      'Méthodes de traitement contre la souris domestique : piégeage réparti, appâtage sécurisé en zones inaccessibles, obturation des ouvertures de quelques millimètres.',
+  }),
+];
+---
+<BaseLayout
+  title="Traitement contre les souris : méthodes et couverture"
+  description="Comment traiter efficacement une présence de souris : densité des dispositifs, couverture par zone, obturation des ouvertures de 6 mm et erreurs à éviter."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Méthodes • Souris"
+    title="Traitement contre les souris : la couverture avant la quantité"
+    lede="Contre la souris, l’erreur la plus fréquente n’est pas le choix du dispositif, mais sa répartition. Un territoire de quelques mètres impose de traiter chaque zone concernée, et pas seulement celle où l’animal a été vu."
+    primaryLabel="Faire le point sur ma situation"
+    meta={['Piégeage réparti', 'Zones inaccessibles', 'Obturation 6 mm']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <div class="answer">
+            <p class="eyebrow">Réponse directe</p>
+            <p>
+              Le traitement des souris repose sur trois principes&nbsp;: couvrir
+              toutes les zones où des indices existent, maintenir les dispositifs
+              plusieurs semaines sans les déplacer sans cesse, et fermer les
+              ouvertures dès 6&nbsp;mm.
+            </p>
+            <p>
+              Une pièce non traitée suffit à maintenir la population&nbsp;: c’est
+              la cause la plus fréquente d’échec.
+            </p>
+          </div>
+
+          <h2>Pourquoi la répartition prime</h2>
+          <p>
+            Une souris domestique exploite un territoire très réduit, souvent de
+            l’ordre de quelques mètres autour de son abri. Elle visite en revanche
+            de très nombreux points dans cette zone au cours de la nuit, en
+            prélevant de petites quantités.
+          </p>
+          <p>
+            Deux conséquences pratiques. D’abord, un dispositif éloigné de sa zone
+            ne sera jamais rencontré, même s’il est parfaitement conçu. Ensuite,
+            plusieurs foyers peuvent coexister dans un même logement sans jamais
+            se croiser : traiter l’un ne règle pas l’autre.
+          </p>
+          <div class="keyline">
+            <p>
+              La bonne question n’est pas « combien de pièges » mais
+              « combien de zones d’indices ai-je, et chacune est-elle couverte ».
+            </p>
+          </div>
+
+          <h2>Le piégeage, méthode principale en logement</h2>
+          <p>
+            Dans un logement occupé, le piégeage constitue la base du traitement.
+            Il permet un résultat vérifiable, le retrait des individus, et
+            n’introduit aucune substance dans les volumes de vie.
+          </p>
+          <p>
+            Les règles de pose sont simples mais rarement respectées :
+          </p>
+          <ul class="ticks">
+            <li>toujours contre une paroi, jamais en espace ouvert&nbsp;;</li>
+            <li>dans l’axe du passage, côté déclenchement vers le mur&nbsp;;</li>
+            <li>plusieurs dispositifs rapprochés dans une zone d’indices dense&nbsp;;</li>
+            <li>maintenus en place au moins deux semaines&nbsp;;</li>
+            <li>hors de portée des enfants et des animaux domestiques&nbsp;;</li>
+            <li>relevés régulièrement — un dispositif oublié n’a plus d’utilité.</li>
+          </ul>
+
+          <h2>L’appâtage, pour ce qui n’est pas accessible</h2>
+          <p>
+            Certaines zones ne peuvent pas être piégées efficacement : volume de
+            faux plafond, gaine technique, doublage de cloison, réserve en
+            hauteur, comble. C’est là que l’appâtage en dispositif fermé prend
+            son sens, avec les mêmes exigences de sécurisation, de repérage et de
+            retrait que pour le rat.
+          </p>
+          <p class="note">
+            Comme pour les rats, l’emploi de rodenticides professionnels relève de
+            la réglementation biocide et impose la sécurisation, la traçabilité
+            et le retrait des points d’appâtage.
+          </p>
+
+          <h2>L’obturation : 6 millimètres suffisent</h2>
+          <p>
+            Une souris adulte franchit une ouverture d’environ 6&nbsp;mm — l’épaisseur
+            d’un crayon. Les points à traiter en priorité dans un logement
+            francilien sont presque toujours les mêmes :
+          </p>
+          <div class="table-wrap">
+            <table>
+              <caption>Ouvertures les plus fréquemment empruntées en logement.</caption>
+              <thead>
+                <tr><th scope="col">Emplacement</th><th scope="col">Traitement</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Traversée de canalisation sous évier</th><td>Grillage fin + mortier ou collerette</td></tr>
+                <tr><th scope="row">Socle de meuble de cuisine</th><td>Fermeture par plinthe rigide ajustée</td></tr>
+                <tr><th scope="row">Passage de câbles, gaine électrique</th><td>Obturation métallique au point de traversée</td></tr>
+                <tr><th scope="row">Coffre de volet roulant</th><td>Joint rigide, fermeture des jours latéraux</td></tr>
+                <tr><th scope="row">Bas de porte palière</th><td>Barre de seuil métallique</td></tr>
+                <tr><th scope="row">Trappe de visite non jointive</th><td>Remplacement ou renfort périphérique</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Les erreurs qui prolongent une infestation</h2>
+          <p>
+            Trois erreurs reviennent sans cesse. La première consiste à tout
+            concentrer en cuisine alors que des indices existent ailleurs. La
+            deuxième est de retirer les dispositifs dès la première capture, en
+            considérant le problème réglé. La troisième est de laisser une
+            ressource accessible : sac de croquettes, pâtes ou riz en sachet
+            ouvert, poubelle sans couvercle, miettes derrière un appareil.
+          </p>
+          <p>
+            À l’inverse, un traitement réparti, maintenu et accompagné de la
+            fermeture des ouvertures donne un résultat stable. C’est le sujet de
+            la page <a href="/prevention-rongeurs">prévention</a>.
+          </p>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Avant notre passage</h3>
+          <p>Trois gestes qui font gagner un passage entier.</p>
+          <ul>
+            <li><a href="/contact">Photographier les zones de crottes</a></li>
+            <li><a href="/contact">Noter les pièces concernées</a></li>
+            <li><a href="/prevention-rongeurs">Mettre les denrées en contenants rigides</a></li>
+            <li><a href="/inspection-rongeurs">Dégager l’accès aux plinthes</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Traitement souris : questions pratiques" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Dans le même parcours"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-souris', label: 'Dératisation souris', note: 'Identifier la présence' },
+      { href: '/infestation-souris', label: 'Infestation de souris', note: 'Présence étendue' },
+      { href: '/inspection-rongeurs', label: 'Inspection des points d’entrée', note: 'Ouvertures de 6 mm' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Après traitement' },
+      { href: '/traitement-rats', label: 'Traitement contre les rats', note: 'Comparer les approches' },
+      { href: '/blog/pourquoi-les-souris-reviennent', label: 'Pourquoi elles reviennent', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Décrivez les pièces concernées, nous calibrons la couverture"
+    text="Le nombre de zones d’indices détermine l’ampleur du traitement bien plus que la surface du logement."
+    eyebrow="Calibrage"
+  />
+</BaseLayout>

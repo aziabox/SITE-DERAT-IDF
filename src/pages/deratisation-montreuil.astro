@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-montreuil', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Seine-Saint-Denis', href: '/zones-intervention/seine-saint-denis' },
+  { label: 'Montreuil', href: '/deratisation-montreuil' },
+];
+
+const faq = [
+  {
+    q: 'Pourquoi les jardins jouent-ils un rôle important à Montreuil ?',
+    a: 'Parce que la commune compte une proportion inhabituelle de parcelles avec jardins, potagers et anciens espaces horticoles. Ces espaces offrent abris, compost et parfois nourrissage d’animaux — trois facteurs qui entretiennent une présence extérieure. La prévention y passe autant par les abords que par le bâtiment.',
+  },
+  {
+    q: 'Les anciens ateliers reconvertis posent-ils des difficultés ?',
+    a: 'Oui. Un atelier transformé en logement ou en bureau conserve souvent des volumes techniques hérités : vides sanitaires, passages de réseaux anciens, cloisonnements incomplets, annexes. Ces discontinuités sont rarement documentées, ce qui rend l’inspection plus longue mais aussi plus décisive.',
+  },
+  {
+    q: 'Le relief de la commune change-t-il quelque chose ?',
+    a: 'Il produit des niveaux décalés entre bâtiments : caves semi-enterrées, accès de plain-pied côté rue haute, soupiraux au ras du trottoir. Concrètement, cela signifie que l’inspection doit faire le tour complet de la parcelle, sur toutes ses faces, et pas seulement en façade principale.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Montreuil',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Montreuil : habitat ancien, anciens ateliers, jardins et parcelles en pente.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Montreuil (93100) : rats et souris"
+  description="Dératisation à Montreuil : habitat ancien, anciens ateliers reconvertis, jardins et parcelles en pente. Inspection complète et sécurisation des accès."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Montreuil • 93100"
+    title="Dératisation à Montreuil"
+    lede="Montreuil ne ressemble pas au reste de la petite couronne : parcelles avec jardins, anciens ateliers reconvertis, bâti hétérogène et relief marqué. Autant de configurations où les accès se trouvent rarement là où on les cherche."
+    primaryLabel="Décrire ma parcelle"
+    meta={['Seine-Saint-Denis (93)', 'Habitat ancien et ateliers', 'Jardins et abords']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <h2>Un tissu urbain atypique</h2>
+          <p>
+            La commune présente une diversité de bâti rare à cette distance de
+            Paris : immeubles de faubourg, maisons de ville, anciens ateliers et
+            entrepôts reconvertis, petites copropriétés, résidences récentes, et
+            une proportion notable de parcelles avec jardins ou anciens espaces
+            horticoles.
+          </p>
+          <p>
+            S’y ajoute un relief marqué, qui décale les niveaux d’une parcelle à
+            l’autre. La conséquence est directe : les ouvertures se trouvent
+            souvent à des hauteurs inattendues — soupiraux au ras du trottoir
+            côté rue basse, accès de plain-pied côté rue haute.
+          </p>
+
+          <h2>Ce que cela implique</h2>
+
+          <h3>Une inspection qui fait le tour complet</h3>
+          <p>
+            Dans un immeuble parisien classique, l’inspection se concentre sur
+            la cour et la cave. Ici, elle doit couvrir toutes les faces de la
+            parcelle, les annexes, les dépendances et les limites séparatives.
+            C’est plus long, et c’est ce qui fait la différence.
+          </p>
+
+          <h3>Des volumes techniques hérités</h3>
+          <p>
+            Les anciens ateliers reconvertis conservent fréquemment des vides
+            sanitaires, des passages de réseaux abandonnés, des cloisonnements
+            incomplets et des annexes. Ces discontinuités ne figurent sur aucun
+            plan : elles se trouvent sur place.
+          </p>
+
+          <h3>Des abords déterminants</h3>
+          <p>
+            Jardins, potagers, composteurs, abris de jardin, stockage de bois,
+            nourrissage d’animaux : ces éléments constituent une ressource et un
+            abri permanents. Dans beaucoup de situations montreuilloises, agir
+            sur les abords produit plus d’effet que le traitement lui-même.
+          </p>
+          <div class="keyline">
+            <p>
+              Un composteur ouvert à trois mètres d’une façade annule l’effet de
+              n’importe quelle intervention intérieure.
+            </p>
+          </div>
+
+          <h2>Souris dans le bâti ancien</h2>
+          <p>
+            Les planchers bois, doublages et cloisons légères du bâti ancien
+            offrent à la souris domestique de nombreux cheminements verticaux.
+            Des indices peuvent apparaître à un étage sans qu’aucun occupant du
+            niveau inférieur n’ait rien constaté. Voir
+            <a href="/deratisation-souris">dératisation souris</a>.
+          </p>
+
+          <h2>Prévention à Montreuil</h2>
+          <ul class="ticks">
+            <li>Fermer les composteurs et les éloigner des façades.</li>
+            <li>Surélever le stockage dans les abris de jardin et les dépendances.</li>
+            <li>Dégager une bande libre en pied de façade, sans végétation en contact.</li>
+            <li>Grillager les ventilations de vide sanitaire, y compris sur les annexes.</li>
+            <li>Obturer les passages de réseaux abandonnés dans les anciens ateliers.</li>
+          </ul>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Pages liées</h3>
+          <p>Poursuivre selon votre cas.</p>
+          <ul>
+            <li><a href="/zones-intervention/seine-saint-denis">Seine-Saint-Denis (93)</a></li>
+            <li><a href="/deratisation-particuliers">Particuliers</a></li>
+            <li><a href="/prevention-rongeurs">Prévention et abords</a></li>
+            <li><a href="/inspection-rongeurs">Inspection complète</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Montreuil : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/zones-intervention/seine-saint-denis', label: 'Seine-Saint-Denis', note: 'Page départementale' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Jardins et abords' },
+      { href: '/deratisation-souris', label: 'Dératisation souris', note: 'Bâti ancien' },
+      { href: '/blog/comment-empecher-les-rats-dentrer', label: 'Empêcher les rats d’entrer', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Jardin, atelier, dépendance : l’inspection doit tout couvrir"
+    text="À Montreuil, l’accès se trouve souvent dans une annexe ou en limite de parcelle. Décrivez-nous la configuration."
+    eyebrow="Montreuil"
+  />
+</BaseLayout>

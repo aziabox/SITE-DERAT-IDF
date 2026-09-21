@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getDepartement, villesOf } from '../../data/idf';
+import { serviceSchema } from '../../lib/seo';
+
+const dep = getDepartement('yvelines')!;
+const villes = villesOf(dep.slug);
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/zones-intervention/yvelines', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Yvelines', href: '/zones-intervention/yvelines' },
+];
+
+const faq = [
+  {
+    q: 'Le bâti ancien des Yvelines pose-t-il des difficultés particulières ?',
+    a: 'Oui, principalement en sous-sol. Les caves voûtées, les murs en pierre et les anciens réseaux offrent de nombreuses discontinuités : joints creusés, pierres descellées, canalisations abandonnées. Ces passages ne se ferment pas au mastic ; ils demandent un rebouchage maçonné avec armature métallique.',
+  },
+  {
+    q: 'Quelle différence entre les villes nouvelles et les centres anciens ?',
+    a: 'Dans les secteurs planifiés comme Saint-Quentin-en-Yvelines, on retrouve des dalles, des galeries techniques et des parkings reliés, où les circulations se font en sous-face. Dans les centres anciens, les passages sont ponctuels et dispersés, liés à l’état du bâti. Le premier cas demande un périmètre large, le second une inspection minutieuse.',
+  },
+  {
+    q: 'La proximité des forêts change-t-elle quelque chose ?',
+    a: 'Pour les rongeurs commensaux, peu : le rat brun et la souris domestique dépendent des bâtiments et des déchets, pas des massifs. En revanche, les lisières et les jardins arborés favorisent la présence de mulots, qui entrent ponctuellement dans les dépendances à l’automne. La réponse est l’obturation, pas le traitement.',
+  },
+  {
+    q: 'Intervenez-vous sur les sites industriels et les plateformes des boucles de Seine ?',
+    a: 'Oui. Ces sites présentent les caractéristiques classiques des grands volumes : quais, portes sectionnelles, bardages, gaines techniques et abords étendus. La protection passe par l’enveloppe et la surveillance périmétrique, complétées par des points de contrôle repérés à l’intérieur.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation dans les Yvelines (78)',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris dans les Yvelines : centres anciens, villes nouvelles, pavillonnaire, sites d’activité des boucles de Seine.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Yvelines (78) : rats et souris"
+  description="Dératisation dans les Yvelines : centres anciens et caves voûtées, villes nouvelles sur dalle, pavillonnaire et sites d’activité. Communes couvertes."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Yvelines • 78"
+    title="Dératisation dans les Yvelines"
+    lede="Peu de départements franciliens présentent un tel écart de bâti : centres anciens à caves voûtées, quartiers planifiés sur dalle, pavillonnaire étendu et plateformes industrielles en bord de Seine. Le diagnostic commence toujours par identifier lequel on a devant soi."
+    primaryLabel="Décrire mon bâtiment"
+    meta={[`Préfecture : ${dep.prefecture}`, 'Grande couronne', `${dep.communes.length}+ communes couvertes`]}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <h2>Les centres anciens et le bâti de pierre</h2>
+          <p>
+            Versailles, Saint-Germain-en-Laye, Poissy, Rambouillet ou
+            Maisons-Laffitte conservent un bâti ancien avec sous-sols maçonnés,
+            caves voûtées et murs épais. Ce type de construction présente une
+            particularité : les passages ne sont pas des trous nets, mais des
+            joints creusés, des pierres descellées, des anciennes traversées de
+            réseaux abandonnées.
+          </p>
+          <p>
+            Deux conséquences. D’abord, l’inspection y prend plus de temps :
+            il faut examiner les maçonneries point par point. Ensuite, la
+            fermeture relève du rebouchage maçonné, avec armature métallique,
+            et non d’un simple calfeutrement.
+          </p>
+          <p>
+            Ces secteurs comportent aussi une forte densité de commerces de
+            bouche et de restauration en centre-ville, dont les réserves
+            occupent souvent ces mêmes sous-sols. Voir
+            <a href="/deratisation-restaurants">restaurants</a>.
+          </p>
+
+          <h2>Les quartiers planifiés</h2>
+          <p>
+            Autour de Saint-Quentin-en-Yvelines — Montigny-le-Bretonneux,
+            Trappes, Guyancourt, Élancourt — et dans plusieurs ensembles des
+            années 1970, on retrouve la logique de la dalle : cheminements
+            piétons en surface, parkings et galeries techniques en dessous.
+          </p>
+          <p>
+            Comme partout où cette configuration existe, les circulations se
+            font au niveau inférieur. Le périmètre d’intervention doit inclure
+            les volumes techniques, sans quoi le traitement ne rencontre pas la
+            population.
+          </p>
+
+          <h2>Le pavillonnaire</h2>
+          <p>
+            C’est la typologie dominante sur une grande partie du département.
+            Les points d’entrée sont ceux de toute maison individuelle :
+            ventilation de vide sanitaire, garage, about de toiture, traversées
+            de réseaux, abords.
+          </p>
+          <p>
+            Un point mérite attention dans les secteurs arborés : la végétation
+            en contact avec la façade. Une haie ou un lierre touchant le mur
+            constitue à la fois un abri et un accès vers la toiture. Le
+            dégagement d’une bande périphérique est l’une des mesures préventives
+            les plus efficaces, et l’une des plus simples.
+          </p>
+
+          <h2>Les boucles de Seine et les sites d’activité</h2>
+          <p>
+            Le nord du département, le long de la Seine — Les Mureaux,
+            Conflans-Sainte-Honorine, Poissy, Mantes-la-Jolie — accueille des
+            activités industrielles et logistiques ainsi que des installations
+            portuaires fluviales. Grands volumes, quais, bardages, abords
+            étendus : la protection passe d’abord par l’enveloppe.
+          </p>
+
+          <h2>Mulots et lisières</h2>
+          <p>
+            Les Yvelines comptent de vastes espaces boisés et agricoles. Dans les
+            communes de lisière, les dépendances, garages et abris de jardin
+            reçoivent occasionnellement des mulots à l’automne. Il s’agit d’une
+            entrée saisonnière d’un rongeur extérieur, pas d’une installation.
+          </p>
+          <div class="keyline">
+            <p>
+              La distinction compte : un mulot se règle par l’obturation et la
+              surélévation des stockages. Le traiter comme une souris domestique
+              conduit à entretenir un dispositif qui ne sert à rien.
+            </p>
+          </div>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Pages communales</h3>
+          <p>Contexte détaillé par ville.</p>
+          <ul>
+            {villes.map((v) => (
+              <li><a href={`/deratisation-${v.slug}`}>Dératisation {v.prep} {v.name}</a></li>
+            ))}
+            <li><a href="/contact">Autre commune du 78</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band band--bone">
+    <div class="wrap">
+      <p class="eyebrow">Couverture</p>
+      <h2>Communes desservies dans les Yvelines</h2>
+      <p class="lede" style="margin-bottom:1.75rem">
+        Liste non exhaustive — l’ensemble du département est couvert.
+      </p>
+      <ul class="inline-list">
+        {dep.communes.map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Yvelines : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Continuer"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-versailles', label: 'Versailles', note: 'Page communale' },
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Bâti ancien et maçonneries' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Abords et végétation' },
+      { href: '/deratisation-restaurants', label: 'Restaurants', note: 'Centres-villes' },
+      { href: '/deratisation-particuliers', label: 'Particuliers', note: 'Pavillons' },
+      { href: '/zones-intervention', label: 'Toutes les zones', note: 'Île-de-France' },
+    ]}
+  />
+
+  <CtaBand
+    title="Bâti ancien ? L’inspection prend plus de temps, et elle est décisive"
+    text="Dans les sous-sols maçonnés, les passages sont discrets. Un relevé sérieux évite de traiter trois fois le même problème."
+    eyebrow="Yvelines"
+  />
+</BaseLayout>

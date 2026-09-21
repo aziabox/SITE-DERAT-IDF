@@ -1,0 +1,30 @@
+---
+import type { FaqItem } from '../lib/seo';
+interface Props {
+  items: FaqItem[];
+  title?: string;
+  eyebrow?: string;
+  intro?: string;
+  id?: string;
+}
+const { items, title = 'Questions fréquentes', eyebrow = 'Réponses', intro, id = 'faq' } = Astro.props;
+---
+<section class="section section--ruled" id={id} aria-labelledby={`${id}-titre`}>
+  <div class="wrap">
+    <div class="split split--wide-right">
+      <div>
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 id={`${id}-titre`}>{title}</h2>
+        {intro && <p class="lede">{intro}</p>}
+      </div>
+      <div class="faq">
+        {items.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <div class="faq__body"><p>{item.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

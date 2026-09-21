@@ -1,0 +1,107 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CallBar from '../components/CallBar.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { site } from '../data/site';
+import { graph, breadcrumbSchema, webPageSchema, faqSchema, type Crumb, type FaqItem } from '../lib/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  crumbs?: Crumb[];
+  schema?: unknown[];
+  faq?: FaqItem[];
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+  datePublished?: string;
+  dateModified?: string;
+  /** Masque le fil d'Ariane visuel (page d'accueil). */
+  hideCrumbs?: boolean;
+}
+
+const {
+  title,
+  description,
+  crumbs = [],
+  schema = [],
+  faq,
+  noindex = false,
+  ogType = 'website',
+  datePublished,
+  dateModified,
+  hideCrumbs = false,
+} = Astro.props;
+
+const origin = Astro.site?.origin ?? 'https://www.deratisation-iledefrance.fr';
+// Canonicalisation : pas de slash final (sauf racine), pas de paramètres.
+const rawPath = Astro.url.pathname;
+const path = rawPath !== '/' ? rawPath.replace(/\/+$/, '') : '/';
+const canonical = new URL(path, origin).href;
+
+const nodes: unknown[] = [];
+const breadcrumbId = crumbs.length > 1 ? `${canonical}#breadcrumb` : undefined;
+nodes.push(
+  webPageSchema({ origin, url: canonical, title, description, breadcrumbId, datePublished, dateModified })
+);
+if (crumbs.length > 1) nodes.push(breadcrumbSchema(crumbs, origin, canonical));
+if (faq && faq.length) nodes.push(faqSchema(faq, canonical));
+nodes.push(...schema);
+
+const jsonLd = JSON.stringify(graph(origin, nodes));
+const ogImage = new URL('/og/og-deratisation-ile-de-france.png', origin).href;
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {!noindex && <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />}
+
+    <link
+      rel="preload"
+      href="/fonts/manrope-latin-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.brand} />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Dératisation en Île-de-France — rats et souris" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <meta name="theme-color" content="#0a1a2b" />
+    <meta name="format-detection" content="telephone=yes" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap.xml" />
+
+    <script type="application/ld+json" set:html={jsonLd} />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+    <Header />
+    {crumbs.length > 1 && !hideCrumbs && <Breadcrumbs crumbs={crumbs} />}
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer />
+    <CallBar />
+  </body>
+</html>

@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { navServices, navClients } from '../data/nav';
+import { departementsHorsParis, villes, arrondissements } from '../data/idf';
+import { CATEGORIES } from '../content.config';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Plan du site', href: '/plan-du-site' },
+];
+
+const posts = (await getCollection('blog')).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title, 'fr')
+);
+---
+<BaseLayout
+  title="Plan du site — Dératisation Île-de-France"
+  description="Toutes les pages du site : interventions, types de clients, départements et communes d’Île-de-France, catégories et articles du blog."
+  crumbs={crumbs}
+>
+  <section class="section">
+    <div class="wrap" style="padding-block:clamp(1.5rem,4vw,2.5rem)">
+      <p class="eyebrow">Navigation</p>
+      <h1 style="font-size:var(--step-4)">Plan du site</h1>
+      <p class="lede" style="margin-bottom:3rem">
+        L’ensemble des pages publiées, classées par section.
+      </p>
+
+      <div class="cols cols--2">
+        <div>
+          <h2 style="font-size:var(--step-2)">Interventions</h2>
+          <ul class="links-grid" style="grid-template-columns:1fr;margin-bottom:2.5rem">
+            <li><a href="/">Accueil</a></li>
+            {navServices.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+          </ul>
+
+          <h2 style="font-size:var(--step-2)">Types de clients</h2>
+          <ul class="links-grid" style="grid-template-columns:1fr;margin-bottom:2.5rem">
+            {navClients.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+          </ul>
+
+          <h2 style="font-size:var(--step-2)">Zones d’intervention</h2>
+          <ul class="links-grid" style="grid-template-columns:1fr;margin-bottom:2.5rem">
+            <li><a href="/zones-intervention">Toute l’Île-de-France</a></li>
+            <li><a href="/deratisation-paris">Dératisation à Paris</a></li>
+            {arrondissements.map((a) => (
+              <li><a href={`/deratisation-paris/${a.slug}`}>Paris {a.label}</a></li>
+            ))}
+            {departementsHorsParis.map((d) => (
+              <li><a href={`/zones-intervention/${d.slug}`}>{d.name} ({d.code})</a></li>
+            ))}
+          </ul>
+
+          <h2 style="font-size:var(--step-2)">Communes</h2>
+          <ul class="links-grid" style="grid-template-columns:1fr;margin-bottom:2.5rem">
+            {villes.map((v) => (
+              <li><a href={`/deratisation-${v.slug}`}>Dératisation {v.prep} {v.name}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h2 style="font-size:var(--step-2)">Blog</h2>
+          <ul class="links-grid" style="grid-template-columns:1fr;margin-bottom:2.5rem">
+            <li><a href="/blog">Tous les articles</a></li>
+            {Object.values(CATEGORIES).map((c) => (
+              <li><a href={`/blog/${c.slug}`}>Catégorie&nbsp;: {c.label}</a></li>
+            ))}
+          </ul>
+
+          <h2 style="font-size:var(--step-2)">Articles</h2>
+          <ul class="links-grid" style="grid-template-columns:1fr;margin-bottom:2.5rem">
+            {posts.map((p) => (
+              <li><a href={`/blog/${p.id}`}>{p.data.title}</a></li>
+            ))}
+          </ul>
+
+          <h2 style="font-size:var(--step-2)">Informations</h2>
+          <ul class="links-grid" style="grid-template-columns:1fr">
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/mentions-legales">Mentions légales</a></li>
+            <li><a href="/politique-de-confidentialite">Politique de confidentialité</a></li>
+            <li><a href="/sitemap.xml">Sitemap XML</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

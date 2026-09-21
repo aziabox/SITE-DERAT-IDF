@@ -1,0 +1,213 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-particuliers', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Particuliers', href: '/deratisation-particuliers' },
+];
+
+const faq = [
+  {
+    q: 'Je suis locataire : qui paie la dératisation ?',
+    a: 'Cela dépend de l’origine. Si la présence provient des parties communes, d’une cave collective, d’une gaine technique ou d’un défaut du bâtiment, l’intervention relève du propriétaire ou de la copropriété. Si elle résulte de l’usage du logement, elle relève de l’entretien courant à la charge du locataire. Un constat écrit permet de trancher sans discussion : c’est l’un des intérêts de l’inspection.',
+  },
+  {
+    q: 'L’intervention est-elle discrète ?',
+    a: 'Oui. Aucun marquage extérieur, véhicule neutre si vous le demandez, et dispositifs posés dans des zones non visibles. En immeuble, nous n’informons pas les autres occupants de notre propre initiative : c’est votre choix, ou celui du syndic si les parties communes sont concernées.',
+  },
+  {
+    q: 'Dois-je être présent pendant l’intervention ?',
+    a: 'Pour le premier passage, oui : vous seul connaissez l’historique, les zones où vous avez entendu ou vu quelque chose, et les contraintes du logement. Les passages de contrôle peuvent, selon les cas, être organisés avec une personne de confiance ou un accès convenu à l’avance.',
+  },
+  {
+    q: 'J’ai un chien et un chat, est-ce compatible ?',
+    a: 'Oui. En présence d’animaux domestiques, la priorité va aux solutions mécaniques et aux dispositifs fermés placés hors de leur portée. Les emplacements vous sont indiqués un par un, et les consignes de circulation vous sont précisées avant notre départ.',
+  },
+  {
+    q: 'Faut-il traiter les combles si je n’y vais jamais ?',
+    a: 'Uniquement si des indices s’y trouvent. Les combles perdus méritent une vérification quand les bruits viennent du plafond du dernier niveau, quand l’isolant est tassé ou déplacé, ou quand la toiture présente des passages ouverts. Sinon, traiter un volume sans indice n’apporte rien.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation pour les particuliers',
+    serviceType: 'Dératisation résidentielle',
+    description:
+      'Traitement des rats et des souris dans les maisons et appartements d’Île-de-France : logement, cave, combles, garage, abords.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation pour particuliers : maison et appartement"
+  description="Dératisation d’un logement en Île-de-France : appartement, maison, cave, combles ou garage. Déroulé, discrétion, répartition locataire / propriétaire."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Particuliers"
+    title="Dératisation d’un logement : maison, appartement, cave, combles"
+    lede="Chez un particulier, la question n’est presque jamais « quel produit ». Elle est : d’où viennent-ils, jusqu’où sont-ils allés, et comment être certain que ça ne recommence pas dans deux mois."
+    primaryLabel="Décrire mon logement"
+    meta={['Appartements et maisons', 'Discrétion assurée', 'Constat écrit sur demande']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left">
+        <div class="prose">
+          <div class="answer">
+            <p class="eyebrow">Le premier réflexe</p>
+            <p>
+              Avant d’acheter quoi que ce soit&nbsp;: notez <strong>où</strong>,
+              <strong>quand</strong> et <strong>quoi</strong>. Une photo des
+              crottes, la pièce concernée et l’heure des bruits permettent
+              d’identifier l’espèce et d’orienter la recherche du passage.
+            </p>
+            <p>
+              Ne bouchez rien à la mousse expansive&nbsp;: cela masque l’accès
+              sans le fermer, et complique le diagnostic.
+            </p>
+          </div>
+
+          <h2>En appartement</h2>
+          <p>
+            L’appartement pose une difficulté particulière : il est rarement
+            autonome. Les gaines techniques, les colonnes de vide-ordures
+            lorsqu’elles existent encore, les doublages de cloison et les caves
+            communicantes relient le logement au reste de l’immeuble.
+          </p>
+          <p>
+            Cela a une conséquence directe : si les indices sont récents et
+            limités à une pièce, un traitement du logement suffit souvent. En
+            revanche, si plusieurs occupants signalent la même chose, ou si les
+            caves sont concernées, le traitement doit être mené à l’échelle de
+            l’immeuble. Nous vous le disons clairement plutôt que de traiter
+            trois fois le même logement.
+          </p>
+          <p>
+            Ce cas de figure est détaillé sur la page
+            <a href="/deratisation-coproprietes">dératisation en copropriété</a>.
+          </p>
+
+          <h2>En maison ou pavillon</h2>
+          <p>
+            La maison individuelle offre davantage de maîtrise, mais aussi plus
+            de surfaces exposées. Les points d’entrée les plus fréquents sont
+            connus :
+          </p>
+          <ul class="ticks">
+            <li>les ventilations basses du vide sanitaire, souvent sans grillage ou détériorées&nbsp;;</li>
+            <li>le garage, dont la porte laisse un jeu au sol&nbsp;;</li>
+            <li>la traversée des réseaux en pied de mur&nbsp;;</li>
+            <li>l’about de toiture et les passages de conduits, pour les combles&nbsp;;</li>
+            <li>les abords : bûcher, abri de jardin, compost, stockage au sol, végétation contre la façade.</li>
+          </ul>
+          <p>
+            Dans un pavillon, la prévention pèse plus lourd que le traitement :
+            une maison dont les ouvertures sont fermées et les abords dégagés se
+            réinfeste rarement.
+          </p>
+
+          <h2>Cave, combles, garage : trois logiques différentes</h2>
+          <div class="table-wrap">
+            <table>
+              <caption>Ce qu’il faut vérifier selon le volume concerné.</caption>
+              <thead>
+                <tr><th scope="col">Volume</th><th scope="col">Espèce la plus probable</th><th scope="col">Point de vigilance</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Cave</th><td>Rat brun</td><td>Communication avec les caves voisines, soupiraux, canalisations</td></tr>
+                <tr><th scope="row">Combles</th><td>Souris</td><td>Isolant tassé, passages en about de toiture, conduits</td></tr>
+                <tr><th scope="row">Garage</th><td>Les deux</td><td>Jeu sous la porte, stockage au sol, nourriture pour animaux</td></tr>
+                <tr><th scope="row">Cuisine</th><td>Souris</td><td>Traversée sous évier, socles de meubles, arrière d’appareils</td></tr>
+                <tr><th scope="row">Vide sanitaire</th><td>Rat brun</td><td>Grilles de ventilation, accès depuis l’extérieur</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Locataire ou propriétaire : qui fait quoi</h2>
+          <p>
+            La question revient systématiquement, et la réponse tient à
+            l’origine de la présence, pas au statut d’occupation.
+          </p>
+          <p>
+            Lorsque la présence provient d’un défaut du bâtiment ou d’une partie
+            commune — canalisation défectueuse, ventilation détériorée, cave
+            collective, gaine technique — l’intervention relève du propriétaire
+            ou de la copropriété. Lorsqu’elle est liée à l’usage du logement,
+            elle relève de l’entretien courant.
+          </p>
+          <p>
+            Dans les deux cas, un constat écrit règle la discussion. C’est
+            précisément ce que produit l’<a href="/inspection-rongeurs">inspection</a>.
+          </p>
+
+          <h2>Ce que nous vous demandons de préparer</h2>
+          <ol class="steps" style="margin-top:1.5rem">
+            <li>
+              <h3>Les zones d’indices</h3>
+              <p>Liste des pièces où vous avez vu des traces, même anciennes.</p>
+            </li>
+            <li>
+              <h3>Un accès dégagé</h3>
+              <p>Sous l’évier, derrière les appareils, le long des plinthes, et l’accès à la cave si elle est concernée.</p>
+            </li>
+            <li>
+              <h3>Les denrées à l’abri</h3>
+              <p>Contenants rigides fermés, y compris pour la nourriture des animaux.</p>
+            </li>
+            <li>
+              <h3>L’historique</h3>
+              <p>Traitements déjà tentés, travaux récents, dégâts des eaux, chantier voisin.</p>
+            </li>
+          </ol>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Selon ce que vous avez vu</h3>
+          <p>Accédez directement à la bonne page.</p>
+          <ul>
+            <li><a href="/deratisation-rats">Des crottes de plus d’un centimètre</a></li>
+            <li><a href="/deratisation-souris">De petites crottes dispersées</a></li>
+            <li><a href="/blog/rats-dans-une-cave-que-faire">Des traces en cave</a></li>
+            <li><a href="/blog/rats-dans-les-murs-comment-savoir">Des bruits dans un mur</a></li>
+            <li><a href="/blog/souris-dans-un-appartement-que-faire">Une souris en appartement</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Particuliers : vos questions" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Pour aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-rats', label: 'Dératisation rats', note: 'Cave, sous-sol, abords' },
+      { href: '/deratisation-souris', label: 'Dératisation souris', note: 'Cuisine, cloisons, combles' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Éviter la récidive' },
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Si l’immeuble est concerné' },
+      { href: '/zones-intervention', label: 'Zones d’intervention', note: 'Trouver votre commune' },
+      { href: '/blog/erreurs-a-eviter-quand-on-decouvre-un-rat', label: 'Les erreurs à éviter', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Envoyez une photo, nous vous répondons sur l’espèce et la zone"
+    text="Un cliché des traces et la pièce concernée suffisent à dire s’il s’agit d’un rat ou d’une souris, et par où commencer."
+    eyebrow="Premier échange"
+  />
+</BaseLayout>

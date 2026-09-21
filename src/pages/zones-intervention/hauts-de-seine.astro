@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getDepartement, villesOf } from '../../data/idf';
+import { serviceSchema } from '../../lib/seo';
+
+const dep = getDepartement('hauts-de-seine')!;
+const villes = villesOf(dep.slug);
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/zones-intervention/hauts-de-seine', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Hauts-de-Seine', href: '/zones-intervention/hauts-de-seine' },
+];
+
+const faq = [
+  {
+    q: 'Quelles zones posent le plus de difficultés dans les Hauts-de-Seine ?',
+    a: 'Les volumes souterrains, très présents dans ce département : parkings sur plusieurs niveaux, locaux techniques, galeries de liaison entre bâtiments. Ils offrent des circulations continues et sont peu fréquentés, ce qui laisse le temps à une présence de s’installer avant d’être remarquée.',
+  },
+  {
+    q: 'Intervenez-vous dans les tours de bureaux de La Défense ?',
+    a: 'Oui, sur les locaux privatifs comme sur les volumes techniques, en coordination avec le gestionnaire de l’immeuble. Dans ce type de bâtiment, le traitement porte principalement sur les niveaux inférieurs, les locaux déchets, les espaces de restauration et les chemins de câbles.',
+  },
+  {
+    q: 'Les immeubles récents sont-ils moins exposés ?',
+    a: 'Pas nécessairement. Une construction récente est souvent mieux fermée sur l’extérieur, mais elle comporte davantage de gaines techniques continues, de faux plafonds et de parkings reliés entre eux. La voie d’entrée change, la circulation interne reste possible.',
+  },
+  {
+    q: 'Un pavillon à Rueil-Malmaison ou à Clamart demande-t-il la même approche ?',
+    a: 'Non. Dans le tissu pavillonnaire de l’ouest et du sud du département, l’enjeu se déplace vers les abords et la toiture : ventilation du vide sanitaire, garage, abri de jardin, végétation en contact avec la façade, combles. Le traitement est plus court, la prévention plus déterminante.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation dans les Hauts-de-Seine (92)',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris dans les Hauts-de-Seine : immeubles résidentiels, sites tertiaires, parkings souterrains et pavillonnaire.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Hauts-de-Seine (92) : rats et souris"
+  description="Dératisation dans les Hauts-de-Seine : immeubles, tertiaire, parkings souterrains et pavillons. Contexte du bâti, zones à risque et communes couvertes."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Hauts-de-Seine • 92"
+    title="Dératisation dans les Hauts-de-Seine"
+    lede="Le 92 est le département francilien où les volumes souterrains pèsent le plus lourd : parkings sur plusieurs niveaux, galeries techniques, socles de tours. C’est presque toujours là que se joue une intervention, avant même les étages."
+    primaryLabel="Décrire mon bâtiment"
+    meta={[`Préfecture : ${dep.prefecture}`, 'Petite couronne', `${dep.communes.length}+ communes couvertes`]}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <h2>Un département à trois visages</h2>
+          <p>
+            Le nord du département, autour de Gennevilliers, Clichy,
+            Asnières-sur-Seine et Colombes, conserve un héritage industriel et
+            portuaire : entrepôts, plateformes logistiques, anciens sites
+            reconvertis, port fluvial. Les volumes y sont grands, les accès
+            nombreux, et la pression extérieure constante.
+          </p>
+          <p>
+            Le centre, avec le quartier d’affaires réparti sur Puteaux,
+            Courbevoie et Nanterre, concentre des immeubles de grande hauteur
+            bâtis sur dalle, avec des niveaux inférieurs étendus, des galeries
+            de liaison et une restauration collective dense.
+          </p>
+          <p>
+            Le sud et l’ouest — Boulogne-Billancourt, Issy-les-Moulineaux,
+            Rueil-Malmaison, Antony, Clamart — mêlent résidentiel dense,
+            programmes récents et secteurs pavillonnaires, avec des jardins et
+            une végétation qui jouent un rôle direct dans l’exposition.
+          </p>
+
+          <h2>Ce que cela change concrètement</h2>
+
+          <h3>Les parkings souterrains</h3>
+          <p>
+            C’est la particularité la plus marquante du département. Un parking
+            de trois niveaux reliant plusieurs bâtiments constitue un réseau de
+            circulation idéal : sombre, peu fréquenté à certaines heures, doté de
+            locaux techniques, de vide-ordures et de locaux déchets, et
+            communiquant avec l’extérieur par les rampes.
+          </p>
+          <p>
+            Dans ces configurations, traiter un logement ou un plateau sans
+            traiter le sous-sol revient à traiter la conséquence. L’inspection
+            commence systématiquement par le niveau le plus bas.
+          </p>
+
+          <h3>Les programmes récents</h3>
+          <p>
+            Les constructions des vingt dernières années sont généralement bien
+            fermées sur l’extérieur. En contrepartie, elles comportent des
+            gaines techniques verticales continues, des faux plafonds étendus et
+            des locaux déchets intégrés au bâtiment. Une fois à l’intérieur, un
+            rongeur y circule très facilement d’un niveau à l’autre.
+          </p>
+
+          <h3>Les anciens sites industriels reconvertis</h3>
+          <p>
+            Le long de la Seine, plusieurs secteurs ont été transformés en
+            quartiers mixtes. Les chantiers de longue durée, les terrassements
+            et les démolitions perturbent les populations installées et les
+            déplacent vers les bâtiments voisins. Une augmentation d’indices
+            concomitante à un chantier proche n’est pas une coïncidence.
+          </p>
+
+          <h2>Qui nous appelle dans le 92</h2>
+          <ul class="ticks">
+            <li><strong>Syndics et gestionnaires</strong> — sous-sols, parkings, locaux déchets de résidences.</li>
+            <li><strong>Gestionnaires de sites tertiaires</strong> — socles d’immeubles, restauration d’entreprise, chemins de câbles.</li>
+            <li><strong>Commerces de pied d’immeuble</strong> — réserves en sous-sol communicantes avec les caves.</li>
+            <li><strong>Particuliers en pavillon</strong> — vide sanitaire, garage, combles, abords.</li>
+            <li><strong>Logistique et entrepôts du nord du département</strong> — quais, abords, flux entrants.</li>
+          </ul>
+
+          <h2>Prévention adaptée au département</h2>
+          <p>
+            Trois points ressortent nettement dans le 92. Le premier est la
+            fermeture des locaux déchets en sous-sol : bas de porte métallique,
+            bacs à couvercle, sol maintenu propre. Le deuxième est le traitement
+            des rampes de parking, souvent la voie d’entrée principale. Le
+            troisième, dans le pavillonnaire, est le grillage des ventilations
+            de vide sanitaire, fréquemment détériorées ou absentes.
+          </p>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Pages communales</h3>
+          <p>Contexte détaillé par ville.</p>
+          <ul>
+            {villes.map((v) => (
+              <li><a href={`/deratisation-${v.slug}`}>Dératisation {v.prep} {v.name}</a></li>
+            ))}
+            <li><a href="/contact">Autre commune du 92</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band band--bone">
+    <div class="wrap">
+      <p class="eyebrow">Couverture</p>
+      <h2>Communes desservies dans les Hauts-de-Seine</h2>
+      <p class="lede" style="margin-bottom:1.75rem">
+        Liste non exhaustive — l’ensemble des communes du département est couvert.
+      </p>
+      <ul class="inline-list">
+        {dep.communes.map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Hauts-de-Seine : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Continuer"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-boulogne-billancourt', label: 'Boulogne-Billancourt', note: 'Page communale' },
+      { href: '/deratisation-nanterre', label: 'Nanterre', note: 'Page communale' },
+      { href: '/deratisation-courbevoie', label: 'Courbevoie', note: 'Page communale' },
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Parkings et sous-sols' },
+      { href: '/deratisation-entreprises', label: 'Entreprises', note: 'Tertiaire et logistique' },
+      { href: '/zones-intervention', label: 'Toutes les zones', note: 'Île-de-France' },
+    ]}
+  />
+
+  <CtaBand
+    title="Un sous-sol ou un parking concerné dans le 92 ?"
+    text="Précisez le nombre de niveaux et si les bâtiments communiquent : c’est ce qui détermine le périmètre à traiter."
+    eyebrow="Hauts-de-Seine"
+  />
+</BaseLayout>

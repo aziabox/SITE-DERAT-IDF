@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { serviceSchema } from '../../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-paris/18e-arrondissement', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Paris', href: '/deratisation-paris' },
+  { label: '18e arrondissement', href: '/deratisation-paris/18e-arrondissement' },
+];
+
+const faq = [
+  {
+    q: 'Pourquoi les marchés et commerces alimentaires comptent-ils autant ici ?',
+    a: 'Parce qu’ils produisent des déchets organiques en volume, sur l’espace public comme dans les réserves. Un secteur de marché génère une ressource récurrente à horaire fixe. Ce n’est pas un problème d’hygiène des commerçants : c’est une caractéristique du secteur, qui impose une vigilance accrue sur la gestion des déchets et la fermeture des locaux.',
+  },
+  {
+    q: 'Le relief de la butte change-t-il quelque chose ?',
+    a: 'Oui, sur les sous-sols. Le relief produit des niveaux décalés d’un bâtiment à l’autre, des caves semi-enterrées et des accès de plain-pied côté rue haute. Ces décalages créent des ouvertures là où on ne les attend pas, notamment en partie basse des façades donnant sur rue en pente.',
+  },
+  {
+    q: 'Les immeubles anciens du 18e ont-ils des caves communicantes ?',
+    a: 'Très souvent. Le parc ancien de l’arrondissement présente des sous-sols reliés entre escaliers, parfois entre immeubles mitoyens. Comme partout à Paris, l’établissement du périmètre doit précéder le traitement, faute de quoi la présence se déplace sans disparaître.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation Paris 18e arrondissement',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris dans le 18e arrondissement de Paris : habitat ancien, relief de la butte, marchés et commerces alimentaires.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Paris 18e : Montmartre, Barbès, La Chapelle"
+  description="Dératisation dans le 18e arrondissement de Paris : habitat ancien, caves en relief, marchés et commerces alimentaires. Périmètre, traitement et prévention."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Paris 18e • 75018"
+    title="Dératisation Paris 18e : relief, bâti ancien et commerce alimentaire"
+    lede="Le 18e combine trois facteurs peu courants ensemble : un relief marqué qui décale les sous-sols, un parc ancien aux caves communicantes, et une densité de commerce alimentaire qui produit une ressource régulière."
+    primaryLabel="Décrire ma situation"
+    meta={['Habitat ancien', 'Sous-sols en relief', 'Commerce alimentaire dense']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <h2>Le contexte urbain</h2>
+          <p>
+            L’arrondissement s’étend de la butte Montmartre aux secteurs de
+            Barbès et de La Chapelle. Le bâti y est majoritairement ancien,
+            avec des immeubles de rapport, des cours, des passages, et une
+            topographie qui fait varier les niveaux d’un bâtiment à l’autre.
+          </p>
+          <p>
+            S’y ajoute une activité commerciale alimentaire particulièrement
+            dense, avec des marchés, des commerces de bouche et de la
+            restauration répartis sur l’ensemble du territoire.
+          </p>
+
+          <h2>Ce que le relief implique</h2>
+          <p>
+            C’est la particularité la moins évidente et l’une des plus utiles à
+            connaître. Une rue en pente produit des sous-sols décalés : la cave
+            d’un immeuble peut se trouver au niveau du rez-de-chaussée du
+            bâtiment voisin, et un local semi-enterré peut disposer d’un accès
+            de plain-pied côté rue haute.
+          </p>
+          <p>
+            Conséquence pratique : des ouvertures existent là où on ne les
+            cherche pas — soupiraux au niveau du trottoir, portes de service en
+            partie basse, ventilations à hauteur d’homme. L’inspection doit donc
+            faire le tour complet du bâtiment, sur toutes ses faces.
+          </p>
+
+          <h2>Les secteurs de marché</h2>
+          <p>
+            Les marchés et le commerce alimentaire dense produisent des déchets
+            organiques en volume, à horaires réguliers, sur l’espace public
+            comme en réserve. Cette régularité est ce qui fixe une population sur
+            un secteur.
+          </p>
+          <p>
+            Pour un commerce situé dans ces zones, la protection passe par trois
+            points : fermeture du local déchets, rayonnage des réserves décollé
+            du sol, et obturation des trappes et accès donnant sur voirie. Voir
+            <a href="/deratisation-commerces">commerces</a>.
+          </p>
+
+          <h2>Le parc résidentiel ancien</h2>
+          <p>
+            Comme dans l’ensemble du parc ancien parisien, les caves sont
+            fréquemment communicantes entre escaliers, parfois entre immeubles.
+            Le traitement d’un lot isolé donne une accalmie, pas un résultat.
+          </p>
+          <p>
+            Par ailleurs, les planchers bois et doublages anciens offrent à la
+            souris domestique des cheminements verticaux, d’où des indices
+            signalés à des étages non contigus. Voir
+            <a href="/deratisation-souris">dératisation souris</a>.
+          </p>
+
+          <h2>Prévention dans le 18e</h2>
+          <ul class="ticks">
+            <li>Inspecter toutes les faces du bâtiment, y compris côté rue haute.</li>
+            <li>Grillager soupiraux et ventilations, souvent au ras du trottoir.</li>
+            <li>Fermer les trappes de cave donnant sur voirie.</li>
+            <li>Tenir la discipline déchets : bacs fermés, horaires, rien au sol.</li>
+            <li>Cloisonner les passages de cave inutilisés entre escaliers.</li>
+          </ul>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Selon votre rôle</h3>
+          <p>Le bon point d’entrée.</p>
+          <ul>
+            <li><a href="/deratisation-coproprietes">Syndic</a></li>
+            <li><a href="/deratisation-commerces">Commerçant</a></li>
+            <li><a href="/deratisation-particuliers">Occupant</a></li>
+            <li><a href="/deratisation-paris">Paris, vue d’ensemble</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Paris 18e : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Faire le tour complet' },
+      { href: '/deratisation-commerces', label: 'Commerces', note: 'Secteurs de marché' },
+      { href: '/deratisation-paris/19e-arrondissement', label: 'Paris 19e', note: 'Arrondissement voisin' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Soupiraux et trappes' },
+    ]}
+  />
+
+  <CtaBand
+    title="Rue en pente ? Les ouvertures ne sont pas où on les attend"
+    text="Dans le 18e, l’inspection doit couvrir toutes les faces du bâtiment. C’est souvent là qu’on trouve l’accès resté ouvert."
+    eyebrow="Paris 18e"
+    variant="petrol"
+  />
+</BaseLayout>

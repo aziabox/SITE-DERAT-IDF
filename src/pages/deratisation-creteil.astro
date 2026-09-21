@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-creteil', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Val-de-Marne', href: '/zones-intervention/val-de-marne' },
+  { label: 'Créteil', href: '/deratisation-creteil' },
+];
+
+const faq = [
+  {
+    q: 'Pourquoi faut-il traiter le niveau sous dalle à Créteil ?',
+    a: 'Parce que c’est là que passent les circulations. Dans les ensembles sur dalle, les cheminements piétons sont en surface et les parkings, galeries et locaux techniques en dessous. Les rongeurs utilisent ce niveau inférieur, continu et peu fréquenté. Un traitement limité aux logements ne rencontre donc jamais la population.',
+  },
+  {
+    q: 'Les anciennes colonnes de vide-ordures posent-elles problème ?',
+    a: 'Oui, quand elles ont été condamnées sans être obturées. Une colonne fermée par une simple trappe au niveau des paliers mais restée ouverte en pied constitue une gaine verticale idéale entre le sous-sol et les étages. C’est l’un des points que nous vérifions systématiquement dans ce type d’ensemble.',
+  },
+  {
+    q: 'Qui intervient dans un logement social ou une résidence gérée ?',
+    a: 'Le bailleur ou le gestionnaire, au titre des parties communes et des volumes techniques. Un signalement écrit précisant la localisation et la nature des indices est le point de départ le plus efficace. Le traitement des lots concernés doit être mené dans la même période que celui des communs.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Créteil',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Créteil : ensembles sur dalle, grands ensembles, équipements publics et commerces.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Créteil (94000) : dalles et grands ensembles"
+  description="Dératisation à Créteil : ensembles sur dalle, vide-ordures condamnés, grands ensembles et équipements. Périmètre technique et sécurisation."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Créteil • 94000"
+    title="Dératisation à Créteil"
+    lede="Préfecture du Val-de-Marne, Créteil est l’une des communes franciliennes où l’urbanisme sur dalle est le plus présent. La conséquence est toujours la même : la population vit un niveau plus bas que là où on la signale."
+    primaryLabel="Décrire mon bâtiment"
+    meta={['Val-de-Marne (94)', 'Ensembles sur dalle', 'Collectif et équipements']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left">
+        <div class="prose">
+          <h2>L’urbanisme sur dalle</h2>
+          <p>
+            Plusieurs quartiers de la commune sont organisés selon ce principe :
+            cheminements piétons et espaces publics en surface, parkings,
+            galeries techniques, locaux d’exploitation et réseaux en sous-face.
+          </p>
+          <p>
+            Ce niveau inférieur est continu, relié à l’extérieur par des rampes,
+            peu fréquenté à certaines heures, et doté de locaux déchets. Pour un
+            rongeur, c’est un réseau de circulation complet. Pour une
+            intervention, cela signifie que le périmètre doit impérativement
+            l’inclure.
+          </p>
+          <div class="keyline">
+            <p>
+              Un occupant du sixième étage qui entend des bruits ne vit pas
+              au-dessus du problème : il vit au-dessus de son extrémité.
+            </p>
+          </div>
+
+          <h2>Les gaines verticales et les vide-ordures</h2>
+          <p>
+            Les ensembles de cette génération comportent des gaines techniques
+            continues et, dans certains cas, d’anciennes colonnes de
+            vide-ordures. Lorsque ces colonnes ont été condamnées au niveau des
+            paliers sans être obturées en pied, elles forment un passage direct
+            entre le sous-sol et les étages.
+          </p>
+          <p>
+            C’est un point systématiquement vérifié : son obturation change
+            radicalement la situation d’un bâtiment.
+          </p>
+
+          <h2>Les équipements et les commerces</h2>
+          <p>
+            La commune concentre des équipements publics, universitaires,
+            hospitaliers et commerciaux. Ces sites posent des contraintes
+            propres : continuité de service, fréquentation, restauration
+            collective, locaux déchets d’ampleur.
+          </p>
+          <p>
+            Le traitement s’y organise hors des heures de forte fréquentation,
+            avec des dispositifs non visibles du public et une traçabilité des
+            passages. Voir
+            <a href="/deratisation-entreprises">entreprises et locaux professionnels</a>.
+          </p>
+
+          <h2>Prévention à Créteil</h2>
+          <ul class="ticks">
+            <li>Obturer en pied les anciennes colonnes de vide-ordures condamnées.</li>
+            <li>Sécuriser les rampes et accès du niveau sous dalle.</li>
+            <li>Fermer les locaux déchets : porte jointive, bas de porte métallique, bacs à couvercle.</li>
+            <li>Supprimer le stockage au sol dans les caves et locaux techniques.</li>
+            <li>Obturer les traversées de gaines entre niveaux.</li>
+          </ul>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Selon votre rôle</h3>
+          <p>Le bon point d’entrée.</p>
+          <ul>
+            <li><a href="/deratisation-coproprietes">Syndic ou bailleur</a></li>
+            <li><a href="/deratisation-particuliers">Occupant</a></li>
+            <li><a href="/deratisation-commerces">Commerçant</a></li>
+            <li><a href="/zones-intervention/val-de-marne">Val-de-Marne</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Créteil : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/zones-intervention/val-de-marne', label: 'Val-de-Marne', note: 'Page départementale' },
+      { href: '/deratisation-vitry-sur-seine', label: 'Vitry-sur-Seine', note: 'Commune voisine' },
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Volumes techniques' },
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Niveaux sous dalle' },
+    ]}
+  />
+
+  <CtaBand
+    title="Bâtiment sur dalle : le périmètre commence en sous-face"
+    text="Indiquez le nombre de niveaux techniques et si les bâtiments communiquent entre eux. C’est ce qui détermine l’ampleur du traitement."
+    eyebrow="Créteil"
+  />
+</BaseLayout>

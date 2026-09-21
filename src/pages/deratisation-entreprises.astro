@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-entreprises', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Entreprises', href: '/deratisation-entreprises' },
+];
+
+const faq = [
+  {
+    q: 'Des rongeurs dans des bureaux, est-ce courant ?',
+    a: 'Plus qu’on ne le croit. Un plateau de bureaux offre chaleur constante, faux plafonds, chemins de câbles et, surtout, des espaces de pause avec denrées et déchets. La souris y est fréquente ; le rat apparaît plutôt dans les niveaux inférieurs, les parkings et les locaux techniques.',
+  },
+  {
+    q: 'Quel est le risque principal pour une entreprise ?',
+    a: 'Le risque matériel, d’abord : le rongement des câbles et des gaines dans les faux plafonds et les chemins de câbles peut provoquer des coupures et un risque d’incendie. Le risque social ensuite : la découverte d’indices dans un espace de travail génère rapidement des signalements et, le cas échéant, une saisine du CSE.',
+  },
+  {
+    q: 'Comment traiter un entrepôt sans arrêter l’exploitation ?',
+    a: 'En travaillant sur la périphérie et sur les flux. Les dispositifs sont installés le long des parois, aux quais et dans les zones techniques, jamais au milieu des allées de circulation. Le traitement est calé sur les créneaux de moindre activité, et les zones de stockage sont traitées rack par rack lors des rotations.',
+  },
+  {
+    q: 'Fournissez-vous un reporting pour nos audits ?',
+    a: 'Oui : plan des points de contrôle, compte rendu daté de chaque passage, relevé des indices constatés et actions correctives. Ces éléments sont directement exploitables dans un dossier d’audit, un plan de maîtrise sanitaire ou un dossier d’assurance.',
+  },
+  {
+    q: 'Qui est responsable dans un immeuble de bureaux loué ?',
+    a: 'La répartition suit généralement le bail et le règlement de l’immeuble : les parties communes et les locaux techniques relèvent du propriétaire ou du gestionnaire, les locaux privatifs de l’occupant. Comme en copropriété, un constat technique écrit évite que la discussion s’enlise pendant que la situation progresse.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation pour entreprises et locaux professionnels',
+    serviceType: 'Dératisation tertiaire et industrielle',
+    description:
+      'Traitement des rongeurs en entreprise : bureaux, locaux professionnels, entrepôts et sites logistiques en Île-de-France, avec reporting exploitable en audit.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation entreprise : bureaux, locaux et entrepôts"
+  description="Traitement des rongeurs en entreprise en Île-de-France : bureaux, locaux professionnels, entrepôts et logistique. Continuité d’activité et reporting d’audit."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Entreprises • Sites professionnels"
+    title="Dératisation en entreprise : continuité d’activité et traçabilité"
+    lede="Sur un site professionnel, une présence de rongeurs devient vite un sujet transverse : sécurité des installations, conditions de travail, conformité, image. L’intervention doit être efficace, documentée et compatible avec l’exploitation."
+    primaryLabel="Demander une évaluation de site"
+    meta={['Bureaux et tertiaire', 'Entrepôts et logistique', 'Reporting d’audit']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <div class="answer">
+        <p class="eyebrow">Réponse directe</p>
+        <p>
+          En entreprise, le traitement se cale sur les
+          <strong>flux</strong> (livraisons, déchets, circulation) et sur la
+          <strong>périphérie</strong> des volumes, afin de ne pas interrompre
+          l’exploitation.
+        </p>
+        <p>
+          Chaque passage est documenté&nbsp;: plan des points de contrôle,
+          constats, actions correctives — exploitables en audit interne comme
+          externe.
+        </p>
+      </div>
+
+      <h2 id="bureaux">Bureaux et sites tertiaires</h2>
+      <p>
+        Un plateau de bureaux réunit des conditions favorables sans qu’on y
+        pense : température constante, faux plafonds accessibles, chemins de
+        câbles continus, et surtout des espaces de convivialité où s’accumulent
+        denrées et déchets.
+      </p>
+      <p>
+        La souris y est l’espèce dominante. Les indices apparaissent
+        généralement dans cet ordre : tiroirs et placards des espaces de pause,
+        arrière des distributeurs et machines à café, plinthes techniques,
+        faux plafonds.
+      </p>
+      <p>
+        Le point critique est le chemin de câbles. Un rongement sur un faisceau
+        dans un faux plafond peut provoquer une coupure réseau ou électrique, et
+        constitue un risque d’incendie. C’est l’argument qui justifie une
+        intervention rapide, bien avant l’aspect nuisance.
+      </p>
+
+      <h2 id="locaux">Locaux professionnels, ateliers, laboratoires</h2>
+      <p>
+        Les locaux d’activité cumulent souvent des matières stockées, des
+        volumes techniques et des accès fréquemment ouverts. Trois configurations
+        posent régulièrement problème :
+      </p>
+      <ul class="ticks">
+        <li><strong>l’atelier avec stockage au sol</strong> — abris multiples, indices difficiles à lire&nbsp;;</li>
+        <li><strong>le local avec porte d’accès maintenue ouverte</strong> — livraisons, ventilation, confort d’été&nbsp;;</li>
+        <li><strong>le laboratoire ou local sensible</strong> — contraintes fortes sur les méthodes utilisables, piégeage privilégié.</li>
+      </ul>
+      <p>
+        Sur ces sites, l’obturation prend une place dominante : c’est souvent la
+        seule mesure réellement durable face à des accès structurellement
+        ouverts.
+      </p>
+
+      <h2 id="entrepots">Entrepôts et sites logistiques</h2>
+      <p>
+        L’entrepôt présente une difficulté propre : la réintroduction permanente.
+        Les palettes, cartons et conteneurs arrivent de l’extérieur, les quais
+        restent ouverts pendant les opérations, et les abords sont souvent
+        étendus.
+      </p>
+      <p>
+        La stratégie s’organise donc en trois couches concentriques.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>Organisation de la protection d’un site logistique.</caption>
+          <thead>
+            <tr><th scope="col">Couche</th><th scope="col">Objectif</th><th scope="col">Moyens</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Abords</th><td>Réduire la pression extérieure</td><td>Dégagement, gestion des déchets, points de contrôle périmétriques</td></tr>
+            <tr><th scope="row">Enveloppe</th><td>Empêcher l’entrée</td><td>Quais, portes sectionnelles, bardage, gaines, joints</td></tr>
+            <tr><th scope="row">Intérieur</th><td>Détecter tôt</td><td>Points de contrôle repérés, inspection des racks, lecture des indices</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Sur un site logistique, l’objectif réaliste n’est pas l’absence absolue
+        d’introduction — elle est impossible à garantir avec des flux entrants
+        quotidiens — mais la détection précoce et le traitement immédiat.
+      </p>
+
+      <h2>Restauration collective et locaux sociaux</h2>
+      <p>
+        Dès qu’un site comporte une cuisine collective, une cafétéria ou un
+        local déchets d’ampleur, les exigences se rapprochent de celles de la
+        restauration commerciale : protection des denrées, traçabilité, absence
+        de produit en zone de production. Voir
+        <a href="/deratisation-restaurants">dératisation en restauration</a>.
+      </p>
+
+      <h2>Ce que nous remettons</h2>
+      <p>
+        Un plan repéré des points de contrôle, un compte rendu daté par passage,
+        le relevé des indices et les actions correctives engagées, ainsi que la
+        distinction entre ce qui relève du traitement et ce qui relève de
+        travaux sur le bâti. Ce dernier point évite les interventions
+        répétitives sur une cause structurelle non traitée.
+      </p>
+      <div class="keyline">
+        <p>
+          Sur un site professionnel, le reporting n’est pas une formalité : c’est
+          ce qui permet de démontrer la maîtrise du risque en cas d’audit,
+          d’inspection ou de sinistre.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Entreprises : questions fréquentes" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Sujets liés"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-commerces', label: 'Commerces', note: 'Réserve et vente' },
+      { href: '/deratisation-restaurants', label: 'Restaurants', note: 'Restauration collective' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Enveloppe et abords' },
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Audit d’un site' },
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Sous-sols et parkings' },
+      { href: '/zones-intervention', label: 'Zones d’intervention', note: 'Sites multiples en IDF' },
+    ]}
+  />
+
+  <CtaBand
+    title="Plusieurs sites à couvrir en Île-de-France ?"
+    text="Nous évaluons chaque site séparément et fournissons un reporting homogène, exploitable par vos services QHSE et vos auditeurs."
+    eyebrow="Multi-sites"
+  />
+</BaseLayout>

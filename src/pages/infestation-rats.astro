@@ -1,0 +1,218 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/infestation-rats', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Infestation de rats', href: '/infestation-rats' },
+];
+
+const faq = [
+  {
+    q: 'À partir de quand parle-t-on d’infestation de rats ?',
+    a: 'Quand la présence n’est plus ponctuelle mais structurée : indices frais dans plusieurs zones distinctes, déjections en grande quantité, coulées grasses marquées, animaux visibles en journée, et parfois plusieurs occupants concernés dans un même bâtiment. Un rat aperçu une fois dans une cour n’est pas une infestation ; des crottes fraîches en cave, en local poubelles et dans une gaine, oui.',
+  },
+  {
+    q: 'Une infestation peut-elle disparaître seule ?',
+    a: 'Non, tant que les ressources restent disponibles. Elle peut en revanche sembler disparaître : les rongeurs se déplacent temporairement à la suite de travaux, d’un curage de réseau ou d’un nettoyage. La population n’a pas diminué, elle s’est décalée, et elle revient quand la perturbation cesse.',
+  },
+  {
+    q: 'Combien de temps pour venir à bout d’une infestation installée ?',
+    a: 'Compter généralement plusieurs semaines, avec des passages échelonnés. La durée dépend du volume concerné, du nombre d’accès à fermer et surtout de la possibilité d’intervenir sur toutes les zones. Un immeuble où l’accès aux caves privatives est impossible allonge mécaniquement le délai.',
+  },
+  {
+    q: 'Qui prend en charge une infestation dans un immeuble ?',
+    a: 'Lorsque la présence concerne les parties communes — caves, local poubelles, cour, gaines, vide sanitaire — l’intervention relève de la copropriété, décidée par le syndic. Le traitement d’un lot privatif reste à la charge de l’occupant ou du propriétaire selon le bail. Dans les faits, les deux doivent être menés ensemble pour que le résultat tienne.',
+  },
+  {
+    q: 'Faut-il évacuer le bâtiment pendant le traitement ?',
+    a: 'Non. Les dispositifs sont installés dans des zones non accessibles aux occupants et sécurisés. Des consignes temporaires peuvent concerner l’accès à une cave ou à un local technique, la sortie des animaux domestiques dans une cour, ou la gestion des déchets pendant la période de traitement.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Traitement des infestations de rats',
+    serviceType: 'Infestation de rongeurs',
+    description:
+      'Prise en charge des infestations de rats installées en Île-de-France : périmètre, phasage, coordination entre occupants et gestionnaires, suivi.',
+  }),
+];
+---
+<BaseLayout
+  title="Infestation de rats : reconnaître une présence installée"
+  description="Signes d’une infestation de rats installée, périmètre à traiter, phasage de l’intervention et coordination en immeuble collectif. Île-de-France."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Situation avancée"
+    title="Infestation de rats : quand la présence est déjà installée"
+    lede="Une infestation ne se traite pas comme une présence isolée. Le périmètre est plus large, les accès sont multiples, et plusieurs parties sont souvent concernées. Cette page explique comment on reprend la main sur une situation qui s’est étendue."
+    primaryLabel="Faire évaluer la situation"
+    meta={['Périmètre élargi', 'Passages échelonnés', 'Coordination syndic / occupants']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <div class="answer">
+        <p class="eyebrow">Réponse directe</p>
+        <p>
+          On parle d’infestation lorsque les indices sont <strong>frais</strong>,
+          <strong>nombreux</strong> et présents dans <strong>plusieurs zones
+          distinctes</strong>, avec souvent une activité visible en journée.
+        </p>
+        <p>
+          La réponse n’est alors pas un traitement ponctuel mais un plan :
+          périmètre complet, phasage, fermeture systématique des accès,
+          contrôles espacés jusqu’à absence d’indice frais.
+        </p>
+      </div>
+
+      <h2>Les signes qui font basculer d’une présence à une infestation</h2>
+      <p>
+        Le passage de l’un à l’autre n’est pas une question de nombre d’animaux
+        vus — on en voit rarement — mais de structure des indices.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>Lecture comparée d’une présence isolée et d’une infestation installée.</caption>
+          <thead>
+            <tr><th scope="col">Critère</th><th scope="col">Présence isolée</th><th scope="col">Infestation</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Zones concernées</th><td>Une seule</td><td>Plusieurs, non contiguës</td></tr>
+            <tr><th scope="row">Déjections</th><td>Quelques crottes</td><td>Amas, plusieurs générations mêlées</td></tr>
+            <tr><th scope="row">Coulées grasses</th><td>Absentes ou discrètes</td><td>Nettes, continues sur plusieurs mètres</td></tr>
+            <tr><th scope="row">Activité diurne</th><td>Aucune</td><td>Observée</td></tr>
+            <tr><th scope="row">Dégâts</th><td>Ponctuels</td><td>Câbles, isolants, joints, emballages</td></tr>
+            <tr><th scope="row">Témoignages</th><td>Un occupant</td><td>Plusieurs occupants, étages différents</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Pourquoi une infestation résiste aux traitements partiels</h2>
+      <p>
+        Une population installée s’organise autour de plusieurs abris et de
+        plusieurs sources. Traiter une zone déplace simplement l’activité vers
+        les autres. C’est le mécanisme classique du « ça a marché deux
+        semaines » : la pression exercée sur un point a fait reculer les animaux,
+        qui reviennent dès qu’elle cesse.
+      </p>
+      <p>
+        Trois facteurs entretiennent particulièrement une infestation en milieu
+        urbain francilien :
+      </p>
+      <ul class="ticks">
+        <li><strong>une ressource permanente</strong> — local poubelles ouvert, dépôt sauvage, stockage au sol, nourrissage d’animaux en extérieur&nbsp;;</li>
+        <li><strong>un réseau accessible</strong> — canalisation défectueuse, regard non étanche, vide sanitaire ouvert sur l’extérieur&nbsp;;</li>
+        <li><strong>un accès non traité</strong> — une seule ouverture suffit à réalimenter le bâtiment.</li>
+      </ul>
+
+      <h2>Comment on reprend la situation</h2>
+      <ol class="steps" style="margin-top:1.5rem">
+        <li>
+          <h3>Établir le périmètre réel</h3>
+          <p>
+            Avant tout traitement, on détermine jusqu’où va la présence :
+            caves, cour, locaux techniques, gaines, logements concernés,
+            abords, mitoyennetés. Un périmètre sous-estimé condamne la suite.
+          </p>
+        </li>
+        <li>
+          <h3>Identifier les sources et les accès</h3>
+          <p>
+            Recherche systématique des points d’entrée et des ressources
+            disponibles, avec priorisation : ce qui alimente la population
+            passe avant ce qui la loge.
+          </p>
+        </li>
+        <li>
+          <h3>Traiter simultanément, pas successivement</h3>
+          <p>
+            Les zones sont couvertes dans la même séquence pour éviter les
+            reports d’activité d’un secteur vers l’autre.
+          </p>
+        </li>
+        <li>
+          <h3>Fermer au fur et à mesure</h3>
+          <p>
+            Les accès sont obturés en cours de traitement, après s’être assuré
+            qu’ils ne constituent pas la seule issue d’une zone encore active.
+          </p>
+        </li>
+        <li>
+          <h3>Contrôler jusqu’à absence d’indice frais</h3>
+          <p>
+            Le critère d’arrêt n’est pas une date mais un constat : plus aucune
+            crotte fraîche, plus aucune consommation, plus aucun bruit signalé
+            sur deux passages consécutifs.
+          </p>
+        </li>
+        <li>
+          <h3>Verrouiller la prévention</h3>
+          <p>
+            Consignes écrites, points de contrôle à surveiller, et le cas
+            échéant travaux à programmer (ventilation, réseau, local déchets).
+          </p>
+        </li>
+      </ol>
+
+      <h2>Le cas particulier du bâtiment collectif</h2>
+      <p>
+        En immeuble, la difficulté est rarement technique : elle est
+        organisationnelle. L’accès aux caves privatives, la coordination des
+        rendez-vous, la décision du syndic et l’information des occupants
+        conditionnent le résultat autant que le traitement lui-même.
+      </p>
+      <p>
+        Nous fournissons dans ce cadre les éléments nécessaires au gestionnaire :
+        constat, périmètre, points à sécuriser, calendrier. Le détail figure sur
+        la page <a href="/deratisation-coproprietes">dératisation en copropriété</a>.
+      </p>
+
+      <h2>Et si la source est à l’extérieur ?</h2>
+      <p>
+        Chantier voisin, réseau d’assainissement défectueux, dépôt sauvage
+        récurrent, parcelle en friche : certaines sources ne relèvent pas du
+        bâtiment traité. Dans ce cas, le traitement protège le site — obturation,
+        surveillance périmétrique — mais la résolution durable passe par un
+        signalement auprès du gestionnaire concerné ou des services de la commune.
+        Nous le disons plutôt que de laisser croire qu’un traitement interne
+        réglera une pression externe.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Infestation de rats : ce qu’il faut comprendre" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Poursuivre"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-rats', label: 'Dératisation rats', note: 'Les bases' },
+      { href: '/traitement-rats', label: 'Traitement contre les rats', note: 'Méthodes' },
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Parties communes' },
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Établir le périmètre' },
+      { href: '/infestation-souris', label: 'Infestation de souris', note: 'Autre espèce' },
+      { href: '/blog/rats-dans-une-copropriete-qui-doit-intervenir', label: 'Qui doit intervenir en copropriété', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Plusieurs zones touchées ? Ne traitez pas pièce par pièce"
+    text="Une infestation se traite sur son périmètre complet. Décrivez-nous les zones concernées et l’ancienneté des indices."
+    eyebrow="Plan d’action"
+    variant="petrol"
+  />
+</BaseLayout>

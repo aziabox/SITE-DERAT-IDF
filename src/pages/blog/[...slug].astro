@@ -1,0 +1,263 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { CATEGORIES, type Category } from '../../content.config';
+import { articleSchema, faqSchema } from '../../lib/seo';
+import { site, telHref } from '../../data/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+
+  const categoryPaths = Object.values(CATEGORIES).map((c) => ({
+    params: { slug: c.slug },
+    props: {
+      kind: 'category' as const,
+      category: c,
+      posts: posts
+        .filter((p) => p.data.category === c.slug)
+        .sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime()),
+    },
+  }));
+
+  const postPaths = posts.map((post) => ({
+    params: { slug: post.id },
+    props: { kind: 'post' as const, post, all: posts },
+  }));
+
+  return [...categoryPaths, ...postPaths];
+}
+
+type Props =
+  | { kind: 'category'; category: Category; posts: CollectionEntry<'blog'>[] }
+  | { kind: 'post'; post: CollectionEntry<'blog'>; all: CollectionEntry<'blog'>[] };
+
+const props = Astro.props as Props;
+const origin = Astro.site?.origin ?? '';
+const dateFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+let rendered: Awaited<ReturnType<typeof render>> | null = null;
+if (props.kind === 'post') rendered = await render(props.post);
+const Content = rendered?.Content;
+
+const catCrumbs =
+  props.kind === 'category'
+    ? [
+        { label: 'Accueil', href: '/' },
+        { label: 'Blog', href: '/blog' },
+        { label: props.category.label, href: `/blog/${props.category.slug}` },
+      ]
+    : [];
+
+const postCrumbs =
+  props.kind === 'post'
+    ? [
+        { label: 'Accueil', href: '/' },
+        { label: 'Blog', href: '/blog' },
+        { label: CATEGORIES[props.post.data.category].label, href: `/blog/${props.post.data.category}` },
+        { label: props.post.data.title, href: `/blog/${props.post.id}` },
+      ]
+    : [];
+
+let postSchema: unknown[] = [];
+let related: CollectionEntry<'blog'>[] = [];
+if (props.kind === 'post') {
+  const d = props.post.data;
+  const url = new URL(`/blog/${props.post.id}`, origin).href;
+  postSchema = [
+    articleSchema({
+      origin,
+      url,
+      headline: d.title,
+      description: d.description,
+      datePublished: d.datePublished.toISOString(),
+      dateModified: (d.dateModified ?? d.datePublished).toISOString(),
+      author: d.author,
+      section: CATEGORIES[d.category].label,
+    }),
+  ];
+  if (d.faq?.length) postSchema.push(faqSchema(d.faq, url));
+
+  const explicit = props.all.filter((p) => d.related.includes(p.id));
+  const sameCat = props.all.filter(
+    (p) => p.id !== props.post.id && p.data.category === d.category && !d.related.includes(p.id)
+  );
+  related = [...explicit, ...sameCat].slice(0, 4);
+}
+---
+{props.kind === 'category' && (
+  <BaseLayout
+    title={`${props.category.title} : guides et conseils | Blog`}
+    description={props.category.intro}
+    crumbs={catCrumbs}
+  >
+    <PageHero
+      eyebrow={`Blog • ${props.category.label}`}
+      title={props.category.title}
+      lede={props.category.intro}
+      primaryLabel="Décrire mon problème"
+      showPhone={false}
+      meta={[`${props.posts.length} article${props.posts.length > 1 ? 's' : ''}`]}
+    />
+
+    <section class="section">
+      <div class="wrap">
+        <div class="split split--wide-left" style="margin-bottom:3rem">
+          <div class="prose">
+            {props.category.body.map((para) => <p>{para}</p>)}
+          </div>
+          <aside class="aside-card">
+            <h2 style="font-size:var(--step-1)">Passer à l’action</h2>
+            <p>Un article donne le cadre. Un diagnostic dit ce qui se passe chez vous.</p>
+            <ul>
+              <li><a href="/deratisation">Le service de dératisation</a></li>
+              <li><a href="/inspection-rongeurs">Faire identifier les traces</a></li>
+              <li><a href="/zones-intervention">Zones d’intervention</a></li>
+              <li><a href="/contact">Décrire ma situation</a></li>
+            </ul>
+          </aside>
+        </div>
+
+        <p class="eyebrow">Autres catégories</p>
+        <ul class="chips" style="margin-bottom:3rem">
+          {Object.values(CATEGORIES).map((c) => (
+            <li>
+              <a href={`/blog/${c.slug}`} aria-current={c.slug === props.category.slug ? 'page' : undefined}>
+                {c.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <ul class="post-list">
+          {props.posts.map((p) => (
+            <li>
+              <article>
+                <p class="post-list__meta">
+                  <b>{CATEGORIES[p.data.category].label}</b>
+                  {dateFmt.format(p.data.datePublished)} · {p.data.readingTime} min
+                </p>
+                <div>
+                  <h2 style="font-size:var(--step-2);margin:0">
+                    <a href={`/blog/${p.id}`} style="text-decoration:none;color:var(--ink-900)">{p.data.title}</a>
+                  </h2>
+                  <p style="margin:0.4rem 0 0;color:var(--grey-600)">{p.data.description}</p>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <CtaBand
+      title="Besoin d’un avis sur votre situation précise ?"
+      text="Un article donne le cadre général. Un diagnostic dit ce qui se passe réellement chez vous."
+      eyebrow="Contact"
+    />
+  </BaseLayout>
+)}
+
+{props.kind === 'post' && Content && (
+  <BaseLayout
+    title={props.post.data.metaTitle ?? props.post.data.title}
+    description={props.post.data.description}
+    crumbs={postCrumbs}
+    schema={postSchema}
+    ogType="article"
+    datePublished={props.post.data.datePublished.toISOString()}
+    dateModified={(props.post.data.dateModified ?? props.post.data.datePublished).toISOString()}
+  >
+    <article>
+      <header class="wrap wrap--narrow article-head">
+        <p class="eyebrow">
+          <a href={`/blog/${props.post.data.category}`} style="color:inherit;text-decoration:none">
+            {CATEGORIES[props.post.data.category].label}
+          </a>
+        </p>
+        <h1>{props.post.data.title}</h1>
+        <p class="lede" style="margin-top:1.25rem">{props.post.data.description}</p>
+      </header>
+
+      <div class="wrap wrap--narrow" style="padding-top:2rem">
+        <p class="article-meta">
+          <span>Par {props.post.data.author}</span>
+          <span>
+            Publié le <time datetime={props.post.data.datePublished.toISOString()}>
+              {dateFmt.format(props.post.data.datePublished)}
+            </time>
+          </span>
+          {props.post.data.dateModified && (
+            <span>
+              Mis à jour le <time datetime={props.post.data.dateModified.toISOString()}>
+                {dateFmt.format(props.post.data.dateModified)}
+              </time>
+            </span>
+          )}
+          <span>{props.post.data.readingTime} min de lecture</span>
+        </p>
+
+        <div class="answer">
+          <p class="eyebrow">Réponse courte</p>
+          <p>{props.post.data.answer}</p>
+        </div>
+
+        <div class="article-body">
+          <Content />
+        </div>
+
+        {props.post.data.faq && props.post.data.faq.length > 0 && (
+          <section style="margin-top:clamp(2.5rem,6vw,4rem)">
+            <h2 style="font-size:var(--step-3)">Questions fréquentes</h2>
+            <div class="faq">
+              {props.post.data.faq.map((f) => (
+                <details>
+                  <summary>{f.q}</summary>
+                  <div class="faq__body"><p>{f.a}</p></div>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {props.post.data.relatedPages.length > 0 && (
+          <aside class="aside-card" style="margin-top:clamp(2.5rem,6vw,3.5rem)">
+            <h2 style="font-size:var(--step-1)">Pages liées</h2>
+            <p>Pour passer de l’information à l’intervention.</p>
+            <ul>
+              {props.post.data.relatedPages.map((r) => (
+                <li><a href={r.href}>{r.label}</a></li>
+              ))}
+            </ul>
+            <p style="margin-top:1.25rem">
+              <a class="btn btn--amber" href="/contact" style="width:100%">Décrire ma situation</a>
+            </p>
+            <p style="margin-top:0.75rem;text-align:center;font-size:0.95rem">
+              ou appeler le <a href={telHref}>{site.phoneDisplay}</a>
+            </p>
+          </aside>
+        )}
+      </div>
+    </article>
+
+    {related.length > 0 && (
+      <RelatedLinks
+        title="Dans la même thématique"
+        eyebrow="À lire ensuite"
+        items={related.map((p) => ({
+          href: `/blog/${p.id}`,
+          label: p.data.title,
+          note: `${p.data.readingTime} min`,
+        }))}
+      />
+    )}
+
+    <CtaBand
+      title="Cet article décrit le cas général. Le vôtre est peut-être différent"
+      text="Décrivez ce que vous avez constaté : espèce, zone, ancienneté. Nous vous disons ce que cela implique."
+      eyebrow="Passer à l’action"
+    />
+  </BaseLayout>
+)}

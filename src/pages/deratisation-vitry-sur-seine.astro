@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-vitry-sur-seine', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Val-de-Marne', href: '/zones-intervention/val-de-marne' },
+  { label: 'Vitry-sur-Seine', href: '/deratisation-vitry-sur-seine' },
+];
+
+const faq = [
+  {
+    q: 'Les anciennes emprises industrielles influencent-elles la situation ?',
+    a: 'Indirectement, par les travaux. Les opérations de reconversion impliquent terrassements et démolitions, qui détruisent les abris souterrains et provoquent un report des populations vers les bâtiments voisins. Une apparition soudaine d’indices dans un immeuble sans historique s’explique souvent ainsi.',
+  },
+  {
+    q: 'Que vérifier en priorité dans une résidence collective de la commune ?',
+    a: 'Trois points : l’état du local déchets (bas de porte, bacs, propreté du sol), les ventilations de vide sanitaire, et le stockage au sol dans les caves. Ces trois éléments expliquent l’essentiel des situations rencontrées dans ce type de bâtiment.',
+  },
+  {
+    q: 'Les bords de Seine demandent-ils des précautions supplémentaires ?',
+    a: 'Ils rendent la fermeture du pied de bâtiment plus déterminante. Les berges offrent au rat brun un accès permanent à l’eau et un sol où creuser. Soupiraux, regards, traversées de réseaux et absence de dépôt au sol deviennent les points décisifs pour un bâtiment riverain.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Vitry-sur-Seine',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Vitry-sur-Seine : résidences collectives, anciennes emprises industrielles et bords de Seine.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Vitry-sur-Seine (94400) : rats et souris"
+  description="Dératisation à Vitry-sur-Seine : résidences collectives, anciennes emprises industrielles en reconversion et bords de Seine. Diagnostic et obturation."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Vitry-sur-Seine • 94400"
+    title="Dératisation à Vitry-sur-Seine"
+    lede="Vitry-sur-Seine change vite : anciennes emprises industrielles en reconversion, résidences collectives étendues, longues berges de Seine. Dans une commune en travaux, l’obturation compte souvent davantage que le traitement."
+    primaryLabel="Décrire ma résidence"
+    meta={['Val-de-Marne (94)', 'Collectif étendu', 'Bords de Seine']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Une commune en reconversion</h2>
+      <p>
+        Le territoire porte l’héritage d’une longue activité industrielle le
+        long de la Seine, aujourd’hui largement reconvertie ou en cours de
+        transformation. Ces opérations impliquent terrassements, démolitions et
+        reprises de réseaux.
+      </p>
+      <p>
+        L’effet sur les rongeurs est mécanique : les abris souterrains
+        disparaissent, les populations se reportent vers les bâtiments voisins.
+        C’est pourquoi, dans les secteurs concernés, nous commençons par
+        vérifier et fermer l’enveloppe du bâtiment avant d’engager tout
+        traitement intérieur.
+      </p>
+
+      <h2>Les résidences collectives</h2>
+      <p>
+        Le parc collectif de la commune présente la configuration classique :
+        vide sanitaire, gaines verticales, caves, locaux déchets en pied
+        d’immeuble. Trois points expliquent l’essentiel des situations que nous
+        y rencontrons.
+      </p>
+      <ol class="steps" style="margin-top:1.5rem">
+        <li>
+          <h3>Le local déchets</h3>
+          <p>
+            Bas de porte usé, bacs sans couvercle, sacs déposés au sol : c’est
+            la ressource principale, et souvent la seule à corriger pour
+            changer la situation.
+          </p>
+        </li>
+        <li>
+          <h3>Les ventilations de vide sanitaire</h3>
+          <p>
+            Grilles absentes, déformées ou à maille trop large. Un grillage
+            métallique fixé règle ce point durablement.
+          </p>
+        </li>
+        <li>
+          <h3>Le stockage au sol en cave</h3>
+          <p>
+            Cartons et objets posés à même le sol créent des abris et masquent
+            les indices. Leur suppression change la lisibilité du sous-sol.
+          </p>
+        </li>
+      </ol>
+
+      <h2>Les bords de Seine</h2>
+      <p>
+        Les berges offrent eau et terrain meuble. Pour un bâtiment riverain, la
+        priorité porte sur le pied de bâtiment : soupiraux, regards, traversées
+        de réseaux, et gestion des déchets côté extérieur.
+      </p>
+
+      <h2>Prévention à Vitry-sur-Seine</h2>
+      <ul class="ticks">
+        <li>Fermer et tenir le local déchets.</li>
+        <li>Grillager toutes les ventilations basses.</li>
+        <li>Supprimer le stockage au sol dans les caves.</li>
+        <li>Obturer l’enveloppe en priorité si un chantier est proche.</li>
+        <li>Sceller les regards côté berges et espaces extérieurs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Vitry-sur-Seine : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/zones-intervention/val-de-marne', label: 'Val-de-Marne', note: 'Page départementale' },
+      { href: '/deratisation-creteil', label: 'Créteil', note: 'Commune voisine' },
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Local déchets et caves' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Obturation de l’enveloppe' },
+    ]}
+  />
+
+  <CtaBand
+    title="Travaux à proximité ? Fermez le bâtiment d’abord"
+    text="Dans un secteur en chantier, l’obturation évite qu’une population déplacée ne trouve chez vous un abri de remplacement."
+    eyebrow="Vitry-sur-Seine"
+    variant="petrol"
+  />
+</BaseLayout>

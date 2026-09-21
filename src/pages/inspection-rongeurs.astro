@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/inspection-rongeurs', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Inspection', href: '/inspection-rongeurs' },
+];
+
+const faq = [
+  {
+    q: 'Comment trouver le point d’entrée des rongeurs ?',
+    a: 'En partant des indices, pas du bâtiment. On remonte les trajets à partir des crottes et des coulées grasses, qui indiquent les parois longées, puis on inspecte systématiquement les traversées techniques situées sur ces trajets : canalisations, gaines, fourreaux, seuils, ventilations. Le point d’entrée se trouve presque toujours à l’intersection d’un trajet et d’une discontinuité du bâti.',
+  },
+  {
+    q: 'Une inspection peut-elle être réalisée sans traitement ?',
+    a: 'Oui. Elle a du sens dans trois cas : un doute sur la nature de ce qui a été entendu ou vu, un bâtiment à sécuriser avant une ouverture ou une livraison, ou un contrôle après un traitement réalisé par un tiers. L’inspection produit un constat et une liste de points à traiter, que vous restez libre de faire exécuter par qui vous voulez.',
+  },
+  {
+    q: 'Faut-il ouvrir les cloisons pour trouver les passages ?',
+    a: 'Rarement. La très grande majorité des accès se situe sur des ouvertures existantes : traversées de réseaux, jours sous les portes, grilles détériorées, joints ouverts. Des investigations plus poussées (dépose d’une trappe, ouverture d’un coffrage) ne sont proposées que lorsque les indices convergent vers un volume fermé précis.',
+  },
+  {
+    q: 'Que contient le constat remis après inspection ?',
+    a: 'L’espèce identifiée ou l’hypothèse la plus probable, les zones concernées, l’ancienneté estimée de la présence, la liste des points d’entrée relevés avec leur localisation, les ressources disponibles constatées et les actions recommandées par ordre de priorité.',
+  },
+  {
+    q: 'Et si l’inspection ne trouve rien ?',
+    a: 'C’est un résultat utile. Il oriente vers d’autres explications : dilatation de matériaux, oiseaux sous toiture, circulation d’eau dans une canalisation, présence chez un voisin sans passage vers chez vous. Nous le disons clairement plutôt que de proposer un traitement sans objet.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Inspection et recherche des points d’entrée',
+    serviceType: 'Diagnostic rongeurs',
+    description:
+      'Inspection technique d’un bâtiment pour identifier l’espèce en cause, les circulations, les points d’entrée et les ressources disponibles.',
+  }),
+];
+---
+<BaseLayout
+  title="Inspection rongeurs : trouver les points d’entrée"
+  description="Inspection technique pour identifier l’espèce, les circulations et les points d’entrée des rats et souris. Constat détaillé et priorités d’action, en Île-de-France."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Diagnostic"
+    title="Inspection et recherche des points d’entrée"
+    lede="C’est l’étape qui décide de tout le reste. Tant qu’on ne sait pas par où ils entrent, on traite un symptôme. L’inspection remonte les trajets réels des rongeurs jusqu’aux ouvertures qui leur ont donné accès au bâtiment."
+    primaryLabel="Demander une inspection"
+    meta={['Identification de l’espèce', 'Relevé des accès', 'Constat écrit']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <div class="answer">
+            <p class="eyebrow">Réponse directe</p>
+            <p>
+              Pour trouver un point d’entrée, on ne fouille pas le bâtiment au
+              hasard&nbsp;: on part des indices. Les crottes et les coulées grasses
+              indiquent les parois longées&nbsp;; on inspecte ensuite chaque
+              discontinuité technique située sur ces trajets.
+            </p>
+            <p>
+              Dans la pratique, plus de neuf accès sur dix se trouvent sur une
+              traversée de réseau, une ventilation, un seuil ou un joint.
+            </p>
+          </div>
+
+          <h2>Pourquoi l’inspection passe avant le traitement</h2>
+          <p>
+            Un traitement posé sans inspection repose sur une hypothèse : que les
+            dispositifs se trouvent sur les trajets empruntés. Comme les rongeurs
+            longent les parois et évitent les espaces ouverts, cette hypothèse est
+            fausse la plupart du temps.
+          </p>
+          <p>
+            L’inspection transforme cette hypothèse en constat. Elle répond à
+            quatre questions dans l’ordre : quelle espèce, quels trajets, quels
+            accès, quelles ressources.
+          </p>
+
+          <h2>Comment se déroule l’inspection</h2>
+          <ol class="steps" style="margin-top:1.5rem">
+            <li>
+              <h3>Recueil de ce que vous avez observé</h3>
+              <p>
+                Nature des indices, dates, heures, pièces concernées, travaux
+                récents, historique éventuel. Cette étape oriente déjà fortement
+                la recherche.
+              </p>
+            </li>
+            <li>
+              <h3>Relevé des indices sur place</h3>
+              <p>
+                Déjections et leur fraîcheur, coulées grasses, grignotages,
+                empreintes, nids, odeur. On distingue systématiquement les traces
+                anciennes des traces actives.
+              </p>
+            </li>
+            <li>
+              <h3>Reconstitution des trajets</h3>
+              <p>
+                Les indices sont reliés entre eux pour dessiner les circulations.
+                Un trajet remonte presque toujours vers une zone d’abri d’un côté
+                et un accès de l’autre.
+              </p>
+            </li>
+            <li>
+              <h3>Inspection des discontinuités</h3>
+              <p>
+                Sur chaque trajet : traversées de canalisation, fourreaux,
+                gaines, grilles de ventilation, seuils, joints de dilatation,
+                trappes, regards.
+              </p>
+            </li>
+            <li>
+              <h3>Recensement des ressources</h3>
+              <p>
+                Nourriture accessible, points d’eau, abris. Sans cette partie,
+                le constat est incomplet : un accès fermé ne suffit pas si le
+                site reste attractif.
+              </p>
+            </li>
+            <li>
+              <h3>Constat et priorités</h3>
+              <p>
+                Document remis avec la localisation de chaque point relevé et
+                l’ordre dans lequel les traiter.
+              </p>
+            </li>
+          </ol>
+
+          <h2>Les accès les plus fréquemment trouvés</h2>
+          <p>
+            En Île-de-France, la typologie du bâti oriente fortement la nature
+            des accès.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <caption>Accès typiques selon la configuration du bâtiment.</caption>
+              <thead>
+                <tr><th scope="col">Bâtiment</th><th scope="col">Accès fréquemment relevés</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Immeuble ancien</th><td>Soupiraux détériorés, caves communicantes, traversées en pied de colonne, trous en cour</td></tr>
+                <tr><th scope="row">Résidence collective</th><td>Vide sanitaire ouvert, gaines verticales, local déchets, joints de dilatation</td></tr>
+                <tr><th scope="row">Pavillon</th><td>Ventilation de vide sanitaire, about de toiture, passage de conduit, garage</td></tr>
+                <tr><th scope="row">Local commercial</th><td>Bas de rideau, réserve sur rue, traversée de plonge, trappe de livraison</td></tr>
+                <tr><th scope="row">Entrepôt</th><td>Quais, portes sectionnelles, gaines techniques, façade en bardage</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Ce que l’inspection permet d’éviter</h2>
+          <p>
+            Deux dépenses inutiles, surtout. La première : un traitement répété
+            trois ou quatre fois faute d’avoir fermé l’accès. La seconde : des
+            travaux entrepris au mauvais endroit, parce qu’un passage supposé
+            avait été identifié à l’œil sans vérification.
+          </p>
+          <div class="keyline">
+            <p>
+              Un constat écrit sert aussi à trancher une discussion : entre un
+              locataire et un bailleur, entre un copropriétaire et un syndic,
+              ou dans un dossier de plan de maîtrise sanitaire.
+            </p>
+          </div>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Quand demander une inspection seule</h3>
+          <p>Sans traitement immédiat.</p>
+          <ul>
+            <li><a href="/contact">Bruits sans indice visible</a></li>
+            <li><a href="/prevention-rongeurs">Avant l’ouverture d’un local</a></li>
+            <li><a href="/deratisation-coproprietes">Litige locataire / bailleur</a></li>
+            <li><a href="/traitement-rats">Après un traitement sans effet</a></li>
+            <li><a href="/deratisation-restaurants">Avant un contrôle sanitaire</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Inspection : questions fréquentes" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Suite logique"
+    eyebrow="Maillage"
+    items={[
+      { href: '/prevention-rongeurs', label: 'Prévention et sécurisation', note: 'Fermer ce qui a été trouvé' },
+      { href: '/traitement-rats', label: 'Traitement contre les rats', note: 'Si la présence est confirmée' },
+      { href: '/traitement-souris', label: 'Traitement contre les souris', note: 'Si la présence est confirmée' },
+      { href: '/deratisation', label: 'Dératisation', note: 'Le service complet' },
+      { href: '/blog/comment-identifier-un-passage-de-rat', label: 'Identifier un passage de rat', note: 'Guide' },
+      { href: '/blog/comment-securiser-les-points-dentree', label: 'Sécuriser les points d’entrée', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Un doute sur l’origine des bruits ? Commencez par l’inspection"
+    text="Elle tranche entre rongeur, oiseau, réseau ou dilatation — et évite un traitement qui n’aurait rien à traiter."
+    eyebrow="Avant tout"
+  />
+</BaseLayout>

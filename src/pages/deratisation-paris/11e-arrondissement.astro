@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { serviceSchema } from '../../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-paris/11e-arrondissement', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Paris', href: '/deratisation-paris' },
+  { label: '11e arrondissement', href: '/deratisation-paris/11e-arrondissement' },
+];
+
+const faq = [
+  {
+    q: 'Pourquoi les cours et passages du 11e posent-ils problème ?',
+    a: 'Parce qu’ils créent des continuités entre parcelles. L’arrondissement conserve de nombreuses cours d’anciens ateliers, passages et impasses où les bâtiments s’enchaînent sans rupture nette. Une population installée dans l’un peut circuler jusqu’aux suivants sans jamais passer par la rue.',
+  },
+  {
+    q: 'La densité de bars et restaurants change-t-elle la donne ?',
+    a: 'Oui, par le volume et la temporalité des déchets. Dans les secteurs de vie nocturne, la production se concentre tard et les bacs restent parfois pleins jusqu’au matin. C’est une ressource régulière, à horaire fixe — exactement ce qui fixe une population sur un secteur.',
+  },
+  {
+    q: 'Les immeubles anciens du 11e favorisent-ils les souris ?',
+    a: 'Le bâti ancien avec planchers bois, doublages et cloisons légères offre effectivement de nombreux cheminements intérieurs. La souris y circule verticalement entre étages sans passer par les parties communes, ce qui explique des indices signalés à des niveaux très différents dans un même immeuble.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation Paris 11e arrondissement',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris dans le 11e arrondissement de Paris : cours d’anciens ateliers, habitat ancien dense, bars et restaurants.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Paris 11e : cours, ateliers, habitat ancien"
+  description="Dératisation dans le 11e arrondissement de Paris : cours et passages d’anciens ateliers, habitat ancien dense, bars et restaurants. Périmètre et prévention."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Paris 11e • 75011"
+    title="Dératisation Paris 11e : un tissu continu, sans rupture"
+    lede="Le 11e est l’un des arrondissements les plus denses de Paris, avec un parc ancien, des cours d’anciens ateliers et très peu d’espaces ouverts. Cette continuité du bâti explique l’essentiel des situations que nous y rencontrons."
+    primaryLabel="Décrire mon immeuble"
+    meta={['Cours et passages', 'Habitat ancien', 'Vie nocturne dense']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <h2>Le contexte urbain</h2>
+          <p>
+            Historiquement arrondissement d’artisanat et de petite industrie, le
+            11e conserve un tissu caractéristique : immeubles de rapport,
+            cours intérieures profondes, anciens ateliers reconvertis en
+            logements ou en bureaux, passages et impasses. S’y ajoute, autour
+            d’Oberkampf et de Bastille, une concentration importante de bars et
+            de restaurants.
+          </p>
+          <p>
+            Deux traits en découlent. D’abord, la continuité : les parcelles
+            s’enchaînent, les cours communiquent, les sous-sols aussi. Ensuite,
+            la densité : peu d’espaces ouverts, donc peu de ruptures dans les
+            cheminements possibles.
+          </p>
+
+          <h2>Ce que nous y rencontrons le plus</h2>
+
+          <h3>Des périmètres qui dépassent l’immeuble</h3>
+          <p>
+            Dans un arrondissement aussi continu, la question du périmètre est
+            centrale. Une cour d’ancien atelier peut desservir plusieurs
+            bâtiments, avec des caves, des locaux techniques et des annexes
+            reliés entre eux. L’inspection commence donc par cartographier ces
+            communications.
+          </p>
+
+          <h3>Des circulations verticales intérieures</h3>
+          <p>
+            Le bâti ancien — planchers bois, doublages, cloisons légères,
+            gaines anciennes — offre à la souris domestique de nombreux
+            cheminements entre étages. C’est la raison pour laquelle des indices
+            peuvent apparaître au quatrième étage sans qu’aucun occupant du
+            rez-de-chaussée n’ait rien signalé.
+          </p>
+          <p>
+            Ce mécanisme est détaillé sur la page
+            <a href="/deratisation-souris">dératisation souris</a>.
+          </p>
+
+          <h3>Une ressource nocturne régulière</h3>
+          <p>
+            Dans les secteurs de vie nocturne, la production de déchets se
+            concentre en fin de soirée et de nuit. Les bacs restent parfois
+            remplis jusqu’au matin, à horaire quasi fixe. Cette régularité est
+            précisément ce qui fixe une population sur un secteur.
+          </p>
+
+          <h2>Comment nous intervenons</h2>
+          <p>
+            La séquence typique dans le 11e : cartographier les communications
+            entre cours, caves et annexes ; traiter le local déchets et les
+            zones de dépôt ; couvrir les volumes intérieurs si des indices de
+            souris existent aux étages ; puis obturer, en priorité les
+            soupiraux, trappes et traversées.
+          </p>
+
+          <h2>Prévention dans le 11e</h2>
+          <ul class="ticks">
+            <li>Cloisonner les passages de cave devenus inutiles entre bâtiments.</li>
+            <li>Fermer les locaux déchets et imposer des horaires de sortie stricts.</li>
+            <li>Grillager soupiraux et ventilations donnant sur cour.</li>
+            <li>Supprimer le stockage au sol dans les caves et les annexes d’atelier.</li>
+            <li>Obturer les traversées de réseaux dans les logements anciens, sous évier en particulier.</li>
+          </ul>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Selon votre rôle</h3>
+          <p>Le bon point d’entrée.</p>
+          <ul>
+            <li><a href="/deratisation-coproprietes">Syndic ou conseil syndical</a></li>
+            <li><a href="/deratisation-particuliers">Occupant</a></li>
+            <li><a href="/deratisation-restaurants">Bar ou restaurant</a></li>
+            <li><a href="/deratisation-paris">Paris, vue d’ensemble</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Paris 11e : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-souris', label: 'Dératisation souris', note: 'Circulations verticales' },
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Cours et caves' },
+      { href: '/deratisation-paris/1er-arrondissement', label: 'Paris 1er', note: 'Restauration dense' },
+      { href: '/blog/rats-dans-les-murs-comment-savoir', label: 'Bruits dans les murs', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Votre cour dessert-elle plusieurs bâtiments ?"
+    text="Dans le 11e, c’est souvent la réponse à cette question qui détermine l’étendue réelle du problème."
+    eyebrow="Paris 11e"
+  />
+</BaseLayout>

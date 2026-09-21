@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { navServices, navClients } from '../data/nav';
+import { site, telHref } from '../data/site';
+---
+<BaseLayout
+  title="Page introuvable (404) — Dératisation Île-de-France"
+  description="Cette page n’existe pas ou a été déplacée. Retrouvez nos pages d’intervention, nos zones et notre blog."
+  noindex={true}
+>
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <p class="eyebrow eyebrow--light">Erreur 404</p>
+      <h1 style="font-size:var(--step-4)">Cette page n’existe pas</h1>
+      <p class="lede">
+        L’adresse est peut-être incorrecte, ou la page a été déplacée.
+        Voici les points d’entrée les plus utiles.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--amber" href="/deratisation">Le service de dératisation</a>
+        <a class="btn btn--outline-light" href={telHref}>Appeler · {site.phoneDisplay}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cols cols--2">
+        <div>
+          <p class="eyebrow">Interventions</p>
+          <ul class="links-grid" style="grid-template-columns:1fr">
+            {navServices.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <p class="eyebrow">Qui nous appelle</p>
+          <ul class="links-grid" style="grid-template-columns:1fr">
+            {navClients.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+            <li><a href="/zones-intervention">Zones d’intervention</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/plan-du-site">Plan du site</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

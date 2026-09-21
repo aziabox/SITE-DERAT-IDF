@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getDepartement, villesOf } from '../../data/idf';
+import { serviceSchema } from '../../lib/seo';
+
+const dep = getDepartement('val-doise')!;
+const villes = villesOf(dep.slug);
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/zones-intervention/val-doise', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Val-d’Oise', href: '/zones-intervention/val-doise' },
+];
+
+const faq = [
+  {
+    q: 'Le Val-d’Oise est-il plutôt concerné par les rats ou les souris ?',
+    a: 'Les deux, mais pas dans les mêmes contextes. Le rat brun se rencontre surtout dans les secteurs denses du sud du département, les sous-sols collectifs et les abords des cours d’eau. La souris domine dans le pavillonnaire et les combles. Sur les franges rurales, le mulot peut également s’inviter dans les dépendances à l’automne.',
+  },
+  {
+    q: 'Un mulot, est-ce la même chose qu’une souris ?',
+    a: 'Non. Le mulot est un rongeur des milieux extérieurs — champs, haies, jardins — qui entre occasionnellement dans les bâtiments à l’approche du froid, surtout dans les dépendances, garages et abris. Il ne s’installe pas durablement comme la souris domestique. La distinction change la réponse : pour un mulot, l’obturation et le dégagement des abords suffisent le plus souvent.',
+  },
+  {
+    q: 'Intervenez-vous sur les zones logistiques autour de Roissy ?',
+    a: 'Oui. Les plateformes logistiques et les sites liés à l’activité aéroportuaire présentent une exposition continue par les flux entrants. La démarche est la même que pour tout entrepôt : protection de l’enveloppe, discipline sur les déchets et les abords, et détection précoce par points de contrôle repérés.',
+  },
+  {
+    q: 'Les grands ensembles du département demandent-ils une approche particulière ?',
+    a: 'Oui, pour des raisons d’accès et de périmètre. Vide sanitaire continu, gaines verticales, locaux déchets multiples : le traitement doit couvrir l’ensemble du sous-sol et des communs, ce qui suppose une coordination avec le bailleur ou le syndic pour ouvrir les locaux techniques et les caves.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation dans le Val-d’Oise (95)',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris dans le Val-d’Oise : habitat collectif, pavillonnaire, centres anciens, zones logistiques et franges rurales.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Val-d’Oise (95) : rats, souris et mulots"
+  description="Dératisation dans le Val-d’Oise : collectif, pavillonnaire, centres anciens et zones logistiques. Contexte local, mulots en frange rurale, communes couvertes."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Val-d’Oise • 95"
+    title="Dératisation dans le Val-d’Oise"
+    lede="Le Val-d’Oise change de nature du sud au nord : dense et continu aux portes de Paris, pavillonnaire dans les vallées, puis nettement plus ouvert vers la plaine. Cette gradation se lit directement dans la nature des interventions."
+    primaryLabel="Décrire ma commune"
+    meta={[`Préfecture : ${dep.prefecture}`, 'Grande couronne', `${dep.communes.length}+ communes couvertes`]}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Du sud dense au nord ouvert</h2>
+      <p>
+        Le sud du département — Argenteuil, Bezons, Sarcelles,
+        Garges-lès-Gonesse, Villiers-le-Bel — s’inscrit dans la continuité de la
+        petite couronne : habitat collectif dense, sous-sols étendus, locaux
+        déchets nombreux, commerces en pied d’immeuble.
+      </p>
+      <p>
+        Les vallées de Montmorency et de l’Oise présentent un profil différent :
+        centres anciens, pavillonnaire installé, jardins arborés, sous-sols
+        individuels. Plus au nord et à l’est, vers la plaine et les abords des
+        zones d’activité, l’habitat s’espace et les abords extérieurs prennent le
+        pas sur le bâti lui-même.
+      </p>
+
+      <h2>Le pavillonnaire : l’enveloppe avant tout</h2>
+      <p>
+        Dans une maison individuelle, la quasi-totalité des entrées se situe sur
+        quelques points récurrents. Les identifier vaut mieux que n’importe quel
+        traitement.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>Points d’entrée typiques d’une maison individuelle.</caption>
+          <thead>
+            <tr><th scope="col">Point</th><th scope="col">Espèce concernée</th><th scope="col">Fermeture adaptée</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Ventilation de vide sanitaire</th><td>Rat brun</td><td>Grillage métallique fin fixé</td></tr>
+            <tr><th scope="row">Jeu sous porte de garage</th><td>Les deux</td><td>Bas de porte métallique</td></tr>
+            <tr><th scope="row">About de toiture, rive</th><td>Souris</td><td>Obturation rigide, peigne de rive</td></tr>
+            <tr><th scope="row">Traversée de réseaux</th><td>Les deux</td><td>Grillage + mortier</td></tr>
+            <tr><th scope="row">Regard, tampon non scellé</th><td>Rat brun</td><td>Scellement, tampon adapté</td></tr>
+            <tr><th scope="row">Abri de jardin, bûcher</th><td>Mulot, souris</td><td>Surélévation, dégagement</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Le cas du mulot</h2>
+      <p>
+        Sur les franges rurales et dans les secteurs bordés de champs, de haies
+        ou de friches, le mulot s’invite parfois dans les dépendances à
+        l’approche du froid. Il ne s’agit pas d’une infestation au sens où on
+        l’entend pour la souris domestique : le mulot vit dehors et n’entre que
+        temporairement.
+      </p>
+      <p>
+        La réponse est donc différente — obturation, surélévation des stockages,
+        dégagement des abords — et rarement un traitement lourd. Nous le
+        précisons parce que confondre les deux conduit à traiter longtemps un
+        problème qui se règle par quelques fermetures.
+      </p>
+
+      <h2>Les zones logistiques et d’activité</h2>
+      <p>
+        Le département accueille d’importantes activités logistiques,
+        notamment en lien avec la zone aéroportuaire de Roissy-en-France et les
+        axes routiers. Ces sites présentent une exposition continue : les
+        marchandises arrivent de l’extérieur, les quais restent ouverts, les
+        abords sont étendus.
+      </p>
+      <p>
+        La stratégie applicable est décrite sur la page
+        <a href="/deratisation-entreprises#entrepots">entrepôts et logistique</a> :
+        protéger l’enveloppe, tenir les abords, détecter tôt à l’intérieur.
+      </p>
+
+      <h2>Collectif et copropriétés</h2>
+      <p>
+        Dans les ensembles collectifs du sud du département, la difficulté est
+        celle de tous les grands ensembles franciliens : le périmètre. Vide
+        sanitaire continu, gaines verticales, caves, locaux déchets. Un
+        traitement limité à une cage d’escalier n’atteint pas la population.
+      </p>
+      <p>
+        Le déroulé adapté au collectif figure sur la page
+        <a href="/deratisation-coproprietes">copropriétés</a>.
+      </p>
+
+      <h2>Prévention prioritaire dans le 95</h2>
+      <ul class="ticks">
+        <li>Grillager systématiquement les ventilations de vide sanitaire.</li>
+        <li>Poser un bas de porte métallique sur les garages et les locaux déchets.</li>
+        <li>Surélever les stockages dans les dépendances et les abris.</li>
+        <li>Dégager la végétation en contact avec les façades.</li>
+        <li>Fermer les composteurs et éloigner le nourrissage extérieur d’animaux.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section band band--marked">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--light">Couverture</p>
+      <h2>Communes desservies dans le Val-d’Oise</h2>
+      <p class="lede" style="margin-bottom:1.75rem">
+        Liste non exhaustive — l’ensemble du département est couvert.
+      </p>
+      <ul class="inline-list">
+        {dep.communes.map((c) => <li>{c}</li>)}
+      </ul>
+      <div class="btn-row">
+        {villes.map((v) => (
+          <a class="btn btn--outline-light" href={`/deratisation-${v.slug}`}>{v.name}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Val-d’Oise : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Continuer"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-argenteuil', label: 'Argenteuil', note: 'Page communale' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Enveloppe et abords' },
+      { href: '/deratisation-particuliers', label: 'Particuliers', note: 'Pavillons et combles' },
+      { href: '/deratisation-entreprises', label: 'Logistique', note: 'Plateformes et entrepôts' },
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Trouver les accès' },
+      { href: '/zones-intervention', label: 'Toutes les zones', note: 'Île-de-France' },
+    ]}
+  />
+
+  <CtaBand
+    title="Maison, collectif ou site logistique : dites-nous lequel"
+    text="Dans le Val-d’Oise, le type de bâtiment détermine presque entièrement la méthode. C’est la première question que nous posons."
+    eyebrow="Val-d’Oise"
+    variant="petrol"
+  />
+</BaseLayout>

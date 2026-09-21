@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getDepartement, villesOf } from '../../data/idf';
+import { serviceSchema } from '../../lib/seo';
+
+const dep = getDepartement('seine-saint-denis')!;
+const villes = villesOf(dep.slug);
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/zones-intervention/seine-saint-denis', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Seine-Saint-Denis', href: '/zones-intervention/seine-saint-denis' },
+];
+
+const faq = [
+  {
+    q: 'Pourquoi les chantiers sont-ils un sujet en Seine-Saint-Denis ?',
+    a: 'Parce que le département connaît de nombreuses opérations d’aménagement et de transport. Un terrassement, un curage de réseau ou une démolition perturbe les populations de rongeurs installées et les pousse vers les bâtiments voisins. Une hausse d’indices qui coïncide avec l’ouverture d’un chantier à proximité s’explique presque toujours ainsi.',
+  },
+  {
+    q: 'Les grands ensembles se traitent-ils différemment ?',
+    a: 'Oui, sur deux points. Le périmètre d’abord : vide sanitaire continu, gaines verticales, locaux déchets multiples, parfois anciennes colonnes de vide-ordures condamnées. L’organisation ensuite : l’accès aux caves et aux locaux techniques doit être coordonné avec le bailleur ou le syndic, sans quoi le traitement reste partiel.',
+  },
+  {
+    q: 'Intervenez-vous pour les commerces de gros et les entrepôts ?',
+    a: 'Oui. Ce type de site pose un problème spécifique : la réintroduction permanente par les flux entrants. La stratégie consiste à protéger l’enveloppe (quais, portes, bardages, gaines) et à détecter tôt à l’intérieur, plutôt qu’à espérer une étanchéité totale impossible avec des livraisons quotidiennes.',
+  },
+  {
+    q: 'Les abords des canaux changent-ils quelque chose ?',
+    a: 'Les berges et les ouvrages hydrauliques offrent des abris et un accès permanent à l’eau, ce qui favorise l’installation de populations de rats bruns à proximité. Pour un bâtiment riverain, la prévention doit intégrer le périmètre extérieur : pied de façade, regards, stockage au sol, gestion des déchets côté rue.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation en Seine-Saint-Denis (93)',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris en Seine-Saint-Denis : habitat collectif, centres anciens, entrepôts, commerce de gros et abords de canaux.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Seine-Saint-Denis (93) : rats et souris"
+  description="Dératisation en Seine-Saint-Denis : grands ensembles, habitat ancien, entrepôts et abords de canaux. Contexte local, zones à risque et communes couvertes."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Seine-Saint-Denis • 93"
+    title="Dératisation en Seine-Saint-Denis"
+    lede="Le 93 juxtapose des centres anciens très denses, de grands ensembles étendus, des zones d’entrepôts et un réseau de canaux. Trois contextes qui ne se traitent pas de la même façon — et qui se retrouvent parfois dans un rayon de cinq cents mètres."
+    primaryLabel="Décrire ma situation"
+    meta={[`Préfecture : ${dep.prefecture}`, 'Petite couronne', `${dep.communes.length}+ communes couvertes`]}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Quatre contextes, quatre approches</h2>
+
+      <h3>Les centres anciens</h3>
+      <p>
+        Saint-Denis, Montreuil, Pantin, Bagnolet ou Saint-Ouen-sur-Seine
+        conservent un tissu ancien avec cours, caves voûtées, ateliers et
+        mitoyennetés serrées. La difficulté est la continuité souterraine : les
+        caves communiquent souvent entre immeubles, parfois sans qu’aucun
+        occupant en ait connaissance.
+      </p>
+      <p>
+        Dans ces secteurs, la question « faut-il traiter l’immeuble ou le
+        logement ? » a presque toujours la même réponse : l’immeuble, et parfois
+        plus. C’est l’objet de la page
+        <a href="/deratisation-coproprietes">copropriétés</a>.
+      </p>
+
+      <h3>Les grands ensembles</h3>
+      <p>
+        Construits majoritairement entre les années 1950 et 1980, ils partagent
+        des caractéristiques précises : vide sanitaire continu sous les barres,
+        gaines techniques verticales, locaux déchets en pied d’immeuble,
+        anciennes colonnes de vide-ordures parfois condamnées sans être
+        obturées, dalles piétonnes avec volumes techniques dessous.
+      </p>
+      <p>
+        L’intervention y est autant logistique que technique : il faut pouvoir
+        accéder aux caves, aux locaux techniques et au vide sanitaire, ce qui
+        suppose une coordination avec le bailleur ou le syndic.
+      </p>
+
+      <h3>Les entrepôts et le commerce de gros</h3>
+      <p>
+        Le département accueille de nombreuses activités de stockage et de
+        négoce, notamment autour d’Aubervilliers et de La Courneuve. Ces sites
+        cumulent les facteurs d’exposition : flux entrants quotidiens, quais
+        ouverts, stockage au sol, déchets d’emballage en volume.
+      </p>
+      <p>
+        La protection s’organise par couches — abords, enveloppe, intérieur —
+        comme décrit sur la page
+        <a href="/deratisation-entreprises#entrepots">entreprises et entrepôts</a>.
+      </p>
+
+      <h3>Les abords de canaux et de la Seine</h3>
+      <p>
+        Le canal Saint-Denis, le canal de l’Ourcq et les berges offrent un
+        accès permanent à l’eau, des abris en pleine terre et des végétations
+        denses. Pour les bâtiments riverains, la prévention doit inclure le
+        périmètre extérieur, pas seulement l’enveloppe.
+      </p>
+
+      <h2>L’effet des chantiers</h2>
+      <p>
+        La Seine-Saint-Denis connaît un volume important d’opérations
+        d’aménagement et d’infrastructures de transport. Ces travaux ont une
+        conséquence directe et bien documentée sur le terrain : ils déplacent
+        les populations de rongeurs installées dans les sols et les réseaux.
+      </p>
+      <div class="keyline">
+        <p>
+          Un bâtiment qui n’avait aucun historique et qui voit apparaître des
+          indices en quelques semaines a très souvent un terrassement, un curage
+          ou une démolition dans son voisinage immédiat.
+        </p>
+      </div>
+      <p>
+        Dans ce cas, la priorité n’est pas le traitement intérieur mais
+        l’obturation : pied de façade, soupiraux, traversées, regards. C’est ce
+        qui empêche une population déplacée de s’installer chez vous.
+      </p>
+
+      <h2>Qui nous appelle dans le 93</h2>
+      <ul class="ticks">
+        <li><strong>Bailleurs et syndics</strong> — caves, vides sanitaires, locaux déchets.</li>
+        <li><strong>Commerçants et restaurateurs</strong> — locaux en pied d’immeuble, réserves en sous-sol.</li>
+        <li><strong>Entrepôts et grossistes</strong> — quais, stockage, abords.</li>
+        <li><strong>Copropriétaires et locataires</strong> — logements touchés depuis les communs.</li>
+        <li><strong>Collectivités et établissements</strong> — équipements publics, locaux techniques.</li>
+      </ul>
+
+      <h2>Prévention prioritaire</h2>
+      <p>
+        Dans ce département, trois actions produisent l’essentiel du résultat :
+        fermer correctement les locaux déchets (bas de porte métallique, bacs à
+        couvercle, sol dégagé), obturer les soupiraux et ventilations basses avec
+        du grillage métallique, et supprimer le stockage au sol dans les caves et
+        les réserves. Elles figurent en détail sur la page
+        <a href="/prevention-rongeurs">prévention des rongeurs</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section band band--marked">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--light">Couverture</p>
+      <h2>Communes desservies en Seine-Saint-Denis</h2>
+      <p class="lede" style="margin-bottom:1.75rem">
+        Liste non exhaustive — l’ensemble du département est couvert.
+      </p>
+      <ul class="inline-list">
+        {dep.communes.map((c) => <li>{c}</li>)}
+      </ul>
+      <div class="btn-row">
+        {villes.map((v) => (
+          <a class="btn btn--outline-light" href={`/deratisation-${v.slug}`}>{v.name}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Seine-Saint-Denis : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Continuer"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-saint-denis', label: 'Saint-Denis', note: 'Page communale' },
+      { href: '/deratisation-montreuil', label: 'Montreuil', note: 'Page communale' },
+      { href: '/deratisation-aubervilliers', label: 'Aubervilliers', note: 'Page communale' },
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Sous-sols étendus' },
+      { href: '/deratisation-entreprises', label: 'Entrepôts et logistique', note: 'Flux entrants' },
+      { href: '/zones-intervention', label: 'Toutes les zones', note: 'Île-de-France' },
+    ]}
+  />
+
+  <CtaBand
+    title="Des indices apparus en même temps qu’un chantier voisin ?"
+    text="Dans ce cas, la priorité est l’obturation du bâtiment. Décrivez la configuration, nous vous indiquons les points à vérifier en premier."
+    eyebrow="Seine-Saint-Denis"
+    variant="petrol"
+  />
+</BaseLayout>

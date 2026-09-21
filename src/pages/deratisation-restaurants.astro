@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-restaurants', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Restaurants', href: '/deratisation-restaurants' },
+];
+
+const faq = [
+  {
+    q: 'Comment traiter une infestation dans un restaurant sans fermer ?',
+    a: 'En travaillant hors service et en séquençant les zones. Le traitement se concentre d’abord sur les volumes techniques — réserve, plonge, local déchets, vides techniques, faux plafonds — qui concentrent l’essentiel de l’activité des rongeurs. Les zones de préparation sont traitées par dispositifs mécaniques et par obturation, sans introduire de produit au contact des denrées. Une fermeture n’est nécessaire que dans les situations les plus avancées.',
+  },
+  {
+    q: 'Que demande un contrôle sanitaire en matière de nuisibles ?',
+    a: 'Le contrôle vérifie que l’établissement maîtrise le risque : absence d’indices, protection des denrées, état du bâti, et surtout traçabilité. Concrètement, un plan de maîtrise sanitaire doit contenir le dispositif de lutte en place, le plan des points de contrôle, les comptes rendus d’intervention et les actions correctives engagées.',
+  },
+  {
+    q: 'Peut-on utiliser des rodenticides en cuisine professionnelle ?',
+    a: 'Pas au contact des denrées ni dans les zones de préparation. L’appâtage est réservé aux volumes techniques et périphériques, en dispositifs fermés, verrouillés, fixés et repérés sur plan. En zone de production, on travaille par piégeage mécanique et par obturation.',
+  },
+  {
+    q: 'Quels sont les points d’entrée typiques d’un restaurant ?',
+    a: 'La traversée d’évacuation sous plonge, le bas de rideau métallique, la porte de livraison maintenue ouverte, le siphon de sol asséché, les gaines de ventilation et d’extraction, le passage vers une cave d’immeuble, et le local déchets partagé avec la copropriété. Dans un restaurant en pied d’immeuble, ce dernier point est le plus fréquent.',
+  },
+  {
+    q: 'À quelle fréquence faut-il faire contrôler un restaurant ?',
+    a: 'Un établissement de restauration est structurellement exposé : denrées, chaleur, eau, déchets, livraisons quotidiennes. Un suivi périodique avec points de contrôle repérés permet de détecter une reprise au stade où quelques dispositifs suffisent encore. La fréquence se détermine selon l’exposition réelle : type de local, voisinage, volume de déchets, historique.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation de restaurants et métiers de bouche',
+    serviceType: 'Dératisation restauration',
+    description:
+      'Traitement des rongeurs en restauration : cuisine, réserve, plonge, local déchets. Intervention hors service, traçabilité pour le plan de maîtrise sanitaire.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation restaurant : cuisine, réserve, local déchets"
+  description="Traitement des rats et souris en restauration à Paris et en Île-de-France : intervention hors service, protection des denrées et traçabilité pour le PMS."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Restauration • Métiers de bouche"
+    title="Dératisation en restaurant : agir vite, sans interrompre le service"
+    lede="Un restaurant réunit tout ce qu’un rongeur recherche : chaleur, eau, denrées et déchets, souvent en pied d’immeuble. L’enjeu n’est donc pas seulement de traiter, mais de traiter sans exposer les denrées et sans arrêter l’activité."
+    primaryLabel="Intervention hors service"
+    meta={['Intervention hors service', 'Traçabilité PMS', 'Cuisine, réserve, plonge']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <div class="answer">
+            <p class="eyebrow">Réponse directe</p>
+            <p>
+              En restauration, le traitement se concentre d’abord sur les
+              <strong>volumes techniques</strong> — réserve, plonge, local
+              déchets, faux plafonds, vides techniques — puis sur l’obturation.
+              Aucun produit n’est introduit en zone de préparation.
+            </p>
+            <p>
+              L’intervention se fait hors service, et chaque passage est
+              documenté pour alimenter le plan de maîtrise sanitaire.
+            </p>
+          </div>
+
+          <h2>Pourquoi la restauration concentre les difficultés</h2>
+          <p>
+            Trois facteurs se cumulent. D’abord, l’attractivité : matières
+            premières, chaleur permanente, eau, graisses, déchets organiques en
+            volume. Ensuite, le bâti : la majorité des restaurants franciliens
+            occupent un pied d’immeuble, avec une cave, une communication vers
+            les parties communes et souvent un local déchets partagé. Enfin, le
+            rythme : livraisons quotidiennes, portes ouvertes, rotation du
+            personnel.
+          </p>
+          <p>
+            Conséquence pratique : un restaurant peut être irréprochable dans sa
+            tenue et présenter malgré tout des indices, parce que la source se
+            trouve dans l’immeuble ou dans la rue.
+          </p>
+
+          <h2>Les zones traitées, dans l’ordre</h2>
+          <ol class="steps" style="margin-top:1.5rem">
+            <li>
+              <h3>Local déchets et abords</h3>
+              <p>
+                C’est la source. Bacs, sol, bas de porte, siphon, zone de dépôt
+                extérieure. Tant que ce point n’est pas tenu, le reste est
+                provisoire.
+              </p>
+            </li>
+            <li>
+              <h3>Plonge et évacuations</h3>
+              <p>
+                Traversées de canalisation, siphons de sol asséchés, arrière des
+                bacs, caniveaux. Un siphon sec est une porte ouverte sur le
+                réseau.
+              </p>
+            </li>
+            <li>
+              <h3>Réserve et cave</h3>
+              <p>
+                Stockage au sol, palettes, cartons, communication avec la cave
+                de l’immeuble. Le rayonnage décollé du sol et des murs change
+                radicalement la lisibilité des indices.
+              </p>
+            </li>
+            <li>
+              <h3>Vides techniques et faux plafonds</h3>
+              <p>
+                Passages de fluides, extraction, chemins de câbles. Zones
+                privilégiées de circulation, rarement inspectées.
+              </p>
+            </li>
+            <li>
+              <h3>Zone de préparation</h3>
+              <p>
+                Uniquement piégeage mécanique et obturation. Dispositifs
+                retirés avant la reprise du service.
+              </p>
+            </li>
+            <li>
+              <h3>Salle et zone client</h3>
+              <p>
+                Aucun dispositif visible. Traitement périphérique et fermeture
+                des jours sous portes et bas de rideau.
+              </p>
+            </li>
+          </ol>
+
+          <h2>Traçabilité : ce qui est attendu dans le PMS</h2>
+          <p>
+            La maîtrise du risque nuisibles fait partie du plan de maîtrise
+            sanitaire d’un établissement manipulant des denrées alimentaires. Ce
+            qui est attendu n’est pas « un contrat », mais un dossier tenu.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <caption>Éléments à conserver dans le dossier nuisibles.</caption>
+              <thead>
+                <tr><th scope="col">Élément</th><th scope="col">À quoi il sert</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Plan des points de contrôle</th><td>Localiser et vérifier chaque dispositif</td></tr>
+                <tr><th scope="row">Compte rendu de chaque passage</th><td>Prouver le suivi dans le temps</td></tr>
+                <tr><th scope="row">Constats d’indices</th><td>Documenter ce qui a été observé, et quand</td></tr>
+                <tr><th scope="row">Actions correctives</th><td>Montrer la réponse apportée (obturation, travaux, consignes)</td></tr>
+                <tr><th scope="row">Fiches des produits employés</th><td>Justifier la conformité des substances utilisées</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Quand la source est dans l’immeuble</h2>
+          <p>
+            C’est une situation extrêmement fréquente en Île-de-France : le
+            restaurant traite son local avec sérieux, mais la cave communique
+            avec celle de la copropriété, ou le local déchets est partagé. Dans
+            ce cas, le traitement interne protège l’établissement mais ne règle
+            pas la source.
+          </p>
+          <p>
+            Nous le formalisons par écrit, ce qui permet au gérant de saisir le
+            syndic avec un constat technique plutôt qu’avec une réclamation.
+            Voir <a href="/deratisation-coproprietes">dératisation en copropriété</a>.
+          </p>
+
+          <h2>Discrétion</h2>
+          <p>
+            Intervention hors service, véhicule neutre sur demande, aucun
+            dispositif visible en salle, et aucune communication extérieure sur
+            l’établissement. Pour un restaurant, la gestion de l’image fait
+            partie de la prestation.
+          </p>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Urgence avant contrôle</h3>
+          <p>Les points vérifiés en priorité.</p>
+          <ul>
+            <li><a href="/inspection-rongeurs">Indices en réserve ou en plonge</a></li>
+            <li><a href="/prevention-rongeurs">Siphons de sol asséchés</a></li>
+            <li><a href="/prevention-rongeurs">Bas de porte du local déchets</a></li>
+            <li><a href="/traitement-souris">Emballages percés en réserve</a></li>
+            <li><a href="/deratisation-coproprietes">Communication avec la cave d’immeuble</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Restauration : questions fréquentes" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Sujets liés"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-commerces', label: 'Commerces', note: 'Alimentaire et non alimentaire' },
+      { href: '/deratisation-entreprises', label: 'Entreprises', note: 'Restauration collective, bureaux' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Sécuriser durablement' },
+      { href: '/infestation-souris', label: 'Infestation de souris', note: 'Réserves et faux plafonds' },
+      { href: '/blog/rats-dans-un-restaurant-quelles-mesures', label: 'Rats dans un restaurant', note: 'Guide' },
+      { href: '/deratisation-paris', label: 'Restaurants à Paris', note: 'Contexte parisien' },
+    ]}
+  />
+
+  <CtaBand
+    title="Un indice en cuisine ? Traitons-le avant le prochain service"
+    text="Décrivez la zone et l’heure de découverte. Les interventions en restauration se planifient hors service, y compris tôt le matin."
+    eyebrow="Restauration"
+  />
+</BaseLayout>

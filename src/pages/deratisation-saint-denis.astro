@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-saint-denis', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Seine-Saint-Denis', href: '/zones-intervention/seine-saint-denis' },
+  { label: 'Saint-Denis', href: '/deratisation-saint-denis' },
+];
+
+const faq = [
+  {
+    q: 'Le centre ancien et les grands ensembles se traitent-ils différemment ?',
+    a: 'Oui, sur le périmètre. Dans le centre ancien, la question est celle des caves communicantes entre immeubles mitoyens. Dans les grands ensembles, c’est celle du vide sanitaire continu et des gaines verticales. Dans le premier cas on cartographie des passages ponctuels, dans le second on couvre un volume étendu.',
+  },
+  {
+    q: 'Les abords du canal influencent-ils les interventions ?',
+    a: 'Les berges du canal Saint-Denis offrent au rat brun eau et terrain meuble, deux conditions favorables. Pour un bâtiment riverain ou une activité proche, la priorité va à la fermeture du pied de bâtiment et à la gestion des déchets côté extérieur, davantage qu’au traitement intérieur.',
+  },
+  {
+    q: 'Les entrepôts de la commune demandent-ils une approche particulière ?',
+    a: 'Oui : la réintroduction par les flux entrants est permanente. La stratégie consiste à protéger l’enveloppe (quais, portes sectionnelles, bardages, gaines), tenir les abords, et détecter tôt à l’intérieur grâce à des points de contrôle repérés, plutôt que d’espérer une étanchéité totale.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Saint-Denis',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Saint-Denis : centre ancien, grands ensembles, abords du canal et zones d’entrepôts.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Saint-Denis (93200) : rats et souris"
+  description="Dératisation à Saint-Denis : centre ancien, grands ensembles, abords du canal et entrepôts. Périmètre, traitement et sécurisation des accès."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Saint-Denis • 93200"
+    title="Dératisation à Saint-Denis"
+    lede="Peu de communes franciliennes présentent autant de configurations sur un même territoire : un centre ancien serré, des grands ensembles étendus, des berges de canal et des zones d’entrepôts. Chacune appelle un périmètre d’intervention différent."
+    primaryLabel="Décrire mon bâtiment"
+    meta={['Seine-Saint-Denis (93)', 'Centre ancien et collectif', 'Canal et entrepôts']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Le centre ancien</h2>
+      <p>
+        Le cœur historique présente un tissu serré : immeubles anciens, cours,
+        passages, commerces en rez-de-chaussée et sous-sols souvent reliés entre
+        parcelles mitoyennes. La question centrale y est toujours la même :
+        jusqu’où va réellement le sous-sol.
+      </p>
+      <p>
+        Comme dans tout tissu de ce type, un traitement limité à une cave
+        privative produit une accalmie, pas une résolution. L’inspection
+        commence donc par cartographier les communications. Voir
+        <a href="/inspection-rongeurs">inspection des points d’entrée</a>.
+      </p>
+
+      <h2>Les grands ensembles</h2>
+      <p>
+        Les opérations de logement collectif présentent la configuration
+        habituelle : vide sanitaire continu sous les bâtiments, gaines
+        techniques verticales, locaux déchets multiples, parfois d’anciennes
+        colonnes de vide-ordures condamnées sans obturation.
+      </p>
+      <p>
+        Le périmètre est donc large, et l’accès aux volumes techniques
+        conditionne le résultat. C’est un point d’organisation autant que de
+        technique : sans coordination avec le bailleur ou le syndic,
+        l’intervention reste partielle. Voir
+        <a href="/deratisation-coproprietes">copropriétés</a>.
+      </p>
+
+      <h2>Les abords du canal</h2>
+      <p>
+        Les berges du canal Saint-Denis offrent un accès permanent à l’eau et un
+        sol meuble. Pour les bâtiments et activités riverains, la priorité porte
+        sur la fermeture du pied de bâtiment — soupiraux, regards, traversées de
+        réseaux — et sur la gestion des déchets côté extérieur.
+      </p>
+
+      <h2>Les zones d’entrepôts et d’activité</h2>
+      <p>
+        La commune accueille des activités de stockage et de distribution. Ces
+        sites présentent une exposition continue par les flux entrants. La
+        protection s’organise par couches : abords, enveloppe, détection
+        intérieure. Voir
+        <a href="/deratisation-entreprises#entrepots">entrepôts et logistique</a>.
+      </p>
+
+      <h2>L’effet des chantiers</h2>
+      <p>
+        Saint-Denis connaît un volume important d’opérations d’aménagement et
+        d’infrastructures. Ces travaux déplacent les populations installées dans
+        les sols et les réseaux vers les bâtiments voisins. Une apparition
+        soudaine d’indices sans historique s’explique très souvent ainsi, et
+        appelle en priorité une obturation du bâtiment.
+      </p>
+
+      <h2>Prévention à Saint-Denis</h2>
+      <ul class="ticks">
+        <li>Cartographier et cloisonner les passages de cave entre parcelles.</li>
+        <li>Grillager systématiquement les ventilations de vide sanitaire.</li>
+        <li>Obturer les anciennes colonnes de vide-ordures condamnées.</li>
+        <li>Fermer les locaux déchets et tenir les horaires de sortie.</li>
+        <li>Protéger les quais et portes sectionnelles des sites d’activité.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Saint-Denis : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/zones-intervention/seine-saint-denis', label: 'Seine-Saint-Denis', note: 'Page départementale' },
+      { href: '/deratisation-aubervilliers', label: 'Aubervilliers', note: 'Commune voisine' },
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Sous-sols étendus' },
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Grands ensembles' },
+    ]}
+  />
+
+  <CtaBand
+    title="Centre ancien ou grand ensemble : deux périmètres à établir"
+    text="Dites-nous le type de bâtiment et la présence d’un vide sanitaire ou de caves mitoyennes."
+    eyebrow="Saint-Denis"
+    variant="petrol"
+  />
+</BaseLayout>

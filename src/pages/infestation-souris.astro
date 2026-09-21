@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/infestation-souris', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Infestation de souris', href: '/infestation-souris' },
+];
+
+const faq = [
+  {
+    q: 'Comment savoir si l’infestation de souris est importante ?',
+    a: 'Trois signaux comptent plus que le nombre d’animaux vus : la présence de crottes dans des pièces éloignées les unes des autres, une odeur ammoniaquée persistante qui ne part pas au nettoyage, et des observations en journée. Quand ces trois éléments sont réunis, la population n’est plus limitée à un foyer unique.',
+  },
+  {
+    q: 'Pourquoi l’infestation s’étend-elle si vite ?',
+    a: 'La souris domestique a des portées rapprochées et les jeunes atteignent la maturité en quelques semaines. Surtout, chaque nouveau foyer s’installe à proximité d’une ressource : une pièce contenant de la nourriture accessible devient rapidement une zone d’installation à part entière, indépendante de la première.',
+  },
+  {
+    q: 'Une infestation de souris peut-elle abîmer le logement ?',
+    a: 'Oui, principalement par le rongement des gaines et des câbles, la souillure des isolants dans les combles et les cloisons, et la contamination des denrées. Le risque électrique est réel dès lors qu’un câble est dénudé dans un volume fermé.',
+  },
+  {
+    q: 'Faut-il jeter la nourriture stockée ?',
+    a: 'Tout emballage percé, souillé ou en contact avec des déjections doit être éliminé. Les produits en contenants rigides fermés hermétiquement et intacts peuvent être conservés. Le nettoyage des surfaces concernées se fait en évitant de balayer à sec les déjections, afin de ne pas remettre de poussières en suspension.',
+  },
+  {
+    q: 'Combien de temps dure le traitement d’une infestation de souris ?',
+    a: 'Généralement plusieurs semaines, avec au moins deux à trois passages. La durée dépend du nombre de zones concernées et de la possibilité de fermer les ouvertures. Un logement dont les traversées de canalisation restent ouvertes nécessitera un suivi plus long, voire indéfini.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Traitement des infestations de souris',
+    serviceType: 'Infestation de rongeurs',
+    description:
+      'Traitement des infestations de souris étendues en Île-de-France : cartographie des foyers, couverture complète, obturation et suivi.',
+  }),
+];
+---
+<BaseLayout
+  title="Infestation de souris : signes, étendue et traitement"
+  description="Reconnaître une infestation de souris étendue, comprendre pourquoi elle progresse et comment la traiter zone par zone. Logements et locaux en Île-de-France."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Situation avancée"
+    title="Infestation de souris : plusieurs foyers, une seule méthode"
+    lede="Une infestation de souris n’est pas un gros foyer : c’est plusieurs petits foyers indépendants, installés chacun près d’une ressource. C’est ce qui explique qu’un traitement partiel donne toujours l’impression de repartir de zéro."
+    primaryLabel="Décrire l’étendue"
+    meta={['Cartographie des foyers', 'Traitement simultané', 'Fermeture des ouvertures']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left">
+        <div class="prose">
+          <div class="answer">
+            <p class="eyebrow">Réponse directe</p>
+            <p>
+              Une infestation de souris se reconnaît à des indices présents dans
+              des pièces éloignées, à une odeur ammoniaquée persistante et à des
+              observations en journée.
+            </p>
+            <p>
+              Le traitement doit être <strong>simultané sur tous les foyers</strong>.
+              Traiter l’un après l’autre laisse aux autres le temps de se
+              reconstituer.
+            </p>
+          </div>
+
+          <h2>Comment une présence devient une infestation</h2>
+          <p>
+            L’histoire est presque toujours la même. Une souris entre par une
+            ouverture technique — traversée de canalisation, gaine, socle de
+            meuble. Elle s’installe à proximité immédiate d’une ressource :
+            placard bas, arrière d’appareil ménager, réserve. Quelques semaines
+            plus tard, un deuxième groupe s’établit près d’une autre ressource,
+            dans une autre pièce.
+          </p>
+          <p>
+            À partir de là, le logement ne contient plus un problème mais
+            plusieurs, qui n’ont pas besoin de communiquer entre eux pour
+            persister. C’est la différence fondamentale avec le rat, dont la
+            colonie reste structurée autour d’un même réseau.
+          </p>
+
+          <h2>Cartographier avant de traiter</h2>
+          <p>
+            La première étape consiste à établir où sont réellement les foyers,
+            et non où l’on a vu une souris. On s’appuie pour cela sur la
+            répartition des déjections, qui trace la carte des déplacements
+            nocturnes.
+          </p>
+          <ul class="ticks">
+            <li>Concentration forte de crottes = zone d’abri proche.</li>
+            <li>Crottes éparses en ligne = trajet de circulation.</li>
+            <li>Crottes dans un tiroir ou un placard = ressource exploitée.</li>
+            <li>Crottes en hauteur = circulation par gaine ou doublage.</li>
+            <li>Absence totale dans une pièce = zone probablement hors territoire.</li>
+          </ul>
+          <p>
+            Cette lecture évite deux erreurs symétriques : traiter des pièces
+            inutilement, et en oublier une qui relancera tout.
+          </p>
+
+          <h2>Ce qui change par rapport à un traitement simple</h2>
+          <div class="table-wrap">
+            <table>
+              <caption>Adaptation du traitement selon l’étendue.</caption>
+              <thead>
+                <tr><th scope="col">Paramètre</th><th scope="col">Présence localisée</th><th scope="col">Infestation étendue</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Zones traitées</th><td>1 à 2</td><td>Toutes les zones d’indices</td></tr>
+                <tr><th scope="row">Passages</th><td>1 pose + 1 contrôle</td><td>1 pose + 2 à 3 contrôles</td></tr>
+                <tr><th scope="row">Obturation</th><td>Ponctuelle</td><td>Systématique, tout le logement</td></tr>
+                <tr><th scope="row">Gestion des denrées</th><td>Recommandée</td><td>Indispensable</td></tr>
+                <tr><th scope="row">Combles / gaines</th><td>Selon indices</td><td>À inspecter systématiquement</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>L’odeur, un signal souvent mal interprété</h2>
+          <p>
+            L’odeur ammoniaquée caractéristique provient de l’urine, déposée en
+            continu le long des trajets. Elle ne disparaît pas avec un nettoyage
+            de surface parce qu’elle imprègne les matériaux poreux et les volumes
+            fermés — doublages, isolants, arrière de meubles.
+          </p>
+          <p>
+            Sa persistance après traitement ne signifie donc pas que la présence
+            continue : elle signifie que les matériaux imprégnés n’ont pas encore
+            été traités ou remplacés. C’est un point que nous distinguons
+            explicitement lors du contrôle.
+          </p>
+
+          <h2>En local professionnel</h2>
+          <p>
+            Dans un commerce, un restaurant ou une réserve, une infestation de
+            souris engage aussi la conformité sanitaire. Les priorités changent :
+            protection des denrées, traçabilité des interventions, absence de
+            dispositif visible en zone client. Voir
+            <a href="/deratisation-commerces">commerces</a> et
+            <a href="/deratisation-restaurants">restaurants</a>.
+          </p>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Signal d’alerte</h3>
+          <p>Ces constats indiquent une présence déjà étendue.</p>
+          <ul>
+            <li><a href="/traitement-souris">Crottes dans plus de deux pièces</a></li>
+            <li><a href="/traitement-souris">Souris observée en journée</a></li>
+            <li><a href="/prevention-rongeurs">Odeur persistante après nettoyage</a></li>
+            <li><a href="/inspection-rongeurs">Bruits à plusieurs niveaux</a></li>
+            <li><a href="/contact">Emballages percés à répétition</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Infestation de souris : questions fréquentes" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Poursuivre"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-souris', label: 'Dératisation souris', note: 'Les bases' },
+      { href: '/traitement-souris', label: 'Traitement contre les souris', note: 'Méthodes' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Fermer les accès' },
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Comparer' },
+      { href: '/deratisation-particuliers', label: 'Particuliers', note: 'Logements' },
+      { href: '/blog/souris-dans-un-appartement-que-faire', label: 'Souris en appartement', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Listez les pièces où vous trouvez des traces"
+    text="C’est la donnée la plus utile pour évaluer l’étendue réelle et calibrer le nombre de passages nécessaires."
+    eyebrow="Évaluation"
+  />
+</BaseLayout>

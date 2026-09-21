@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-aubervilliers', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Seine-Saint-Denis', href: '/zones-intervention/seine-saint-denis' },
+  { label: 'Aubervilliers', href: '/deratisation-aubervilliers' },
+];
+
+const faq = [
+  {
+    q: 'Pourquoi les entrepôts et le commerce de gros sont-ils si exposés ?',
+    a: 'À cause des flux. Palettes, cartons et conteneurs arrivent quotidiennement de l’extérieur, les quais restent ouverts pendant les opérations et les emballages s’accumulent. L’étanchéité totale est impossible à garantir : l’objectif réaliste est de protéger l’enveloppe et de détecter très tôt à l’intérieur.',
+  },
+  {
+    q: 'Comment protéger un local de stockage sans bloquer l’activité ?',
+    a: 'Trois mesures suffisent le plus souvent : rayonnage décollé du sol et des murs, fermeture des portes hors opérations de livraison, et gestion stricte des emballages. Elles ne coûtent presque rien et transforment à la fois la lisibilité des indices et l’attractivité du site.',
+  },
+  {
+    q: 'Les logements anciens de la commune sont-ils concernés ?',
+    a: 'Oui, avec les problématiques classiques du parc ancien : caves communicantes, local déchets, cours, traversées de canalisation non obturées. La proximité d’activités de stockage peut augmenter la pression extérieure, ce qui rend l’obturation du bâtiment d’autant plus déterminante.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Aubervilliers',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Aubervilliers : entrepôts, commerce de gros, abords du canal et habitat ancien.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Aubervilliers (93300) : entrepôts et logements"
+  description="Dératisation à Aubervilliers : entrepôts, commerce de gros, abords du canal Saint-Denis et habitat ancien. Protection de l’enveloppe et détection précoce."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Aubervilliers • 93300"
+    title="Dératisation à Aubervilliers"
+    lede="Aubervilliers est l’une des communes franciliennes où l’activité de stockage et de négoce pèse le plus lourd. Cela change la nature du problème : ici, la question n’est pas d’empêcher toute introduction, mais de la détecter avant qu’elle ne s’installe."
+    primaryLabel="Décrire mon site"
+    meta={['Seine-Saint-Denis (93)', 'Entrepôts et commerce de gros', 'Abords du canal']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Une commune d’activité</h2>
+      <p>
+        Le territoire associe des zones d’entrepôts et de commerce de gros, un
+        tissu d’habitat ancien dense, des programmes récents et les abords du
+        canal Saint-Denis. Cette combinaison crée une pression particulière :
+        les activités de stockage constituent une source permanente, et le bâti
+        résidentiel voisin en subit les conséquences.
+      </p>
+
+      <h2>Les sites de stockage et de négoce</h2>
+      <p>
+        Ces sites cumulent tous les facteurs d’exposition : volumes importants,
+        quais ouverts pendant les opérations, flux entrants quotidiens,
+        emballages en accumulation, abords souvent encombrés.
+      </p>
+      <p>
+        La stratégie applicable est celle décrite pour la logistique :
+        protéger l’enveloppe, tenir les abords, détecter tôt à l’intérieur grâce
+        à des points de contrôle repérés. Voir
+        <a href="/deratisation-entreprises#entrepots">entrepôts et logistique</a>.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption>Mesures à fort effet sur un site de stockage.</caption>
+          <thead>
+            <tr><th scope="col">Mesure</th><th scope="col">Effet</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Rayonnage décollé du sol et des murs</th><td>Supprime les abris, rend les indices visibles</td></tr>
+            <tr><th scope="row">Portes fermées hors opérations</th><td>Réduit fortement l’introduction</td></tr>
+            <tr><th scope="row">Gestion des emballages</th><td>Supprime les matériaux de nid</td></tr>
+            <tr><th scope="row">Abords dégagés</th><td>Supprime les abris périphériques</td></tr>
+            <tr><th scope="row">Points de contrôle repérés</th><td>Permet la détection précoce</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Le parc résidentiel ancien</h2>
+      <p>
+        Le tissu d’habitat ancien de la commune présente les caractéristiques
+        habituelles : caves communicantes, cours, locaux déchets, traversées de
+        canalisation non obturées dans les logements. Lorsque des activités de
+        stockage se trouvent à proximité, la pression extérieure augmente, ce
+        qui rend l’obturation encore plus déterminante.
+      </p>
+      <p>
+        Le déroulé adapté au collectif figure sur la page
+        <a href="/deratisation-coproprietes">copropriétés</a>.
+      </p>
+
+      <h2>Les abords du canal</h2>
+      <p>
+        Les berges offrent un accès permanent à l’eau et un sol meuble. Pour les
+        bâtiments riverains, la priorité porte sur le pied de bâtiment :
+        soupiraux, regards, traversées, et absence de dépôt de déchets au sol.
+      </p>
+
+      <h2>Prévention à Aubervilliers</h2>
+      <ul class="ticks">
+        <li>Rayonner et surélever tous les stockages.</li>
+        <li>Fermer les quais et portes hors opérations.</li>
+        <li>Évacuer les emballages quotidiennement.</li>
+        <li>Grillager soupiraux et ventilations dans l’habitat ancien.</li>
+        <li>Sceller les regards côté canal et espaces extérieurs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Aubervilliers : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-entreprises', label: 'Entrepôts et logistique', note: 'Flux entrants' },
+      { href: '/zones-intervention/seine-saint-denis', label: 'Seine-Saint-Denis', note: 'Page départementale' },
+      { href: '/deratisation-saint-denis', label: 'Saint-Denis', note: 'Commune voisine' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Enveloppe et abords' },
+    ]}
+  />
+
+  <CtaBand
+    title="Site de stockage : visons la détection précoce"
+    text="Sur un site à flux entrants quotidiens, l’objectif réaliste n’est pas l’étanchéité mais le repérage rapide. Parlons-en."
+    eyebrow="Aubervilliers"
+    variant="petrol"
+  />
+</BaseLayout>

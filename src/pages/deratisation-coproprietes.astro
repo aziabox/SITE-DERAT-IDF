@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-coproprietes', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Dératisation', href: '/deratisation' },
+  { label: 'Copropriétés', href: '/deratisation-coproprietes' },
+];
+
+const faq = [
+  {
+    q: 'Qui décide d’une dératisation en copropriété ?',
+    a: 'Le syndic, au titre de l’entretien des parties communes. Pour une intervention ponctuelle relevant de l’entretien courant, il peut généralement engager l’action sans attendre une assemblée générale. Un contrat d’entretien récurrent ou des travaux de sécurisation d’ampleur relèvent en revanche d’une décision de l’assemblée.',
+  },
+  {
+    q: 'Les logements privatifs sont-ils traités ?',
+    a: 'Pas au titre de la copropriété. L’intervention collective porte sur les parties communes : caves, local poubelles, cour, gaines, vide sanitaire, locaux techniques. Lorsqu’un lot privatif est touché, son traitement est organisé séparément — mais il doit être mené dans la même période, sinon l’effet du traitement collectif est annulé.',
+  },
+  {
+    q: 'Faut-il informer les résidents ?',
+    a: 'Oui, et c’est déterminant. Un affichage clair évite trois problèmes : le déplacement d’un dispositif par un occupant, l’ouverture d’une cave sans précaution, et le sentiment d’opacité qui transforme une intervention technique en conflit. Nous fournissons le texte d’affichage et les consignes à diffuser.',
+  },
+  {
+    q: 'Les caves privatives doivent-elles être ouvertes ?',
+    a: 'C’est l’un des points les plus délicats. Une cave fermée dans un sous-sol infesté peut abriter le nid et faire échouer l’ensemble du traitement. Nous signalons les caves à vérifier ; le syndic organise l’accès avec les copropriétaires concernés, généralement par courrier et créneau annoncé.',
+  },
+  {
+    q: 'Combien de passages faut-il en immeuble ?',
+    a: 'Rarement moins de trois : un passage de diagnostic et de pose, un premier contrôle sous une à deux semaines, un contrôle de consolidation. Les immeubles étendus ou avec plusieurs entrées communicantes en demandent davantage, parce qu’il faut vérifier chaque sous-sol indépendamment.',
+  },
+  {
+    q: 'Comment éviter que le problème revienne chaque année ?',
+    a: 'En traitant les deux causes structurelles les plus fréquentes : le local poubelles et les accès du sous-sol. Un local dont la porte ferme mal, sans bas de porte métallique et dont les bacs restent ouverts réalimente la présence en permanence, quel que soit le traitement réalisé.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation en copropriété',
+    serviceType: 'Dératisation parties communes',
+    description:
+      'Traitement des rongeurs dans les parties communes d’immeubles en Île-de-France : caves, local poubelles, cour, gaines techniques, vide sanitaire.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation en copropriété : parties communes et caves"
+  description="Intervention en immeuble collectif : caves, local poubelles, gaines et cour. Rôle du syndic, information des résidents, phasage et suivi en Île-de-France."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Copropriétés • Syndics"
+    title="Dératisation en copropriété : traiter l’immeuble, pas un logement"
+    lede="En collectif, la difficulté est rarement technique. Elle est organisationnelle : accéder aux caves, coordonner les créneaux, informer les résidents et traiter le sous-sol et les lots touchés dans la même fenêtre de temps."
+    primaryLabel="Demander une évaluation d’immeuble"
+    meta={['Caves et sous-sols', 'Local poubelles', 'Constat pour le conseil syndical']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <div class="answer">
+        <p class="eyebrow">Réponse directe</p>
+        <p>
+          En copropriété, l’intervention porte sur les parties communes et
+          relève du syndic. Elle échoue presque toujours pour l’une de ces trois
+          raisons&nbsp;: une cave privative restée fermée, un local poubelles non
+          sécurisé, ou des lots privatifs traités plusieurs semaines après le
+          sous-sol.
+        </p>
+      </div>
+
+      <h2>Les cinq zones qui décident du résultat</h2>
+      <p>
+        Dans un immeuble francilien, la quasi-totalité des situations se joue
+        sur les mêmes points.
+      </p>
+
+      <h3>1. Le sous-sol et les caves</h3>
+      <p>
+        C’est l’espace privilégié du rat brun : sombre, peu fréquenté, souvent
+        humide, et communicant. Dans beaucoup d’immeubles anciens, les caves de
+        plusieurs entrées communiquent par des passages maçonnés ou par les
+        réseaux. Traiter une seule entrée revient alors à traiter un tiers du
+        problème.
+      </p>
+
+      <h3>2. Le local poubelles</h3>
+      <p>
+        C’est la ressource alimentaire la plus constante d’un immeuble. Trois
+        défauts reviennent : un bas de porte usé laissant un jeu de quelques
+        centimètres, des bacs sans couvercle ou débordants, et des sacs déposés
+        au sol en dehors des horaires de collecte. Tant que ces points
+        subsistent, la pression reste permanente.
+      </p>
+
+      <h3>3. Les gaines techniques</h3>
+      <p>
+        Colonnes verticales de fluides, trémies, anciennes colonnes de
+        vide-ordures condamnées : elles relient le sous-sol aux étages. C’est
+        par là que des indices apparaissent au quatrième étage alors que rien
+        n’a été signalé au rez-de-chaussée.
+      </p>
+
+      <h3>4. La cour et les abords</h3>
+      <p>
+        Pied de façade, massifs, local vélos, regards, joints de dallage. En
+        cœur d’îlot parisien, la cour est fréquemment le point de passage entre
+        plusieurs immeubles mitoyens.
+      </p>
+
+      <h3>5. Le vide sanitaire</h3>
+      <p>
+        Présent dans une grande partie des résidences construites entre les
+        années 1950 et 1980. Les grilles de ventilation détériorées y donnent un
+        accès direct depuis l’extérieur.
+      </p>
+
+      <h2>Le rôle de chacun</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Répartition usuelle des rôles lors d’une intervention en immeuble.</caption>
+          <thead>
+            <tr><th scope="col">Acteur</th><th scope="col">Ce qu’il prend en charge</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Syndic</th><td>Décision, commande, accès aux communs, information des résidents</td></tr>
+            <tr><th scope="row">Conseil syndical</th><td>Relais terrain, signalement des zones, suivi entre deux passages</td></tr>
+            <tr><th scope="row">Gardien / employé d’immeuble</th><td>Accès quotidien, gestion des déchets, observation des indices</td></tr>
+            <tr><th scope="row">Copropriétaires</th><td>Ouverture des caves privatives, signalement dans les lots</td></tr>
+            <tr><th scope="row">Occupants</th><td>Respect des consignes, non-déplacement des dispositifs</td></tr>
+            <tr><th scope="row">Intervenant</th><td>Diagnostic, traitement, obturation, constat, préconisations</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Un déroulé adapté au collectif</h2>
+      <ol class="steps" style="margin-top:1.5rem">
+        <li>
+          <h3>Visite d’évaluation</h3>
+          <p>
+            Parcours complet : sous-sols de chaque entrée, local déchets, cour,
+            locaux techniques, accès extérieurs. Relevé des indices et des
+            points d’entrée.
+          </p>
+        </li>
+        <li>
+          <h3>Constat et préconisations</h3>
+          <p>
+            Document remis au syndic : zones concernées, périmètre proposé,
+            points à sécuriser, travaux éventuels à distinguer du traitement.
+          </p>
+        </li>
+        <li>
+          <h3>Information des résidents</h3>
+          <p>
+            Affichage dans les halls avant le premier passage, avec les dates,
+            les zones concernées et les consignes.
+          </p>
+        </li>
+        <li>
+          <h3>Traitement des communs</h3>
+          <p>
+            Pose simultanée sur l’ensemble du périmètre pour éviter les reports
+            d’activité d’une entrée vers l’autre.
+          </p>
+        </li>
+        <li>
+          <h3>Sécurisation</h3>
+          <p>
+            Obturation des accès relevés, en priorisant le local déchets et les
+            soupiraux, qui conditionnent la suite.
+          </p>
+        </li>
+        <li>
+          <h3>Contrôles et clôture</h3>
+          <p>
+            Passages de vérification jusqu’à absence d’indice frais, retrait des
+            dispositifs, compte rendu final au syndic.
+          </p>
+        </li>
+      </ol>
+
+      <h2>Ce que nous remettons au syndic</h2>
+      <p>
+        Un constat daté, la localisation des points traités et sécurisés, la
+        liste des points relevant de travaux (et non du traitement), et le
+        compte rendu de chaque passage. Ces éléments sont directement
+        exploitables en conseil syndical ou en assemblée générale.
+      </p>
+      <div class="keyline">
+        <p>
+          Nous distinguons systématiquement ce qui relève du traitement de ce
+          qui relève de travaux. Confondre les deux conduit à refaire chaque
+          année une intervention que des travaux régleraient une fois.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Copropriété : questions des syndics et des conseils syndicaux" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Documents et sujets liés"
+    eyebrow="Maillage"
+    items={[
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Sous-sols étendus' },
+      { href: '/inspection-rongeurs', label: 'Inspection', note: 'Constat pour le syndic' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Local déchets et accès' },
+      { href: '/deratisation-particuliers', label: 'Particuliers', note: 'Lots privatifs' },
+      { href: '/blog/rats-dans-une-copropriete-qui-doit-intervenir', label: 'Qui doit intervenir ?', note: 'Guide' },
+      { href: '/blog/guide-deratisation-ile-de-france', label: 'Guide complet Île-de-France', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Une évaluation d’immeuble avant de passer en assemblée"
+    text="Constat écrit, périmètre chiffré et distinction claire entre traitement et travaux : de quoi présenter un dossier tenable au conseil syndical."
+    eyebrow="Syndics et gestionnaires"
+    variant="petrol"
+  />
+</BaseLayout>

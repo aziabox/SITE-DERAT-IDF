@@ -1,0 +1,6 @@
+# Redirections 301 — Netlify / Cloudflare Pages.
+# Doivent rester alignées sur le bloc `redirects` d'astro.config.mjs.
+/zones-intervention/paris      /deratisation-paris   301
+/deratisation-ile-de-france    /deratisation         301
+/deratiseur                    /deratisation         301
+/blog/index                    /blog                 301

@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { serviceSchema } from '../../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-paris/13e-arrondissement', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Paris', href: '/deratisation-paris' },
+  { label: '13e arrondissement', href: '/deratisation-paris/13e-arrondissement' },
+];
+
+const faq = [
+  {
+    q: 'Qu’est-ce qui change dans un ensemble construit sur dalle ?',
+    a: 'Les circulations. Dans ce type d’urbanisme, les cheminements piétons sont en surface et les volumes techniques, parkings et locaux d’exploitation se trouvent dessous. Les rongeurs utilisent ce niveau inférieur, continu et peu fréquenté. Un traitement limité aux logements ou aux commerces de surface ne rencontre donc pas la population.',
+  },
+  {
+    q: 'Les commerces alimentaires du quartier asiatique demandent-ils une approche spécifique ?',
+    a: 'La méthode est la même que pour tout commerce de bouche, mais deux contraintes s’ajoutent souvent : des réserves de grande capacité avec stockage dense, et des livraisons fréquentes. La priorité va donc au rayonnage décollé du sol, à la protection des quais et à la fermeture des accès de livraison.',
+  },
+  {
+    q: 'Les immeubles récents des quais sont-ils concernés ?',
+    a: 'Ils sont généralement bien fermés sur l’extérieur, mais comportent des parkings sur plusieurs niveaux, des gaines continues et des locaux déchets intégrés. Une fois à l’intérieur, la circulation est aisée. L’essentiel de la prévention porte donc sur les rampes, les locaux déchets et les traversées techniques.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation Paris 13e arrondissement',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris dans le 13e arrondissement de Paris : ensembles sur dalle, tours, commerces alimentaires et quartiers récents des quais.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Paris 13e : dalles, tours et commerces"
+  description="Dératisation dans le 13e arrondissement de Paris : ensembles sur dalle, tours, commerces alimentaires et immeubles récents des quais de Seine."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Paris 13e • 75013"
+    title="Dératisation Paris 13e : la vie se passe un niveau plus bas"
+    lede="Le 13e est l’arrondissement parisien où l’urbanisme sur dalle est le plus présent. Sous les cheminements piétons se trouvent des parkings, des galeries et des locaux techniques continus — et c’est là que se joue l’essentiel de nos interventions."
+    primaryLabel="Décrire mon bâtiment"
+    meta={['Ensembles sur dalle', 'Commerces alimentaires', 'Quartiers récents']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Trois tissus dans un seul arrondissement</h2>
+      <p>
+        Le 13e superpose des réalités urbaines très différentes. Au centre, les
+        ensembles construits sur dalle, avec leurs tours et leurs volumes
+        techniques en sous-face. Autour, un tissu commercial dense, avec une
+        forte concentration de commerces alimentaires et de restauration. Le
+        long de la Seine, des quartiers récents avec immeubles contemporains,
+        parkings souterrains et équipements.
+      </p>
+
+      <h2>L’urbanisme sur dalle</h2>
+      <p>
+        C’est la caractéristique majeure du secteur. Les cheminements piétons
+        sont en surface ; en dessous se trouvent parkings, galeries de
+        livraison, locaux d’exploitation, locaux déchets et réseaux.
+      </p>
+      <p>
+        Ce niveau inférieur est continu, peu fréquenté à certaines heures et
+        relié à l’extérieur par des rampes. Pour un rongeur, c’est un réseau
+        idéal. Pour une intervention, cela signifie que le périmètre doit
+        impérativement inclure ces volumes.
+      </p>
+      <div class="keyline">
+        <p>
+          Lorsqu’un occupant d’un étage élevé signale des indices, la population
+          est presque toujours installée plusieurs niveaux plus bas. Traiter
+          uniquement le logement, c’est traiter la conséquence.
+        </p>
+      </div>
+
+      <h2>Les commerces alimentaires</h2>
+      <p>
+        L’arrondissement compte une densité notable de commerces de bouche,
+        d’épiceries et de restaurants, souvent dotés de réserves de grande
+        capacité et approvisionnés fréquemment.
+      </p>
+      <p>
+        Deux points reviennent systématiquement : le stockage au sol dans les
+        réserves, qui crée des abris et masque les indices, et les accès de
+        livraison maintenus ouverts pendant les opérations. Les deux se
+        corrigent sans investissement lourd — rayonnage et discipline d’accès —
+        et transforment la situation.
+      </p>
+      <p>
+        Voir <a href="/deratisation-commerces">commerces</a> et
+        <a href="/deratisation-restaurants">restaurants</a>.
+      </p>
+
+      <h2>Les quartiers récents</h2>
+      <p>
+        Les immeubles contemporains le long de la Seine sont généralement bien
+        fermés sur l’extérieur. Leur point faible se situe ailleurs : rampes de
+        parking, locaux déchets intégrés au bâtiment, gaines techniques
+        continues entre niveaux.
+      </p>
+
+      <h2>Prévention dans le 13e</h2>
+      <ul class="ticks">
+        <li>Sécuriser les rampes et les accès du niveau technique sous dalle.</li>
+        <li>Fermer les locaux déchets : bas de porte métallique, bacs à couvercle.</li>
+        <li>Rayonner les réserves commerciales, décollées du sol et des murs.</li>
+        <li>Obturer les traversées de gaines entre niveaux.</li>
+        <li>Maintenir les portes de livraison fermées hors opérations.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Paris 13e : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Parkings et dalles' },
+      { href: '/deratisation-commerces', label: 'Commerces', note: 'Réserves' },
+      { href: '/infestation-rats', label: 'Infestation de rats', note: 'Volumes techniques' },
+      { href: '/deratisation-paris', label: 'Dératisation à Paris', note: 'Vue d’ensemble' },
+    ]}
+  />
+
+  <CtaBand
+    title="Bâtiment sur dalle : le périmètre commence en sous-face"
+    text="Indiquez le nombre de niveaux techniques et si les bâtiments communiquent. C’est ce qui détermine l’ampleur de l’intervention."
+    eyebrow="Paris 13e"
+  />
+</BaseLayout>

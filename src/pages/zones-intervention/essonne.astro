@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getDepartement, villesOf } from '../../data/idf';
+import { serviceSchema } from '../../lib/seo';
+
+const dep = getDepartement('essonne')!;
+const villes = villesOf(dep.slug);
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/zones-intervention/essonne', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Essonne', href: '/zones-intervention/essonne' },
+];
+
+const faq = [
+  {
+    q: 'Pourquoi les vallées de l’Orge et de l’Yvette reviennent-elles souvent ?',
+    a: 'Parce qu’une grande partie de l’habitat du nord du département s’est développée le long de ces vallées. Les fonds de vallée réunissent des sols humides, des berges où le rat brun peut creuser et des sous-sols de maisons parfois sujets aux remontées d’eau. Cela ne rend pas une présence automatique, mais cela rend la fermeture des accès en pied de bâtiment plus déterminante.',
+  },
+  {
+    q: 'Les campus et sites de recherche relèvent-ils de la même approche ?',
+    a: 'Le principe reste le même, mais les contraintes sont plus fortes : locaux sensibles, restauration collective, continuité de service, exigences de traçabilité. Le piégeage mécanique et l’obturation y occupent une place dominante, l’appâtage étant réservé aux volumes techniques périphériques.',
+  },
+  {
+    q: 'Un pavillon avec sous-sol semi-enterré est-il plus exposé ?',
+    a: 'Il présente un point de vigilance supplémentaire : les ouvertures de ventilation du sous-sol, souvent au ras du sol extérieur et fréquemment détériorées. C’est l’un des accès les plus classiques pour le rat brun en habitat individuel. Un grillage métallique fixé règle le problème durablement.',
+  },
+  {
+    q: 'Intervenez-vous sur les centres anciens comme Étampes ou Corbeil-Essonnes ?',
+    a: 'Oui. Ces secteurs présentent un bâti ancien avec caves maçonnées, commerces de centre-ville et réseaux parfois anciens. L’inspection y est plus longue car les passages sont diffus : joints creusés, canalisations abandonnées, communications entre caves mitoyennes.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation en Essonne (91)',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris en Essonne : vallées de l’Orge et de l’Yvette, pôles tertiaires, centres anciens et pavillonnaire.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Essonne (91) : rats et souris"
+  description="Dératisation en Essonne : vallées de l’Orge et de l’Yvette, pôles tertiaires, centres anciens et pavillonnaire. Contexte local et communes couvertes."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Essonne • 91"
+    title="Dératisation en Essonne"
+    lede="L’Essonne s’organise largement autour de ses vallées : l’habitat s’y est installé le long de l’Orge, de l’Yvette et de la Seine, avec des sous-sols proches de la nappe et des berges toutes proches. C’est ce qui oriente la plupart des interventions du département."
+    primaryLabel="Décrire ma situation"
+    meta={[`Préfecture : ${dep.prefecture}`, 'Grande couronne', `${dep.communes.length}+ communes couvertes`]}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Les fonds de vallée</h2>
+      <p>
+        Une part importante du bâti essonnien se situe en fond de vallée :
+        Savigny-sur-Orge, Sainte-Geneviève-des-Bois, Athis-Mons, Viry-Châtillon,
+        Longjumeau, Draveil. Cette position a des conséquences concrètes.
+      </p>
+      <p>
+        Les sols y sont plus humides, les sous-sols parfois sujets aux remontées
+        d’eau, et les berges offrent au rat brun ce qu’il recherche : de l’eau en
+        permanence et un terrain meuble où creuser. Les accès à surveiller se
+        situent donc en priorité en partie basse du bâtiment.
+      </p>
+      <ul class="ticks">
+        <li>ventilations de sous-sol semi-enterré, souvent au ras du sol extérieur&nbsp;;</li>
+        <li>regards et tampons non scellés dans les jardins&nbsp;;</li>
+        <li>traversées de réseaux en pied de mur&nbsp;;</li>
+        <li>fissures et joints ouverts au niveau du soubassement&nbsp;;</li>
+        <li>drains et évacuations d’eaux pluviales.</li>
+      </ul>
+
+      <h2>Les pôles tertiaires et d’enseignement</h2>
+      <p>
+        Massy, Palaiseau, Les Ulis, Évry-Courcouronnes et le plateau de Saclay
+        concentrent bureaux, campus, laboratoires et restauration collective.
+        Les contraintes y sont spécifiques : continuité de service, locaux
+        sensibles, exigences de traçabilité, forte fréquentation.
+      </p>
+      <p>
+        Dans ces environnements, la souris est l’espèce la plus souvent en
+        cause, avec des indices apparaissant d’abord dans les espaces de pause,
+        les locaux déchets et les faux plafonds. Le piégeage mécanique et
+        l’obturation dominent ; l’appâtage reste cantonné aux volumes techniques.
+        Voir <a href="/deratisation-entreprises">entreprises et locaux professionnels</a>.
+      </p>
+
+      <h2>Les centres anciens</h2>
+      <p>
+        Étampes, Corbeil-Essonnes, Montlhéry ou Arpajon conservent un bâti
+        ancien avec caves maçonnées, commerces de centre-ville et réseaux parfois
+        anciens. Comme dans tout bâti de ce type, les passages sont diffus
+        plutôt que nets : joints creusés, canalisations abandonnées,
+        communications entre caves mitoyennes.
+      </p>
+      <p>
+        L’inspection y prend plus de temps, et la fermeture relève du rebouchage
+        maçonné. Voir <a href="/inspection-rongeurs">inspection des points d’entrée</a>.
+      </p>
+
+      <h2>Le pavillonnaire et les franges agricoles</h2>
+      <p>
+        Sur une grande partie du département, l’habitat individuel domine. Les
+        points d’entrée sont les classiques de la maison : vide sanitaire,
+        garage, combles, abords. Au sud, vers la Beauce et les plateaux
+        agricoles, les dépendances et abris de jardin reçoivent parfois des
+        mulots à l’automne — un rongeur extérieur qui n’a pas le même
+        comportement que la souris domestique, et qui se règle par l’obturation.
+      </p>
+
+      <h2>Synthèse des priorités en Essonne</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Priorité d’action selon le secteur.</caption>
+          <thead>
+            <tr><th scope="col">Secteur</th><th scope="col">Espèce dominante</th><th scope="col">Priorité</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Fond de vallée</th><td>Rat brun</td><td>Fermeture du soubassement et des regards</td></tr>
+            <tr><th scope="row">Collectif dense</th><td>Rat brun / souris</td><td>Caves, locaux déchets, gaines</td></tr>
+            <tr><th scope="row">Tertiaire et campus</th><td>Souris</td><td>Espaces de pause, faux plafonds, obturation</td></tr>
+            <tr><th scope="row">Centre ancien</th><td>Rat brun</td><td>Inspection des maçonneries</td></tr>
+            <tr><th scope="row">Pavillonnaire</th><td>Souris</td><td>Combles, garage, abords</td></tr>
+            <tr><th scope="row">Frange agricole</th><td>Mulot (saisonnier)</td><td>Obturation des dépendances</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band band--marked">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--light">Couverture</p>
+      <h2>Communes desservies en Essonne</h2>
+      <p class="lede" style="margin-bottom:1.75rem">
+        Liste non exhaustive — l’ensemble du département est couvert.
+      </p>
+      <ul class="inline-list">
+        {dep.communes.map((c) => <li>{c}</li>)}
+      </ul>
+      <div class="btn-row">
+        {villes.map((v) => (
+          <a class="btn btn--outline-light" href={`/deratisation-${v.slug}`}>{v.name}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Essonne : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Continuer"
+    eyebrow="Maillage"
+    items={[
+      { href: '/deratisation-massy', label: 'Massy', note: 'Page communale' },
+      { href: '/deratisation-entreprises', label: 'Entreprises', note: 'Tertiaire et campus' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Soubassements et abords' },
+      { href: '/deratisation-rats', label: 'Dératisation rats', note: 'Fonds de vallée' },
+      { href: '/deratisation-particuliers', label: 'Particuliers', note: 'Pavillons' },
+      { href: '/zones-intervention', label: 'Toutes les zones', note: 'Île-de-France' },
+    ]}
+  />
+
+  <CtaBand
+    title="Sous-sol semi-enterré ou maison en fond de vallée ?"
+    text="Ce sont les configurations où la fermeture du soubassement change tout. Décrivez le bâtiment, nous vous indiquons les points à vérifier."
+    eyebrow="Essonne"
+    variant="petrol"
+  />
+</BaseLayout>

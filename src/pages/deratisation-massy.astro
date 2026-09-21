@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-massy', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Essonne', href: '/zones-intervention/essonne' },
+  { label: 'Massy', href: '/deratisation-massy' },
+];
+
+const faq = [
+  {
+    q: 'Pourquoi les quartiers de gares sont-ils plus exposés ?',
+    a: 'Parce que la restauration rapide y est dense et que la production de déchets s’étale sur une large amplitude horaire. La ressource devient quasi continue, ce qui fixe une population sur le secteur. La gestion des bacs et l’absence de dépôt au sol y pèsent davantage que n’importe quel traitement.',
+  },
+  {
+    q: 'Les immeubles de bureaux récents sont-ils concernés ?',
+    a: 'Ils sont généralement bien fermés, mais comportent des parkings, des locaux déchets intégrés, des espaces de restauration et des faux plafonds continus. La souris y est l’espèce dominante, et les premiers indices apparaissent presque toujours dans les zones de pause avant les volumes techniques.',
+  },
+  {
+    q: 'Que vérifier dans une résidence récente ?',
+    a: 'Le local déchets et les rampes de parking en priorité, puis les traversées de gaines entre niveaux. Dans les programmes récents, ce ne sont pas les façades qui posent problème mais la continuité interne : une fois entré, un rongeur circule facilement entre les niveaux.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Massy',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Massy : quartiers de gares, immeubles de bureaux, résidences récentes et zones d’activité.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Massy (91300) : gares, bureaux, résidences"
+  description="Dératisation à Massy : quartiers de gares, immeubles de bureaux, résidences récentes et zones d’activité. Diagnostic, traitement et prévention."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Massy • 91300"
+    title="Dératisation à Massy"
+    lede="Massy s’est construite autour de ses gares et de son pôle tertiaire. Cela crée une configuration particulière en grande couronne : une densité d’activité et de flux comparable à la petite couronne, dans un bâti majoritairement récent."
+    primaryLabel="Décrire mon site"
+    meta={['Essonne (91)', 'Pôle de gares', 'Tertiaire et résidences récentes']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left">
+        <div class="prose">
+          <h2>Le quartier des gares</h2>
+          <p>
+            La concentration d’une restauration rapide dense autour d’un pôle de
+            transport produit un effet connu : la production de déchets s’étale
+            sur une large amplitude horaire, au lieu de se concentrer sur
+            quelques pics.
+          </p>
+          <p>
+            Pour une population de rongeurs, une ressource continue vaut mieux
+            qu’une ressource abondante mais intermittente. C’est ce qui explique
+            la relative stabilité des situations dans ce type de secteur, et
+            c’est pourquoi la discipline sur les déchets y produit plus d’effet
+            que l’intensification du traitement.
+          </p>
+
+          <h2>Le tertiaire</h2>
+          <p>
+            Les immeubles de bureaux du secteur sont récents et bien fermés sur
+            l’extérieur. Leur vulnérabilité est interne : parkings, locaux
+            déchets intégrés, espaces de restauration et de pause, faux plafonds
+            et chemins de câbles continus.
+          </p>
+          <p>
+            L’espèce dominante y est la souris, et les premiers indices
+            apparaissent dans les tisaneries et cafétérias. Le risque principal
+            reste le rongement des faisceaux. Voir
+            <a href="/deratisation-entreprises#bureaux">entreprises et bureaux</a>.
+          </p>
+
+          <h2>Les résidences récentes</h2>
+          <p>
+            Même logique que dans le tertiaire : l’enveloppe est correcte, la
+            continuité interne ne l’est pas toujours. Les points à vérifier en
+            priorité sont le local déchets, les rampes de parking et les
+            traversées de gaines entre niveaux.
+          </p>
+
+          <h2>Les zones d’activité</h2>
+          <p>
+            Les sites d’activité et de stockage de la commune relèvent de
+            l’approche décrite pour la logistique : protéger l’enveloppe,
+            tenir les abords, détecter tôt à l’intérieur. Voir
+            <a href="/deratisation-entreprises#entrepots">entrepôts et logistique</a>.
+          </p>
+
+          <h2>Prévention à Massy</h2>
+          <ul class="ticks">
+            <li>Traiter les espaces de pause comme des zones à risque : contenants fermés, déchets sortis chaque jour.</li>
+            <li>Fermer les locaux déchets : bas de porte métallique, bacs à couvercle.</li>
+            <li>Sécuriser les rampes de parking.</li>
+            <li>Obturer les traversées de gaines entre niveaux.</li>
+            <li>Dans les zones d’activité : portes fermées hors opérations, abords dégagés.</li>
+          </ul>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Selon votre site</h3>
+          <p>Le bon point d’entrée.</p>
+          <ul>
+            <li><a href="/deratisation-entreprises">Bureaux et locaux professionnels</a></li>
+            <li><a href="/deratisation-restaurants">Restauration</a></li>
+            <li><a href="/deratisation-coproprietes">Résidence</a></li>
+            <li><a href="/zones-intervention/essonne">Essonne (91)</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Massy : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/zones-intervention/essonne', label: 'Essonne', note: 'Page départementale' },
+      { href: '/deratisation-entreprises', label: 'Entreprises', note: 'Tertiaire' },
+      { href: '/deratisation-souris', label: 'Dératisation souris', note: 'Espaces de pause' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Déchets et gaines' },
+    ]}
+  />
+
+  <CtaBand
+    title="Des indices dans une tisanerie ou un local de pause ?"
+    text="C’est presque toujours le premier signal dans un immeuble tertiaire. Mieux vaut le traiter avant qu’il n’atteigne les faux plafonds."
+    eyebrow="Massy"
+  />
+</BaseLayout>

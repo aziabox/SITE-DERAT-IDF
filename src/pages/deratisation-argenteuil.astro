@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-argenteuil', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Val-d’Oise', href: '/zones-intervention/val-doise' },
+  { label: 'Argenteuil', href: '/deratisation-argenteuil' },
+];
+
+const faq = [
+  {
+    q: 'Pavillon ou immeuble : la méthode est-elle la même ?',
+    a: 'Non, et à Argenteuil la question se pose vraiment puisque les deux types d’habitat coexistent largement. En pavillon, l’enjeu est l’enveloppe : ventilation de vide sanitaire, garage, toiture, abords. En collectif, c’est le périmètre : caves, vide sanitaire, gaines, local déchets. Les dispositifs et le nombre de passages diffèrent en conséquence.',
+  },
+  {
+    q: 'Le coteau et les dénivelés changent-ils quelque chose ?',
+    a: 'Oui, sur la localisation des ouvertures. Les terrains en pente produisent des sous-sols semi-enterrés, avec des ventilations au ras du sol extérieur d’un côté et des accès de plain-pied de l’autre. L’inspection doit faire le tour complet du bâtiment plutôt que de se limiter à la façade principale.',
+  },
+  {
+    q: 'Les berges de Seine influencent-elles les interventions ?',
+    a: 'Pour les bâtiments proches, oui : eau permanente et sol meuble favorisent l’installation de rats bruns en extérieur. La priorité devient la fermeture du pied de bâtiment et la gestion des déchets côté rue, plutôt que le traitement intérieur seul.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Argenteuil',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Argenteuil : pavillonnaire, habitat collectif, centre ancien et berges de Seine.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Argenteuil (95100) : rats et souris"
+  description="Dératisation à Argenteuil : pavillons, habitat collectif, centre ancien et bords de Seine. Enveloppe, périmètre et prévention adaptée au bâtiment."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Argenteuil • 95100"
+    title="Dératisation à Argenteuil"
+    lede="Commune la plus peuplée du Val-d’Oise, Argenteuil mélange pavillonnaire étendu, habitat collectif, centre ancien et berges de Seine. La première question que nous posons y est toujours la même : maison ou immeuble ?"
+    primaryLabel="Décrire mon logement"
+    meta={['Val-d’Oise (95)', 'Pavillonnaire et collectif', 'Bords de Seine']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <h2>Deux habitats, deux méthodes</h2>
+          <p>
+            Argenteuil a cette particularité de réunir, à parts importantes,
+            de l’habitat individuel et de l’habitat collectif. Or ces deux
+            types de bâtiment n’ont ni les mêmes points d’entrée, ni les mêmes
+            périmètres d’intervention.
+          </p>
+
+          <h3>En pavillon : l’enveloppe</h3>
+          <p>
+            Tout se joue sur la fermeture du bâtiment et sur les abords. Les
+            accès récurrents sont connus : ventilation de vide sanitaire, jeu
+            sous la porte de garage, about de toiture, traversées de réseaux en
+            pied de mur, regards non scellés. S’y ajoutent les abris extérieurs :
+            abri de jardin, bûcher, composteur, végétation en contact avec la
+            façade.
+          </p>
+          <p>
+            Dans cette configuration, un traitement court suffit souvent, à
+            condition que la prévention suive. Voir
+            <a href="/deratisation-particuliers">particuliers</a>.
+          </p>
+
+          <h3>En collectif : le périmètre</h3>
+          <p>
+            Ici, la question devient : jusqu’où va le sous-sol. Caves, vide
+            sanitaire, gaines verticales, local déchets. Une intervention
+            limitée à une cage d’escalier n’atteint pas la population si le
+            volume technique est continu. Voir
+            <a href="/deratisation-coproprietes">copropriétés</a>.
+          </p>
+
+          <h2>Le relief et les sous-sols semi-enterrés</h2>
+          <p>
+            Les terrains en pente de la commune produisent des configurations
+            particulières : sous-sols semi-enterrés, ventilations au ras du sol
+            extérieur, accès de plain-pied côté haut. Les ouvertures ne se
+            trouvent donc pas toujours là où on les attend, ce qui impose de
+            faire le tour complet du bâtiment.
+          </p>
+
+          <h2>Les berges de Seine</h2>
+          <p>
+            Pour les bâtiments proches des berges, la pression extérieure est
+            plus soutenue : eau permanente, sol meuble, abris. La réponse n’est
+            pas d’intensifier le traitement intérieur mais de fermer le pied de
+            bâtiment.
+          </p>
+
+          <h2>Prévention à Argenteuil</h2>
+          <ul class="ticks">
+            <li>Grillager toutes les ventilations de vide sanitaire, sur toutes les faces.</li>
+            <li>Poser un bas de porte métallique sur le garage.</li>
+            <li>Surélever les stockages dans les abris de jardin.</li>
+            <li>Fermer les composteurs et les éloigner des façades.</li>
+            <li>En collectif : tenir le local déchets et supprimer le stockage au sol en cave.</li>
+          </ul>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Selon votre logement</h3>
+          <p>Le bon point d’entrée.</p>
+          <ul>
+            <li><a href="/deratisation-particuliers">Maison ou pavillon</a></li>
+            <li><a href="/deratisation-coproprietes">Immeuble collectif</a></li>
+            <li><a href="/prevention-rongeurs">Prévention et abords</a></li>
+            <li><a href="/zones-intervention/val-doise">Val-d’Oise (95)</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Argenteuil : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/zones-intervention/val-doise', label: 'Val-d’Oise', note: 'Page départementale' },
+      { href: '/deratisation-particuliers', label: 'Particuliers', note: 'Pavillons' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Enveloppe et abords' },
+      { href: '/blog/comment-securiser-les-points-dentree', label: 'Sécuriser les points d’entrée', note: 'Guide' },
+    ]}
+  />
+
+  <CtaBand
+    title="Maison ou immeuble ? Dites-le-nous en premier"
+    text="C’est l’information qui change tout : les accès, le périmètre, le nombre de passages et la part de prévention."
+    eyebrow="Argenteuil"
+  />
+</BaseLayout>

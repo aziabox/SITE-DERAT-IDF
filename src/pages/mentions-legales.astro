@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Mentions légales', href: '/mentions-legales' },
+];
+
+/**
+ * Cette page n'invente aucune information légale.
+ * Tant que l'identité de l'éditeur n'est pas renseignee dans src/data/site.ts,
+ * la page reste en noindex et signale explicitement ce qui manque.
+ */
+const complete = Boolean(site.legalName && site.siret && site.address && site.email);
+---
+<BaseLayout
+  title="Mentions légales — Dératisation Île-de-France"
+  description="Mentions légales du site : éditeur, hébergement, propriété intellectuelle et conditions d’utilisation."
+  crumbs={crumbs}
+  noindex={!complete}
+>
+  <section class="section">
+    <div class="wrap wrap--narrow prose" style="padding-block:clamp(2rem,5vw,3.5rem)">
+      <p class="eyebrow">Informations légales</p>
+      <h1 style="font-size:var(--step-4)">Mentions légales</h1>
+
+      {!complete && (
+        <div class="answer" style="border-top-color:var(--danger)">
+          <p><strong>Page à compléter avant mise en ligne.</strong></p>
+          <p>
+            Les informations d’identification de l’éditeur (dénomination sociale,
+            forme juridique, capital, SIRET, RCS, adresse du siège, directeur de
+            la publication, e-mail de contact, numéro de TVA le cas échéant)
+            doivent être renseignées dans <code>src/data/site.ts</code>.
+            Tant qu’elles sont absentes, cette page est en <code>noindex</code>
+            et aucune information n’est inventée ici.
+          </p>
+        </div>
+      )}
+
+      <h2>Éditeur du site</h2>
+      <ul class="ticks">
+        <li><strong>Dénomination</strong> : {site.legalName ?? '— à renseigner —'}</li>
+        <li><strong>Nom commercial</strong> : {site.brand}</li>
+        <li><strong>SIRET</strong> : {site.siret ?? '— à renseigner —'}</li>
+        <li><strong>Siège social</strong> : {site.address ? `${site.address.streetAddress}, ${site.address.postalCode} ${site.address.addressLocality}` : '— à renseigner —'}</li>
+        <li><strong>Téléphone</strong> : {site.phoneDisplay}</li>
+        <li><strong>E-mail</strong> : {site.email ?? '— à renseigner —'}</li>
+      </ul>
+
+      <h2>Hébergement</h2>
+      <p>
+        Les coordonnées de l’hébergeur (dénomination, adresse, téléphone) sont à
+        compléter en fonction de la plateforme d’hébergement retenue.
+      </p>
+
+      <h2>Activité réglementée</h2>
+      <p>
+        L’emploi de produits biocides rodenticides à usage professionnel est
+        encadré par la réglementation européenne et nationale relative aux
+        produits biocides. Elle impose notamment la détention du certificat
+        Certibiocide pour l’achat et l’application de ces produits, la
+        sécurisation et la traçabilité des points d’appâtage, ainsi que leur
+        retrait en fin de traitement.
+      </p>
+      {site.certifications.length > 0 ? (
+        <ul class="ticks">
+          {site.certifications.map((c) => <li>{c}</li>)}
+        </ul>
+      ) : (
+        <p class="note">
+          Les références de certification de l’entreprise seront publiées ici
+          dès qu’elles auront été renseignées. Aucune certification n’est
+          affichée tant qu’elle n’est pas vérifiable.
+        </p>
+      )}
+
+      <h2>Propriété intellectuelle</h2>
+      <p>
+        L’ensemble des contenus de ce site — textes, structure, identité
+        visuelle, éléments graphiques — est protégé par le droit de la propriété
+        intellectuelle. Toute reproduction ou représentation, totale ou
+        partielle, sans autorisation écrite préalable est interdite.
+      </p>
+
+      <h2>Limitation de responsabilité</h2>
+      <p>
+        Les informations techniques publiées sur ce site ont une vocation
+        informative. Elles décrivent des principes généraux d’identification et
+        de traitement des rongeurs et ne se substituent pas à un diagnostic
+        réalisé sur site. Chaque bâtiment présente des configurations qui lui
+        sont propres.
+      </p>
+
+      <h2>Données personnelles</h2>
+      <p>
+        Le traitement des données transmises via le formulaire de contact est
+        décrit dans la <a href="/politique-de-confidentialite">politique de confidentialité</a>.
+      </p>
+
+      <h2>Liens externes</h2>
+      <p>
+        Ce site peut renvoyer vers des ressources externes. Leur contenu relève
+        de la responsabilité de leurs éditeurs respectifs.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

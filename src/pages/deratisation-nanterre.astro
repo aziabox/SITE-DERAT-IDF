@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-nanterre', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Hauts-de-Seine', href: '/zones-intervention/hauts-de-seine' },
+  { label: 'Nanterre', href: '/deratisation-nanterre' },
+];
+
+const faq = [
+  {
+    q: 'Un chantier proche peut-il expliquer une apparition soudaine de rats ?',
+    a: 'Oui, et c’est un mécanisme bien connu. Un terrassement, une démolition ou un curage de réseau détruit les abris d’une population installée dans le sol. Les animaux se reportent alors vers les bâtiments voisins. Dans ce cas, la réponse prioritaire n’est pas le traitement intérieur mais l’obturation du bâtiment.',
+  },
+  {
+    q: 'Les bords de Seine changent-ils quelque chose ?',
+    a: 'Les berges offrent de l’eau en permanence et un sol meuble où creuser, deux conditions favorables au rat brun. Pour un bâtiment riverain, cela déplace la priorité vers la fermeture du pied de bâtiment : soupiraux, regards, traversées de réseaux, et gestion des déchets côté extérieur.',
+  },
+  {
+    q: 'Intervenez-vous dans les immeubles de bureaux du secteur ouest de la commune ?',
+    a: 'Oui, sur les locaux privatifs comme sur les volumes techniques, en coordination avec le gestionnaire. Dans ce type d’immeuble, le traitement porte principalement sur les niveaux inférieurs, les locaux déchets, la restauration d’entreprise et les chemins de câbles.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Nanterre',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Nanterre : habitat mixte, secteur tertiaire, bords de Seine et zones en chantier.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Nanterre (92000) : rats et souris"
+  description="Dératisation à Nanterre : habitat mixte, secteur tertiaire, bords de Seine et quartiers en travaux. Diagnostic, obturation et traitement."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Nanterre • 92000"
+    title="Dératisation à Nanterre"
+    lede="Préfecture des Hauts-de-Seine, Nanterre associe des quartiers en transformation permanente, un secteur tertiaire dense à l’est et de longues berges de Seine. Trois contextes où la question de l’obturation prime souvent sur celle du traitement."
+    primaryLabel="Décrire ma situation"
+    meta={['Hauts-de-Seine (92)', 'Secteur tertiaire', 'Bords de Seine']}
+  />
+
+  <section class="section">
+    <div class="wrap wrap--narrow prose">
+      <h2>Une commune en transformation</h2>
+      <p>
+        Nanterre présente une caractéristique qui influence directement nos
+        interventions : l’intensité et la continuité des opérations
+        d’aménagement. Terrassements, démolitions, réaménagements de voirie,
+        travaux de réseaux se succèdent sur plusieurs secteurs.
+      </p>
+      <p>
+        Ces chantiers ont un effet documenté sur les populations de rongeurs :
+        ils détruisent les abris souterrains et provoquent un report vers les
+        bâtiments voisins. Un immeuble sans historique qui voit apparaître des
+        indices en quelques semaines a très souvent un chantier à proximité
+        immédiate.
+      </p>
+      <div class="keyline">
+        <p>
+          Dans cette configuration, traiter l’intérieur sans fermer le bâtiment
+          revient à absorber une pression qui va se maintenir tant que le
+          chantier dure.
+        </p>
+      </div>
+
+      <h2>Les trois contextes de la commune</h2>
+
+      <h3>L’habitat mixte</h3>
+      <p>
+        Centre ancien, grands ensembles, résidences récentes et secteurs
+        pavillonnaires coexistent. Les périmètres d’intervention varient donc
+        fortement : caves cloisonnées dans l’ancien, vide sanitaire continu et
+        gaines verticales dans le collectif, combles et abords dans le
+        pavillonnaire.
+      </p>
+
+      <h3>Le secteur tertiaire</h3>
+      <p>
+        À l’est de la commune, les immeubles de bureaux posent les questions
+        classiques du tertiaire : espaces de pause, locaux déchets, restauration
+        d’entreprise, faux plafonds et chemins de câbles. La souris y domine, et
+        le risque principal est le rongement des faisceaux. Voir
+        <a href="/deratisation-entreprises">entreprises</a>.
+      </p>
+
+      <h3>Les bords de Seine</h3>
+      <p>
+        Les berges offrent au rat brun eau et terrain meuble. La priorité pour
+        un bâtiment riverain est la fermeture du pied de bâtiment, pas le
+        traitement intérieur.
+      </p>
+
+      <h2>Prévention à Nanterre</h2>
+      <ul class="ticks">
+        <li>Obturer en priorité si un chantier est ouvert à proximité.</li>
+        <li>Grillager soupiraux et ventilations de vide sanitaire.</li>
+        <li>Sceller les regards, en particulier côté berges et espaces extérieurs.</li>
+        <li>Fermer les locaux déchets et tenir les horaires de sortie.</li>
+        <li>Obturer les traversées techniques dans les immeubles de bureaux.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Nanterre : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/zones-intervention/hauts-de-seine', label: 'Hauts-de-Seine', note: 'Page départementale' },
+      { href: '/deratisation-courbevoie', label: 'Courbevoie', note: 'Commune voisine' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Obturation prioritaire' },
+      { href: '/deratisation-entreprises', label: 'Entreprises', note: 'Secteur tertiaire' },
+    ]}
+  />
+
+  <CtaBand
+    title="Un chantier vient d’ouvrir près de chez vous ?"
+    text="C’est le moment de fermer le bâtiment, avant que la pression ne se traduise par une installation."
+    eyebrow="Nanterre"
+    variant="petrol"
+  />
+</BaseLayout>

@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import PageHero from '../components/PageHero.astro';
+import { serviceSchema } from '../lib/seo';
+
+const origin = Astro.site?.origin ?? '';
+const url = new URL('/deratisation-boulogne-billancourt', origin).href;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: 'Hauts-de-Seine', href: '/zones-intervention/hauts-de-seine' },
+  { label: 'Boulogne-Billancourt', href: '/deratisation-boulogne-billancourt' },
+];
+
+const faq = [
+  {
+    q: 'Les immeubles récents du sud de la commune sont-ils concernés ?',
+    a: 'Oui, mais différemment. Les programmes récents sont généralement bien fermés sur l’extérieur ; leur point faible se situe dans les parkings sur plusieurs niveaux, les locaux déchets intégrés et les gaines techniques continues. Une fois à l’intérieur, un rongeur circule facilement d’un bâtiment à l’autre lorsque les sous-sols communiquent.',
+  },
+  {
+    q: 'Que faire si les indices sont dans le parking de la résidence ?',
+    a: 'Le parking relève des parties communes : c’est au syndic d’engager l’intervention. Signalez par écrit, en précisant le niveau, l’emplacement et la nature des indices. Un traitement limité aux logements situés au-dessus n’aurait pas d’effet durable, puisque la population est installée au niveau inférieur.',
+  },
+  {
+    q: 'Les immeubles des années 1930 posent-ils des difficultés spécifiques ?',
+    a: 'Leur particularité tient aux caves et aux gaines. Les sous-sols de cette période sont souvent vastes, cloisonnés en boxes, avec des passages techniques entre volumes. L’inspection doit vérifier si ces caves communiquent entre escaliers, ce qui change complètement le périmètre à traiter.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    origin,
+    url,
+    name: 'Dératisation à Boulogne-Billancourt',
+    serviceType: 'Dératisation',
+    description:
+      'Traitement des rats et des souris à Boulogne-Billancourt : immeubles denses, parkings souterrains, quartiers récents et commerces de pied d’immeuble.',
+  }),
+];
+---
+<BaseLayout
+  title="Dératisation Boulogne-Billancourt (92100) : rats et souris"
+  description="Dératisation à Boulogne-Billancourt : parkings souterrains, immeubles denses, quartiers récents et commerces. Diagnostic, traitement et sécurisation."
+  crumbs={crumbs}
+  schema={schema}
+  faq={faq}
+>
+  <PageHero
+    eyebrow="Boulogne-Billancourt • 92100"
+    title="Dératisation à Boulogne-Billancourt"
+    lede="Commune la plus peuplée des Hauts-de-Seine, Boulogne-Billancourt cumule une densité résidentielle forte et des volumes souterrains étendus. Ici, presque toutes les interventions commencent par le parking ou la cave."
+    primaryLabel="Décrire mon bâtiment"
+    meta={['Hauts-de-Seine (92)', 'Parkings sur plusieurs niveaux', 'Résidentiel dense']}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--wide-left split--sticky">
+        <div class="prose">
+          <h2>Un bâti en deux couches</h2>
+          <p>
+            Boulogne-Billancourt superpose deux générations de bâti. D’un côté,
+            un parc dense d’immeubles construits entre les années 1920 et 1970,
+            avec des sous-sols cloisonnés en boxes et des gaines techniques
+            anciennes. De l’autre, les quartiers issus de la reconversion des
+            anciens terrains industriels du sud de la commune, avec des
+            programmes récents, des parkings sur plusieurs niveaux et des
+            locaux déchets intégrés aux bâtiments.
+          </p>
+          <p>
+            Dans les deux cas, le point commun est la continuité souterraine.
+            C’est elle qui détermine le périmètre d’une intervention.
+          </p>
+
+          <h2>Les situations que nous rencontrons le plus</h2>
+          <ul class="ticks">
+            <li><strong>Parkings résidentiels</strong> — indices au niveau -1 ou -2, souvent près des locaux techniques ou des rampes d’accès.</li>
+            <li><strong>Caves en boxes</strong> — stockage au sol, cloisons ajourées, passages techniques entre volumes.</li>
+            <li><strong>Locaux déchets</strong> — bas de porte usé, bacs sans couvercle, sacs déposés au sol.</li>
+            <li><strong>Commerces de pied d’immeuble</strong> — réserves en sous-sol communicantes avec les caves d’habitation.</li>
+            <li><strong>Logements</strong> — indices de souris en cuisine, traversées de canalisation non obturées.</li>
+          </ul>
+
+          <h2>Comment nous intervenons ici</h2>
+          <p>
+            La séquence typique : descendre au niveau le plus bas, établir si les
+            sous-sols communiquent entre bâtiments, traiter le local déchets et
+            les zones de stockage, puis obturer les accès — rampes, traversées,
+            gaines, portes.
+          </p>
+          <p>
+            Lorsque la résidence comprend plusieurs bâtiments reliés par un
+            parking commun, le traitement doit porter sur l’ensemble du niveau
+            technique. Le détail de cette organisation figure sur la page
+            <a href="/deratisation-coproprietes">copropriétés</a>.
+          </p>
+
+          <h2>Prévention adaptée à la commune</h2>
+          <p>
+            Trois mesures donnent ici l’essentiel du résultat : un bas de porte
+            métallique sur le local déchets, la suppression du stockage au sol
+            dans les caves et les boxes, et la fermeture des traversées
+            techniques entre le parking et les parties habitées.
+          </p>
+          <p>
+            Pour les commerces, s’y ajoute le rayonnage des réserves, décollé du
+            sol et des murs. Voir <a href="/prevention-rongeurs">prévention des rongeurs</a>.
+          </p>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Autour de Boulogne</h3>
+          <p>Pages liées.</p>
+          <ul>
+            <li><a href="/zones-intervention/hauts-de-seine">Hauts-de-Seine (92)</a></li>
+            <li><a href="/deratisation-courbevoie">Courbevoie</a></li>
+            <li><a href="/deratisation-nanterre">Nanterre</a></li>
+            <li><a href="/deratisation-coproprietes">Copropriétés</a></li>
+            <li><a href="/deratisation-rats">Dératisation rats</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Boulogne-Billancourt : questions locales" eyebrow="Questions fréquentes" />
+
+  <RelatedLinks
+    title="Aller plus loin"
+    eyebrow="Maillage"
+    items={[
+      { href: '/zones-intervention/hauts-de-seine', label: 'Hauts-de-Seine', note: 'Page départementale' },
+      { href: '/deratisation-coproprietes', label: 'Copropriétés', note: 'Parkings et caves' },
+      { href: '/deratisation-souris', label: 'Dératisation souris', note: 'Logements' },
+      { href: '/prevention-rongeurs', label: 'Prévention', note: 'Local déchets' },
+    ]}
+  />
+
+  <CtaBand
+    title="Indices au parking ? Signalez-le au syndic, et faites établir un constat"
+    text="Un relevé écrit du niveau, de l’emplacement et de la nature des indices accélère considérablement la prise de décision en copropriété."
+    eyebrow="Boulogne-Billancourt"
+  />
+</BaseLayout>

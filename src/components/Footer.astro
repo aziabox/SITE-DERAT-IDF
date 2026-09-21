@@ -1,0 +1,62 @@
+---
+import Logo from './Logo.astro';
+import { site, telHref } from '../data/site';
+import { navServices, navClients, navZones } from '../data/nav';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <a class="logo" href="/" style="color:#fff" aria-label={`${site.brand} — accueil`}>
+          <Logo class="logo__mark" />
+          <span>{site.brandMark}<small style="color:var(--amber)">Rats &amp; souris · Île-de-France</small></span>
+        </a>
+        <p style="margin-top:1.25rem;max-width:34ch">
+          Dératisation des rats et des souris en Île-de-France : diagnostic,
+          recherche des points d’entrée, traitement, sécurisation et prévention.
+        </p>
+        <p>
+          <a href={telHref} style="color:var(--amber);font-weight:700;font-size:1.15rem">{site.phoneDisplay}</a><br />
+          <span style="font-size:0.88rem">{site.openingHours}</span>
+        </p>
+      </div>
+
+      <div>
+        <h3>Interventions</h3>
+        <ul>
+          {navServices.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+        </ul>
+      </div>
+
+      <div>
+        <h3>Qui nous appelle</h3>
+        <ul>
+          {navClients.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+        </ul>
+        <h3 style="margin-top:1.75rem">Ressources</h3>
+        <ul>
+          <li><a href="/blog">Blog dératisation</a></li>
+          <li><a href="/contact">Décrire mon problème</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Zones d’intervention</h3>
+        <ul>
+          <li><a href="/zones-intervention">Toute l’Île-de-France</a></li>
+          {navZones.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p style="margin:0">© {year} {site.brand}. Tous droits réservés.</p>
+      <p style="margin:0;display:flex;gap:1.25rem;flex-wrap:wrap">
+        <a href="/mentions-legales">Mentions légales</a>
+        <a href="/politique-de-confidentialite">Confidentialité</a>
+        <a href="/plan-du-site">Plan du site</a>
+      </p>
+    </div>
+  </div>
+</footer>
