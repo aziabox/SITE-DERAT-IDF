@@ -2,7 +2,7 @@
 
 Généré automatiquement par `npm run audit:dup` — 2026-09-21.
 
-- Pages indexables analysées : **74**
+- Pages indexables analysées : **72**
 - Méthode : similarité de Jaccard sur les 5-grammes de mots du contenu principal
 - Seuil d'alerte : **0.3** · Seuil bloquant : **0.5**
 - Similarité maximale observée entre deux pages locales : **0.075** (/deratisation-creteil ↔ /deratisation-paris/13e-arrondissement)
@@ -71,9 +71,7 @@ Généré automatiquement par `npm run audit:dup` — 2026-09-21.
 | `/infestation-rats` | 1033 | 1023 |
 | `/infestation-souris` | 888 | 883 |
 | `/inspection-rongeurs` | 947 | 941 |
-| `/mentions-legales` | 531 | 524 |
 | `/plan-du-site` | 319 | 314 |
-| `/politique-de-confidentialite` | 528 | 520 |
 | `/prevention-rongeurs` | 1044 | 1033 |
 | `/traitement-rats` | 1121 | 1110 |
 | `/traitement-souris` | 1025 | 1019 |

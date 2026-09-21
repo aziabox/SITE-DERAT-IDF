@@ -53,7 +53,7 @@ const year = new Date().getFullYear();
     <div class="footer__bottom">
       <p style="margin:0">
         © {year} {site.brand}. Tous droits réservés.
-        {site.legalName && (
+        {site.showLegalIdentitySitewide && site.legalName && (
           <><br /><span style="font-size:0.82rem">
             {site.legalName}{site.legalForm ? ` — ${site.legalForm}` : ''}
             {site.siret ? ` · SIRET ${formatSiret(site.siret)}` : ''}

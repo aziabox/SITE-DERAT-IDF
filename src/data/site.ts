@@ -64,6 +64,19 @@ export interface SiteConfig {
   /** Numero Certibiocide ou autre certification : uniquement si detenu et verifiable. */
   certifications: string[];
 
+  /**
+   * Diffusion de l'identite legale AILLEURS que sur les pages legales.
+   *
+   * `false` (defaut) : le nom de l'exploitant, le SIRET et l'adresse
+   * n'apparaissent que sur /mentions-legales et /politique-de-confidentialite,
+   * ou la loi l'impose. Ils ne sont repris ni en pied de page, ni dans les
+   * donnees structurees, ni dans aucun contenu editorial.
+   *
+   * `true` : l'identite legale est egalement publiee a l'echelle du site
+   * (pied de page et JSON-LD). A n'activer que si c'est un choix assume.
+   */
+  showLegalIdentitySitewide: boolean;
+
   /** Hebergeur du site (art. 6 III LCEN). */
   host: {
     name: string;
@@ -128,6 +141,9 @@ export const site: SiteConfig = {
 
   directeurPublication: 'Bilal ASSOUL',
   certifications: [],
+
+  // L'identite legale reste cantonnee aux pages legales.
+  showLegalIdentitySitewide: false,
 
   host: {
     name: 'Hostinger',

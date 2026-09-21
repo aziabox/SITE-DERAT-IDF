@@ -46,7 +46,8 @@ export function organizationSchema(origin: string) {
     ],
     availableLanguage: 'fr',
   };
-  if (site.legalName) node.legalName = site.legalName;
+  // Identite legale : publiee a l'echelle du site uniquement si c'est un choix assume.
+  if (site.showLegalIdentitySitewide && site.legalName) node.legalName = site.legalName;
   if (site.email) node.email = site.email;
   // Adresse emise uniquement s'il existe un etablissement recevant du public.
   // Le siege social d'une activite qui se rend chez le client n'en est pas un :
@@ -60,8 +61,10 @@ export function organizationSchema(origin: string) {
       addressCountry: 'FR',
     };
   }
-  if (site.siret) node.identifier = { '@type': 'PropertyValue', propertyID: 'SIRET', value: site.siret };
-  if (site.vatNumber) node.vatID = site.vatNumber;
+  if (site.showLegalIdentitySitewide && site.siret) {
+    node.identifier = { '@type': 'PropertyValue', propertyID: 'SIRET', value: site.siret };
+  }
+  if (site.showLegalIdentitySitewide && site.vatNumber) node.vatID = site.vatNumber;
   if (site.openingHoursSchema.length) {
     node.openingHoursSpecification = site.openingHoursSchema.map((h) => {
       const [days, range] = h.split(' ');

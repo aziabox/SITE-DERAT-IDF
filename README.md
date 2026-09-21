@@ -68,6 +68,20 @@ ni affichés, ni envoyés dans les données structurées.
 l'article 6 III de la LCEN manque (éditeur, SIRET, siège, directeur de la
 publication, hébergeur) et signale les points ci-dessus en avertissement.
 
+### Diffusion de l'identité légale
+
+`showLegalIdentitySitewide` (à `false`) cantonne le nom de l'exploitant, le
+SIRET et l'adresse aux seules pages `/mentions-legales` et
+`/politique-de-confidentialite`, où la loi les impose. Ils n'apparaissent alors
+ni en pied de page, ni dans les données structurées, ni dans aucun contenu
+éditorial.
+
+Ces deux pages sont en `noindex, follow` : elles restent accessibles depuis le
+site, mais ne remontent pas dans les résultats de recherche.
+
+Passer le drapeau à `true` republie l'identité à l'échelle du site (pied de
+page, `legalName`, SIRET et TVA en JSON-LD).
+
 ### Deux adresses, deux usages
 
 - `legalAddress` — le siège social. Publié **uniquement** dans les mentions
