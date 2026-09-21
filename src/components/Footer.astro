@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-import { site, telHref } from '../data/site';
+import { site, telHref, formatSiret } from '../data/site';
 import { navServices, navClients, navZones } from '../data/nav';
 const year = new Date().getFullYear();
 ---
@@ -51,7 +51,15 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="footer__bottom">
-      <p style="margin:0">© {year} {site.brand}. Tous droits réservés.</p>
+      <p style="margin:0">
+        © {year} {site.brand}. Tous droits réservés.
+        {site.legalName && (
+          <><br /><span style="font-size:0.82rem">
+            {site.legalName}{site.legalForm ? ` — ${site.legalForm}` : ''}
+            {site.siret ? ` · SIRET ${formatSiret(site.siret)}` : ''}
+          </span></>
+        )}
+      </p>
       <p style="margin:0;display:flex;gap:1.25rem;flex-wrap:wrap">
         <a href="/mentions-legales">Mentions légales</a>
         <a href="/politique-de-confidentialite">Confidentialité</a>

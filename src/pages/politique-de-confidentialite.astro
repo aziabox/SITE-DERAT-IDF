@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../data/site';
+import { site, telHref, formatAddress, formatSiret } from '../data/site';
 
 const crumbs = [
   { label: 'Accueil', href: '/' },
@@ -9,7 +9,7 @@ const crumbs = [
 ---
 <BaseLayout
   title="Politique de confidentialité — Dératisation Île-de-France"
-  description="Traitement des données transmises via le formulaire : finalité, base légale, destinataires, durée de conservation et exercice de vos droits."
+  description="Responsable de traitement, données collectées, finalité, base légale, destinataires, durée de conservation et exercice de vos droits."
   crumbs={crumbs}
 >
   <section class="section">
@@ -18,47 +18,83 @@ const crumbs = [
       <h1 style="font-size:var(--step-4)">Politique de confidentialité</h1>
       <p class="lede">
         Ce site collecte le minimum d’informations nécessaires pour répondre à
-        une demande d’intervention. Aucune donnée n’est vendue ni utilisée à des
-        fins publicitaires.
+        une demande d’intervention. Aucune donnée n’est vendue, louée, ni
+        utilisée à des fins publicitaires.
+      </p>
+
+      <h2>Responsable du traitement</h2>
+      <ul class="ticks">
+        {site.legalName && (
+          <li>
+            <strong>{site.legalName}</strong>
+            {site.legalForm && <> — {site.legalForm}</>}
+            {site.brand && <>, exploitant sous le nom commercial {site.brand}</>}
+          </li>
+        )}
+        {site.legalAddress && <li>{formatAddress(site.legalAddress)}</li>}
+        {site.siret && <li>SIRET&nbsp;: {formatSiret(site.siret)}</li>}
+        <li>Téléphone&nbsp;: <a href={telHref}>{site.phoneDisplay}</a></li>
+        {site.email && <li>E-mail&nbsp;: <a href={`mailto:${site.email}`}>{site.email}</a></li>}
+      </ul>
+      <p>
+        Compte tenu de la nature et du volume des traitements réalisés, la
+        désignation d’un délégué à la protection des données n’est pas requise.
       </p>
 
       <h2>Quelles données sont collectées</h2>
       <p>
         Uniquement celles que vous transmettez volontairement via le formulaire
-        de contact ou lors d’un appel :
+        de contact ou lors d’un appel&nbsp;:
       </p>
       <ul class="ticks">
         <li>identité déclarée (nom) et coordonnées (téléphone, e-mail si fourni)&nbsp;;</li>
         <li>localisation de l’intervention (ville ou code postal)&nbsp;;</li>
-        <li>éléments techniques de la demande : espèce constatée, type de bâtiment, zone concernée, description&nbsp;;</li>
+        <li>éléments techniques de la demande&nbsp;: espèce constatée, type de bâtiment, zone concernée, description&nbsp;;</li>
         <li>photographie éventuellement jointe.</li>
       </ul>
       <p>
-        Le site ne dépose aucun cookie publicitaire ni traceur tiers, et
-        n’embarque aucun script de mesure d’audience externe.
+        Aucune donnée sensible n’est demandée. Merci de ne pas transmettre
+        d’information de cette nature dans le champ de description.
       </p>
 
-      <h2>Pourquoi elles sont collectées</h2>
+      <h2>Cookies et mesure d’audience</h2>
+      <p>
+        Le site ne dépose <strong>aucun cookie publicitaire</strong>, aucun
+        traceur tiers, et n’embarque aucun script de mesure d’audience externe.
+        Les polices de caractères sont hébergées sur le site lui-même&nbsp;:
+        aucune requête n’est adressée à un service tiers lors de votre
+        navigation. Aucun bandeau de consentement n’est donc nécessaire.
+      </p>
+
+      <h2>Pourquoi ces données sont collectées</h2>
       <p>
         Pour répondre à votre demande, évaluer la situation, organiser une
         intervention et en assurer le suivi. La base légale est l’exécution de
-        mesures précontractuelles prises à votre demande, puis, le cas échéant,
-        l’exécution du contrat.
+        mesures précontractuelles prises à votre demande (article 6.1.b du
+        RGPD), puis, le cas échéant, l’exécution du contrat.
       </p>
 
       <h2>Combien de temps elles sont conservées</h2>
       <ul class="ticks">
-        <li><strong>Demande sans suite</strong> : suppression dans un délai raisonnable après le dernier échange.</li>
-        <li><strong>Intervention réalisée</strong> : conservation pendant la durée nécessaire au suivi technique et aux obligations légales et comptables applicables.</li>
-        <li><strong>Photographies transmises</strong> : conservées uniquement le temps nécessaire au diagnostic et au dossier d’intervention.</li>
+        <li><strong>Demande sans suite</strong>&nbsp;: suppression dans un délai raisonnable après le dernier échange.</li>
+        <li><strong>Intervention réalisée</strong>&nbsp;: conservation pendant la durée nécessaire au suivi technique, puis selon les obligations légales et comptables applicables.</li>
+        <li><strong>Photographies transmises</strong>&nbsp;: conservées uniquement le temps nécessaire au diagnostic et au dossier d’intervention.</li>
       </ul>
 
       <h2>Qui y a accès</h2>
       <p>
         Les personnes intervenant dans le traitement de votre demande. Les
-        données peuvent être hébergées par un prestataire technique agissant
-        pour notre compte. Elles ne sont ni cédées, ni louées, ni transmises à
-        des tiers à des fins commerciales.
+        données sont hébergées par{' '}
+        {site.host ? (
+          <>
+            <strong>{site.host.legalName}</strong> ({formatAddress(site.host.address)}),
+            agissant en qualité de sous-traitant pour le compte du responsable
+            de traitement
+          </>
+        ) : (
+          <>l’hébergeur du site, agissant en qualité de sous-traitant</>
+        )}. Elles ne sont ni cédées, ni louées, ni transmises à des tiers à des
+        fins commerciales.
       </p>
 
       <h2>Vos droits</h2>
@@ -70,8 +106,18 @@ const crumbs = [
       </p>
       <p>
         Pour les exercer, contactez-nous
-        {site.email ? <> à l’adresse <a href={`mailto:${site.email}`}>{site.email}</a></> : <> par téléphone au <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></>}.
-        Vous pouvez également introduire une réclamation auprès de la CNIL.
+        {site.email ? (
+          <> à l’adresse <a href={`mailto:${site.email}`}>{site.email}</a></>
+        ) : (
+          <> par téléphone au <a href={telHref}>{site.phoneDisplay}</a></>
+        )}
+        {site.legalAddress && <>, ou par courrier à l’adresse suivante&nbsp;: {formatAddress(site.legalAddress)}</>}.
+        Une réponse vous est apportée dans un délai d’un mois.
+      </p>
+      <p>
+        Vous pouvez également introduire une réclamation auprès de la
+        Commission nationale de l’informatique et des libertés (CNIL),
+        3 place de Fontenoy, 75007 Paris.
       </p>
 
       <h2>Sécurité</h2>

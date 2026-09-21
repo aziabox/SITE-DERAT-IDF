@@ -41,11 +41,33 @@ if (!/formEndpoint:\s*process\.env\.FORM_ENDPOINT/.test(src)) {
 if (!process.env.FORM_ENDPOINT) {
   warnings.push('FORM_ENDPOINT non défini : le formulaire n’enverra rien. À brancher avant mise en ligne.');
 }
-if (/email:\s*null/.test(src)) {
-  warnings.push('site.email est vide : le bloc contact n’affichera pas d’e-mail.');
+
+// Mentions légales : art. 6 III de la LCEN.
+const LEGAL_REQUIRED = [
+  ['legalName', 'dénomination de l’éditeur'],
+  ['siret', 'SIRET'],
+  ['legalAddress', 'siège social'],
+  ['directeurPublication', 'directeur de la publication'],
+  ['host', 'hébergeur'],
+];
+for (const [field, label] of LEGAL_REQUIRED) {
+  if (new RegExp(`${field}:\\s*null`).test(src)) {
+    errors.push(`Mention légale obligatoire absente : ${label} (site.${field}).`);
+  }
 }
-if (/address:\s*null/.test(src)) {
-  warnings.push('site.address est null : aucun schéma LocalBusiness avec adresse ne sera émis (comportement voulu tant qu’aucun établissement réel n’est déclaré).');
+
+// Recommandé sans être bloquant.
+if (/email:\s*null/.test(src)) {
+  warnings.push('site.email est vide : aucune adresse de contact n’est publiée pour l’exercice des droits RGPD.');
+}
+if (/mediator:\s*null/.test(src)) {
+  warnings.push('site.mediator est vide : l’adhésion à un médiateur de la consommation est obligatoire pour un professionnel intervenant chez des particuliers.');
+}
+if (/vatNumber:\s*null/.test(src)) {
+  warnings.push('site.vatNumber est vide : aucune ligne TVA n’est publiée (régime de franchise en base supposé).');
+}
+if (/publicAddress:\s*null/.test(src)) {
+  warnings.push('site.publicAddress est null : aucune adresse postale n’est émise en JSON-LD (comportement voulu pour une activité qui se rend chez le client).');
 }
 if (!process.env.SITE_URL) {
   warnings.push('SITE_URL non défini : le domaine par défaut d’astro.config.mjs est utilisé pour les canonicals.');

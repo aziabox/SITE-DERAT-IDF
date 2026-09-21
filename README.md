@@ -33,22 +33,49 @@ Sans `FORM_ENDPOINT`, le formulaire est rendu et validé côté navigateur mais
 
 ---
 
-## À compléter avant mise en ligne
+## Identité légale et éléments à compléter
 
 Tout est centralisé dans **`src/data/site.ts`**. Le principe du projet est
 qu'aucune information commerciale n'est inventée : les champs à `null` ne sont
 ni affichés, ni envoyés dans les données structurées.
 
-| Champ | État | Conséquence tant qu'il est vide |
-| --- | --- | --- |
-| `phone` / `phoneDisplay` | **Renseigné** — 07 56 82 27 85 | — |
-| `legalName`, `siret`, `address`, `email` | `null` | `/mentions-legales` reste en `noindex` et signale ce qui manque ; aucune adresse n'est émise en JSON-LD |
-| `certifications` | `[]` | Aucune certification affichée (elles ne le seront que si elles sont réelles et vérifiables) |
-| `formEndpoint` | via `FORM_ENDPOINT` | Formulaire non branché |
+### Renseigné
 
-Le fichier `scripts/check-config.mjs` **interrompt le build** si un numéro
-factice ou un placeholder est détecté, et refuse toute donnée structurée
-d'autorité non vérifiable (`aggregateRating`, `ratingValue`, `priceRange`…).
+| Champ | Valeur |
+| --- | --- |
+| `legalName` / `legalForm` | Bilal ASSOUL — Entrepreneur individuel (EI) |
+| `brand` | Dératisation Île-de-France (nom commercial) |
+| `phone` | 07 56 82 27 85 |
+| `legalAddress` | 1 rue Albert Simonin, 92400 Courbevoie |
+| `siren` / `siret` | 901 133 041 / 901 133 041 00011 |
+| `rcs` | 901 133 041 R.C.S. Nanterre, inscrit le 07/07/2021 |
+| `naf` | 81.29A — Désinfection, désinsectisation, dératisation |
+| `directeurPublication` | Bilal ASSOUL |
+| `host` | Hostinger International Ltd, Larnaca (Chypre) |
+
+### Reste à compléter
+
+| Champ | Conséquence tant qu'il est vide | Bloquant |
+| --- | --- | --- |
+| `email` | Aucune adresse de contact publiée pour l'exercice des droits RGPD ; la politique de confidentialité renvoie au téléphone et au courrier | Non |
+| `mediator` | Les mentions légales signalent l'absence de médiateur. **L'adhésion à un dispositif de médiation est obligatoire** pour un professionnel intervenant chez des particuliers (art. L.616-1 du code de la consommation) | Non, mais à régulariser |
+| `vatNumber` | Aucune ligne TVA publiée. À renseigner uniquement si l'entreprise devient assujettie ; en franchise en base, laisser `null` | Non |
+| `certifications` | Aucune certification affichée. Y placer le numéro Certibiocide s'il est détenu | Non |
+| `FORM_ENDPOINT` | Le formulaire est rendu et validé mais ne transmet rien | Oui, avant mise en ligne |
+| `SITE_URL` | Le domaine par défaut d'`astro.config.mjs` sert aux canonicals | Oui, avant mise en ligne |
+
+`scripts/check-config.mjs` **interrompt le build** si une mention obligatoire de
+l'article 6 III de la LCEN manque (éditeur, SIRET, siège, directeur de la
+publication, hébergeur) et signale les points ci-dessus en avertissement.
+
+### Deux adresses, deux usages
+
+- `legalAddress` — le siège social. Publié **uniquement** dans les mentions
+  légales, où la loi l'impose.
+- `publicAddress` — un établissement recevant du public. C'est le seul cas où
+  une adresse postale est émise en JSON-LD. Il est à `null` ici : l'activité se
+  rend chez le client, et déclarer le siège comme un point d'accueil induirait
+  les moteurs en erreur. Le service est décrit par `areaServed`.
 
 ### Avis clients
 

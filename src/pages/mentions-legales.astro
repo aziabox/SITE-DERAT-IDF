@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../data/site';
+import { site, telHref, formatAddress, formatSiren, formatSiret } from '../data/site';
 
 const crumbs = [
   { label: 'Accueil', href: '/' },
@@ -8,15 +8,21 @@ const crumbs = [
 ];
 
 /**
- * Cette page n'invente aucune information légale.
- * Tant que l'identité de l'éditeur n'est pas renseignee dans src/data/site.ts,
+ * La page n'invente aucune information légale : chaque bloc n'est rendu que
+ * si la donnée correspondante existe dans src/data/site.ts. Tant que les
+ * mentions obligatoires de l'article 6 III de la LCEN ne sont pas réunies,
  * la page reste en noindex et signale explicitement ce qui manque.
  */
-const complete = Boolean(site.legalName && site.siret && site.address && site.email);
+const complete = Boolean(
+  site.legalName && site.siret && site.legalAddress && site.host && site.directeurPublication
+);
+
+const dateFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+const fmt = (iso: string | null) => (iso ? dateFmt.format(new Date(iso)) : null);
 ---
 <BaseLayout
   title="Mentions légales — Dératisation Île-de-France"
-  description="Mentions légales du site : éditeur, hébergement, propriété intellectuelle et conditions d’utilisation."
+  description="Éditeur du site, hébergement, cadre réglementaire de l’activité, propriété intellectuelle et traitement des données personnelles."
   crumbs={crumbs}
   noindex={!complete}
 >
@@ -24,45 +30,102 @@ const complete = Boolean(site.legalName && site.siret && site.address && site.em
     <div class="wrap wrap--narrow prose" style="padding-block:clamp(2rem,5vw,3.5rem)">
       <p class="eyebrow">Informations légales</p>
       <h1 style="font-size:var(--step-4)">Mentions légales</h1>
+      <p class="lede">
+        Informations publiées en application de l’article 6 III de la loi
+        n°&nbsp;2004-575 du 21 juin 2004 pour la confiance dans l’économie
+        numérique.
+      </p>
 
       {!complete && (
         <div class="answer" style="border-top-color:var(--danger)">
           <p><strong>Page à compléter avant mise en ligne.</strong></p>
           <p>
-            Les informations d’identification de l’éditeur (dénomination sociale,
-            forme juridique, capital, SIRET, RCS, adresse du siège, directeur de
-            la publication, e-mail de contact, numéro de TVA le cas échéant)
-            doivent être renseignées dans <code>src/data/site.ts</code>.
-            Tant qu’elles sont absentes, cette page est en <code>noindex</code>
-            et aucune information n’est inventée ici.
+            Les mentions obligatoires de l’éditeur ou de l’hébergeur sont
+            incomplètes dans <code>src/data/site.ts</code>. Tant qu’elles le
+            sont, cette page reste en <code>noindex</code> et aucune
+            information n’est inventée ici.
           </p>
         </div>
       )}
 
       <h2>Éditeur du site</h2>
+      <p>
+        Le présent site est édité par <strong>{site.legalName}</strong>
+        {site.legalForm && <> — {site.legalForm} —</>}, exploitant sous le nom
+        commercial <strong>{site.brand}</strong>.
+      </p>
       <ul class="ticks">
-        <li><strong>Dénomination</strong> : {site.legalName ?? '— à renseigner —'}</li>
-        <li><strong>Nom commercial</strong> : {site.brand}</li>
-        <li><strong>SIRET</strong> : {site.siret ?? '— à renseigner —'}</li>
-        <li><strong>Siège social</strong> : {site.address ? `${site.address.streetAddress}, ${site.address.postalCode} ${site.address.addressLocality}` : '— à renseigner —'}</li>
-        <li><strong>Téléphone</strong> : {site.phoneDisplay}</li>
-        <li><strong>E-mail</strong> : {site.email ?? '— à renseigner —'}</li>
+        {site.legalName && <li><strong>Éditeur</strong> : {site.legalName}</li>}
+        {site.legalForm && <li><strong>Forme juridique</strong> : {site.legalForm}</li>}
+        {site.brand && <li><strong>Nom commercial</strong> : {site.brand}</li>}
+        {site.legalAddress && (
+          <li><strong>Siège social</strong> : {formatAddress(site.legalAddress)}</li>
+        )}
+        <li><strong>Téléphone</strong> : <a href={telHref}>{site.phoneDisplay}</a></li>
+        {site.email && <li><strong>E-mail</strong> : <a href={`mailto:${site.email}`}>{site.email}</a></li>}
+        {site.siren && <li><strong>SIREN</strong> : {formatSiren(site.siren)}</li>}
+        {site.siret && <li><strong>SIRET (siège)</strong> : {formatSiret(site.siret)}</li>}
+        {site.rcs && (
+          <li>
+            <strong>Immatriculation</strong> : {site.rcs}
+            {fmt(site.rcsDate) && <> (inscription le {fmt(site.rcsDate)})</>}
+          </li>
+        )}
+        {site.naf && (
+          <li>
+            <strong>Code APE</strong> : {site.naf}
+            {site.nafLabel && <> — {site.nafLabel}</>}
+          </li>
+        )}
+        {site.vatNumber && <li><strong>TVA intracommunautaire</strong> : {site.vatNumber}</li>}
+        {site.directeurPublication && (
+          <li><strong>Directeur de la publication</strong> : {site.directeurPublication}</li>
+        )}
       </ul>
+      {!site.vatNumber && (
+        <p class="note">
+          L’entreprise n’est pas assujettie à la TVA&nbsp;: aucun numéro de TVA
+          intracommunautaire n’est publié. Cette mention sera ajoutée si le
+          régime change.
+        </p>
+      )}
 
       <h2>Hébergement</h2>
-      <p>
-        Les coordonnées de l’hébergeur (dénomination, adresse, téléphone) sont à
-        compléter en fonction de la plateforme d’hébergement retenue.
-      </p>
+      {site.host ? (
+        <>
+          <p>Le site est hébergé par&nbsp;:</p>
+          <ul class="ticks">
+            <li><strong>Hébergeur</strong> : {site.host.legalName} ({site.host.name})</li>
+            <li><strong>Adresse</strong> : {formatAddress(site.host.address)}</li>
+            <li>
+              <strong>Site</strong> :{' '}
+              <a href={site.host.url} rel="noopener nofollow" target="_blank">{site.host.url}</a>
+            </li>
+            <li>
+              <strong>Contact</strong> :{' '}
+              <a href={site.host.contactUrl} rel="noopener nofollow" target="_blank">
+                {site.host.contactUrl}
+              </a>
+            </li>
+          </ul>
+        </>
+      ) : (
+        <p class="note">Coordonnées de l’hébergeur à renseigner.</p>
+      )}
 
-      <h2>Activité réglementée</h2>
+      <h2>Activité et cadre réglementaire</h2>
+      <p>
+        L’activité exercée est la dératisation, c’est-à-dire le traitement des
+        rongeurs — rats et souris — dans les bâtiments, pour les particuliers
+        comme pour les professionnels, en Île-de-France.
+      </p>
       <p>
         L’emploi de produits biocides rodenticides à usage professionnel est
-        encadré par la réglementation européenne et nationale relative aux
-        produits biocides. Elle impose notamment la détention du certificat
-        Certibiocide pour l’achat et l’application de ces produits, la
-        sécurisation et la traçabilité des points d’appâtage, ainsi que leur
-        retrait en fin de traitement.
+        encadré par le règlement (UE) n°&nbsp;528/2012 et par la réglementation
+        nationale relative aux produits biocides. Celle-ci impose notamment la
+        détention du certificat Certibiocide pour l’achat et l’application de
+        ces produits, la sécurisation et la traçabilité des points d’appâtage,
+        ainsi que leur retrait en fin de traitement.
       </p>
       {site.certifications.length > 0 ? (
         <ul class="ticks">
@@ -83,6 +146,11 @@ const complete = Boolean(site.legalName && site.siret && site.address && site.em
         intellectuelle. Toute reproduction ou représentation, totale ou
         partielle, sans autorisation écrite préalable est interdite.
       </p>
+      <p>
+        Les contours administratifs des départements utilisés par la carte
+        d’Île-de-France proviennent des données ouvertes de l’IGN, diffusées
+        sous Licence Ouverte (Etalab).
+      </p>
 
       <h2>Limitation de responsabilité</h2>
       <p>
@@ -92,17 +160,54 @@ const complete = Boolean(site.legalName && site.siret && site.address && site.em
         réalisé sur site. Chaque bâtiment présente des configurations qui lui
         sont propres.
       </p>
+      <p>
+        L’éditeur met tout en œuvre pour que les informations publiées soient
+        exactes et à jour, sans pouvoir en garantir l’exhaustivité.
+      </p>
 
-      <h2>Données personnelles</h2>
+      <h2>Données personnelles et cookies</h2>
       <p>
         Le traitement des données transmises via le formulaire de contact est
-        décrit dans la <a href="/politique-de-confidentialite">politique de confidentialité</a>.
+        décrit dans la{' '}
+        <a href="/politique-de-confidentialite">politique de confidentialité</a>.
+        Le site ne dépose aucun cookie publicitaire, aucun traceur tiers et
+        n’embarque aucun script de mesure d’audience externe.
       </p>
 
       <h2>Liens externes</h2>
       <p>
         Ce site peut renvoyer vers des ressources externes. Leur contenu relève
         de la responsabilité de leurs éditeurs respectifs.
+      </p>
+
+      <h2>Médiation de la consommation</h2>
+      {site.mediator ? (
+        <>
+          <p>
+            Conformément à l’article L.616-1 du code de la consommation, le
+            client particulier peut recourir gratuitement au médiateur de la
+            consommation suivant en vue de la résolution amiable d’un litige&nbsp;:
+          </p>
+          <ul class="ticks">
+            <li><strong>Médiateur</strong> : {site.mediator.name}</li>
+            <li><strong>Adresse</strong> : {site.mediator.address}</li>
+            <li>
+              <strong>Site</strong> :{' '}
+              <a href={site.mediator.url} rel="noopener nofollow" target="_blank">{site.mediator.url}</a>
+            </li>
+          </ul>
+        </>
+      ) : (
+        <p class="note">
+          Coordonnées du médiateur de la consommation à renseigner. L’adhésion à
+          un dispositif de médiation est obligatoire pour tout professionnel
+          intervenant auprès de particuliers.
+        </p>
+      )}
+
+      <h2>Droit applicable</h2>
+      <p>
+        Le présent site et ses mentions légales sont soumis au droit français.
       </p>
     </div>
   </section>

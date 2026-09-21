@@ -48,15 +48,20 @@ export function organizationSchema(origin: string) {
   };
   if (site.legalName) node.legalName = site.legalName;
   if (site.email) node.email = site.email;
-  if (site.address) {
+  // Adresse emise uniquement s'il existe un etablissement recevant du public.
+  // Le siege social d'une activite qui se rend chez le client n'en est pas un :
+  // le declarer comme tel induirait les moteurs en erreur.
+  if (site.publicAddress) {
     node.address = {
       '@type': 'PostalAddress',
-      streetAddress: site.address.streetAddress,
-      postalCode: site.address.postalCode,
-      addressLocality: site.address.addressLocality,
+      streetAddress: site.publicAddress.street,
+      postalCode: site.publicAddress.postalCode,
+      addressLocality: site.publicAddress.city,
       addressCountry: 'FR',
     };
   }
+  if (site.siret) node.identifier = { '@type': 'PropertyValue', propertyID: 'SIRET', value: site.siret };
+  if (site.vatNumber) node.vatID = site.vatNumber;
   if (site.openingHoursSchema.length) {
     node.openingHoursSpecification = site.openingHoursSchema.map((h) => {
       const [days, range] = h.split(' ');
