@@ -3,16 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import Faq from '../../components/Faq.astro';
 import PageHero from '../../components/PageHero.astro';
-import { departementsHorsParis, villes } from '../../data/idf';
+import IdfMap from '../../components/IdfMap.astro';
+import { villes } from '../../data/idf';
 
 const origin = Astro.site?.origin ?? '';
 const crumbs = [
   { label: 'Accueil', href: '/' },
   { label: 'Zones d’intervention', href: '/zones-intervention' },
 ];
-
-const petite = departementsHorsParis.filter((d) => d.couronne === 'Petite couronne');
-const grande = departementsHorsParis.filter((d) => d.couronne === 'Grande couronne');
 
 const faq = [
   {
@@ -117,50 +115,41 @@ const faq = [
         pour les secteurs dont le contexte urbain justifie un contenu spécifique.
       </p>
       <div class="btn-row" style="margin-top:0">
-        <a class="btn btn--amber" href="/deratisation-paris">Dératisation à Paris</a>
+        <a class="btn btn--clay" href="/deratisation-paris">Dératisation à Paris</a>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--ruled" aria-labelledby="carte-zones-titre">
     <div class="wrap">
-      <p class="eyebrow">Petite couronne</p>
-      <h2>Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne</h2>
-      <p class="lede" style="margin-bottom:2.25rem">
-        Territoires denses, en contact direct avec Paris, où coexistent habitat
-        collectif, tissu ancien et zones d’activité.
-      </p>
-      <ul class="links-grid">
-        {petite.map((d) => (
-          <li>
-            <a href={`/zones-intervention/${d.slug}`}>
-              Dératisation {d.prep} {d.name} ({d.code})
-              <span>Préfecture&nbsp;: {d.prefecture}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+      <IdfMap
+        id="carte-zones"
+        heading="Les huit départements desservis"
+        intro="Cliquez sur un département pour accéder à sa page : contexte du bâti, zones à risque, types de clients et communes couvertes."
+      />
 
-  <section class="section section--ruled">
-    <div class="wrap">
-      <p class="eyebrow">Grande couronne</p>
-      <h2>Val-d’Oise, Yvelines, Essonne, Seine-et-Marne</h2>
-      <p class="lede" style="margin-bottom:2.25rem">
-        Pavillonnaire dominant, centres anciens, zones logistiques et secteurs
-        périurbains où les abords jouent un rôle déterminant.
-      </p>
-      <ul class="links-grid">
-        {grande.map((d) => (
-          <li>
-            <a href={`/zones-intervention/${d.slug}`}>
-              Dératisation {d.prep} {d.name} ({d.code})
-              <span>Préfecture&nbsp;: {d.prefecture}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div class="cols cols--2" style="margin-top:clamp(2.5rem,5vw,3.5rem)">
+        <div class="prose">
+          <h3>Petite couronne</h3>
+          <p>
+            Les Hauts-de-Seine, la Seine-Saint-Denis et le Val-de-Marne forment
+            la ceinture en contact direct avec Paris. Territoires denses, où
+            coexistent habitat collectif, tissu ancien et zones d’activité. Les
+            volumes souterrains — parkings, vides sanitaires, galeries
+            techniques — y concentrent l’essentiel des interventions.
+          </p>
+        </div>
+        <div class="prose">
+          <h3>Grande couronne</h3>
+          <p>
+            Le Val-d’Oise, les Yvelines, l’Essonne et la Seine-et-Marne font une
+            place bien plus large à l’habitat individuel. L’enjeu se déplace
+            vers l’enveloppe du bâtiment et ses abords : ventilation de vide
+            sanitaire, garage, combles, abri de jardin, végétation en contact
+            avec la façade.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 

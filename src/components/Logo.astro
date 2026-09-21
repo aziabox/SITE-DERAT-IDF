@@ -2,6 +2,10 @@
 interface Props { class?: string }
 const { class: className } = Astro.props;
 ---
+<!--
+  Le contour reprend la couleur du texte environnant (currentColor).
+  L'accent utilise --logo-accent, redéfini sur fond sombre pour rester lisible.
+-->
 <svg
   class={className}
   viewBox="0 0 32 32"
@@ -18,5 +22,5 @@ const { class: className } = Astro.props;
     stroke-linejoin="round"
     stroke-linecap="square"
   />
-  <rect x="11.1" y="17.6" width="9.8" height="11.4" fill="#ffc21f" />
+  <rect x="11.1" y="17.6" width="9.8" height="11.4" fill="var(--logo-accent, #b0542c)" />
 </svg>

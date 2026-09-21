@@ -3,8 +3,8 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Faq from '../components/Faq.astro';
+import IdfMap from '../components/IdfMap.astro';
 import { site, telHref, cta } from '../data/site';
-import { departementsHorsParis } from '../data/idf';
 import { serviceSchema } from '../lib/seo';
 
 const origin = Astro.site?.origin ?? '';
@@ -74,7 +74,7 @@ const dateFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long'
             l’infestation et fermer les accès par lesquels les rongeurs entrent.
           </p>
           <div class="btn-row">
-            <a class="btn btn--amber" href="/contact">{cta.primary}</a>
+            <a class="btn btn--clay" href="/contact">{cta.primary}</a>
             <a class="btn btn--outline-light" href={telHref}>{cta.call} · {site.phoneDisplay}</a>
           </div>
           <div class="hero__meta">
@@ -84,7 +84,7 @@ const dateFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long'
           </div>
         </div>
 
-        <aside aria-labelledby="signal-titre" style="border:1px solid rgba(255,255,255,0.14);border-top:3px solid var(--amber);padding:clamp(1.4rem,3vw,2rem);background:rgba(255,255,255,0.03)">
+        <aside aria-labelledby="signal-titre" style="border:1px solid rgba(255,255,255,0.14);border-top:3px solid var(--clay-300);padding:clamp(1.4rem,3vw,2rem);background:rgba(255,255,255,0.03)">
           <p class="eyebrow eyebrow--light" style="margin-bottom:0.9rem">Premier repère</p>
           <h2 id="signal-titre" style="font-size:var(--step-2);margin-bottom:1.1rem">Rat ou souris&nbsp;?</h2>
           <div class="table-wrap" style="margin-bottom:0">
@@ -117,8 +117,8 @@ const dateFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long'
             </table>
           </div>
           <p style="margin-top:1.25rem;font-size:0.95rem">
-            <a href="/deratisation-rats" style="color:var(--amber)">Indices de rats</a> ·
-            <a href="/deratisation-souris" style="color:var(--amber)">Indices de souris</a>
+            <a href="/deratisation-rats" style="color:var(--clay-300)">Indices de rats</a> ·
+            <a href="/deratisation-souris" style="color:var(--clay-300)">Indices de souris</a>
           </p>
         </aside>
       </div>
@@ -200,7 +200,7 @@ const dateFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long'
             </li>
           </ul>
           <div class="btn-row">
-            <a class="btn btn--ink" href="/inspection-rongeurs">Faire identifier les traces</a>
+            <a class="btn btn--forest" href="/inspection-rongeurs">Faire identifier les traces</a>
             <a class="btn btn--outline" href="/blog/reconnaitre-crottes-de-rats">Reconnaître des crottes de rats</a>
           </div>
         </div>
@@ -274,7 +274,7 @@ const dateFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long'
             mêmes dispositifs, ni le même nombre de passages.
           </p>
           <div class="btn-row">
-            <a class="btn btn--ink" href="/deratisation">Le service en détail</a>
+            <a class="btn btn--forest" href="/deratisation">Le service en détail</a>
           </div>
         </div>
         <ol class="steps">
@@ -354,35 +354,16 @@ const dateFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long'
   </section>
 
   <!-- ======================= ZONE ======================= -->
-  <section class="section band band--bone" aria-labelledby="zone-titre">
+  <section class="section band band--sand" aria-labelledby="carte-accueil-titre">
     <div class="wrap">
-      <div class="split split--wide-left">
-        <div>
-          <p class="eyebrow">Zone d’intervention</p>
-          <h2 id="zone-titre">Toute l’Île-de-France, département par département</h2>
-          <p class="lede">
-            Le bâti francilien n’est pas homogène&nbsp;: un immeuble haussmannien
-            parisien, une résidence des années 1970 en petite couronne et un pavillon
-            de grande couronne ne se traitent pas de la même façon. C’est pour cette
-            raison que chaque département dispose de sa propre page.
-          </p>
-          <div class="btn-row">
-            <a class="btn btn--ink" href="/zones-intervention">Voir la zone d’intervention</a>
-            <a class="btn btn--outline" href="/deratisation-paris">Dératisation à Paris</a>
-          </div>
-        </div>
-        <div>
-          <ul class="links-grid" style="border-top-color:var(--grey-200)">
-            <li><a href="/deratisation-paris">Paris (75)<span>20 arrondissements</span></a></li>
-            {departementsHorsParis.map((d) => (
-              <li>
-                <a href={`/zones-intervention/${d.slug}`}>
-                  {d.name} ({d.code})<span>{d.couronne}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <IdfMap
+        id="carte-accueil"
+        heading="Toute l’Île-de-France, département par département"
+        intro="Le bâti francilien n’est pas homogène : un immeuble haussmannien parisien, une résidence des années 1970 en petite couronne et un pavillon de grande couronne ne se traitent pas de la même façon. Chaque département a donc sa propre page."
+      />
+      <div class="btn-row" style="margin-top:2.5rem">
+        <a class="btn btn--forest" href="/zones-intervention">Voir la zone d’intervention</a>
+        <a class="btn btn--outline" href="/deratisation-paris">Dératisation à Paris</a>
       </div>
     </div>
   </section>

@@ -1,0 +1,103 @@
+---
+import { DEPT_SHAPES, MAP_VIEWBOX } from '../data/idf-map';
+
+interface Props {
+  /** Titre affiché au-dessus de la carte. */
+  heading?: string;
+  /** Niveau de titre, pour respecter la hiérarchie de la page hôte. */
+  level?: 2 | 3;
+  intro?: string;
+  id?: string;
+}
+
+const { heading = 'Où nous intervenons', level = 2, intro, id = 'carte-idf' } = Astro.props;
+const Heading = `h${level}` as 'h2' | 'h3';
+
+/*
+ * L'ordre de tracé place Paris au-dessus de ses voisins ; l'ordre de lecture
+ * de la légende part au contraire du centre vers la périphérie.
+ */
+const LEGEND_ORDER = ['75', '92', '93', '94', '95', '78', '91', '77'];
+const legend = [...DEPT_SHAPES].sort(
+  (a, b) => LEGEND_ORDER.indexOf(a.code) - LEGEND_ORDER.indexOf(b.code)
+);
+
+/*
+ * Mise en relation carte ↔ légende, sans JavaScript.
+ * Une paire de règles par département : survoler ou focaliser l'un met l'autre
+ * en évidence. Les règles sont générées ici pour rester synchronisées avec les
+ * données, et ne sont chargées que sur les pages qui affichent la carte.
+ */
+const syncRules = DEPT_SHAPES.map(
+  (d) => `
+#${id}:has(.idf-dep--${d.code}:hover) .idf-legend--${d.code} a,
+#${id}:has(.idf-dep--${d.code}:focus-visible) .idf-legend--${d.code} a {
+  background: var(--forest-900);
+  color: var(--white);
+}
+#${id}:has(.idf-legend--${d.code} a:hover) .idf-dep--${d.code} path,
+#${id}:has(.idf-legend--${d.code} a:focus-visible) .idf-dep--${d.code} path {
+  fill: var(--clay);
+}
+#${id}:has(.idf-legend--${d.code} a:hover) .idf-dep--${d.code} text,
+#${id}:has(.idf-legend--${d.code} a:focus-visible) .idf-dep--${d.code} text {
+  fill: var(--white);
+}`
+).join('\n');
+---
+<figure class="idf-map" id={id}>
+  <figcaption class="idf-map__head">
+    <p class="eyebrow">Zone d’intervention</p>
+    <Heading id={`${id}-titre`}>{heading}</Heading>
+    {intro && <p class="lede">{intro}</p>}
+  </figcaption>
+
+  <div class="idf-map__grid">
+    <div class="idf-map__canvas">
+      <svg
+        viewBox={MAP_VIEWBOX}
+        xmlns="http://www.w3.org/2000/svg"
+        aria-labelledby={`${id}-svg-titre ${id}-svg-desc`}
+      >
+        <title id={`${id}-svg-titre`}>
+          Carte des huit départements d’Île-de-France
+        </title>
+        <desc id={`${id}-svg-desc`}>
+          Chaque département est un lien vers sa page d’intervention. La même
+          liste est disponible en texte à côté de la carte.
+        </desc>
+        {DEPT_SHAPES.map((d) => (
+          <a
+            href={d.href}
+            class={`idf-dep idf-dep--${d.code}`}
+            aria-label={`Dératisation ${d.code === '75' ? 'à Paris' : `— ${d.name}`} (${d.code})`}
+          >
+            <path d={d.d} />
+            <text x={d.label.x} y={d.label.y} text-anchor="middle" dominant-baseline="central">
+              {d.code}
+            </text>
+          </a>
+        ))}
+      </svg>
+      <p class="idf-map__note">
+        Contours des départements&nbsp;: données IGN, Licence Ouverte.
+      </p>
+    </div>
+
+    <ul class="idf-map__legend">
+      {legend.map((d) => (
+        <li class={`idf-legend--${d.code}`}>
+          <a href={d.href}>
+            <span class="idf-legend__code">{d.code}</span>
+            <span class="idf-legend__name">
+              {d.code === '75' ? 'Paris' : d.name}
+              <small>{d.code === '75' ? '20 arrondissements' : d.couronne}</small>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</figure>
+
+<style is:inline set:html={syncRules}></style>

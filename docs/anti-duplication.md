@@ -11,7 +11,7 @@ Généré automatiquement par `npm run audit:dup` — 2026-09-21.
 
 | Page | Mots | 5-grammes uniques |
 | --- | ---: | ---: |
-| `/` | 1927 | 1916 |
+| `/` | 1967 | 1956 |
 | `/blog` | 898 | 862 |
 | `/blog/combien-de-temps-pour-eliminer-des-rats` | 967 | 949 |
 | `/blog/comment-empecher-les-rats-dentrer` | 1081 | 1055 |
@@ -76,7 +76,7 @@ Généré automatiquement par `npm run audit:dup` — 2026-09-21.
 | `/prevention-rongeurs` | 1044 | 1033 |
 | `/traitement-rats` | 1121 | 1110 |
 | `/traitement-souris` | 1025 | 1019 |
-| `/zones-intervention` | 908 | 885 |
+| `/zones-intervention` | 1014 | 987 |
 | `/zones-intervention/essonne` | 862 | 834 |
 | `/zones-intervention/hauts-de-seine` | 863 | 856 |
 | `/zones-intervention/seine-et-marne` | 856 | 834 |

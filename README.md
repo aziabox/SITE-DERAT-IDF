@@ -13,6 +13,7 @@ exécutable en une commande.
 npm install
 npm run dev        # http://localhost:4321
 npm run build      # vérifie la config, génère l'OG, construit, écrit le sitemap
+npm run build:map  # régénère les tracés SVG de la carte depuis le GeoJSON
 npm run preview
 npm run audit      # build + audit SEO + audit anti-duplication
 ```
@@ -127,17 +128,70 @@ aucun gabarit générateur de pages locales.
 | Sujet | Choix | Raison |
 | --- | --- | --- |
 | Framework | Astro (sortie statique) | HTML pur, aucun runtime côté client |
-| JavaScript livré | **0 Ko, 0 fichier** | Menu et FAQ en `<details>` natif |
+| JavaScript livré | **0 Ko, 0 fichier** | Menu, FAQ et carte interactive sans script |
 | CSS | Une feuille, inlinée dans le HTML | Aucune requête bloquante pour le rendu |
 | Typographie | Manrope variable auto-hébergée (2 sous-ensembles, ~40 Ko) | Pas de requête tierce, pas de fuite de données |
-| Images | Aucune image bitmap dans les pages | L'identité repose sur la typographie et les filets |
-| Poids page d'accueil | ~16 Ko gzip, tout compris | — |
+| Images | Aucune image bitmap dans les pages | L'identité repose sur la typographie, les filets et la carte SVG |
+| Poids page d'accueil | ~21 Ko gzip, carte comprise | — |
+
+## Palette
+
+Vert forêt profond, sauge, sable et terre cuite. L'accent terre cuite est
+réservé aux appels à l'action, aux éléments d'urgence et aux détails
+graphiques ; il n'est jamais employé en aplat large.
+
+| Rôle | Token | Valeur | Contraste |
+| --- | --- | --- | --- |
+| Surfaces sombres | `--forest-950` / `--forest-900` / `--forest-700` | `#0e2621` `#12302a` `#1d4a3e` | blanc à 15,9 / 14,2 / 10,0:1 |
+| Titres | `--forest-900` | `#12302a` | 14,2:1 sur blanc |
+| Texte courant | `--ink` | `#1c2b26` | 14,8:1 sur blanc |
+| Texte secondaire | `--stone-600` | `#59625c` | 6,3:1 sur blanc |
+| Métadonnées | `--stone-400` | `#666f68` | 5,2:1 sur blanc |
+| Liens, labels | `--sage-700` / `--sage-600` | `#276055` `#2f6355` | 7,3 / 6,9:1 |
+| Boutons d'action | `--clay` / `--clay-600` | `#b0542c` `#9a4520` | blanc à 5,1 / 6,5:1 |
+| Accent sur fond clair | `--clay-700` | `#8f4020` | 7,2:1 sur blanc |
+| Accent sur fond sombre | `--clay-300` | `#e8a98a` | 7,1:1 sur vert 900 |
+| Neutres chauds | `--sand` / `--sand-dim` / `--stone-200` | `#f7f4ed` `#efeade` `#d9d5cb` | fonds et filets |
+
+Chaque valeur destinée à du texte porte son ratio en commentaire dans
+`src/styles/global.css`. **Toute nouvelle couleur doit être vérifiée à 4,5:1
+minimum sur son fond réel avant d'être ajoutée.**
+
+La variante claire d'une bande s'écrit `band--sand` ; les règles pensées pour
+les surfaces sombres sont portées par `.band:not(.band--sand)` afin de ne pas
+s'y appliquer.
+
+## Carte interactive de l'Île-de-France
+
+`src/components/IdfMap.astro` affiche les huit départements en SVG. Elle est
+présente sur l'accueil et sur `/zones-intervention`.
+
+- **Zéro JavaScript.** Chaque département est un `<a>` SVG natif : cliquable,
+  survolable et focalisable au clavier.
+- **Carte et légende synchronisées** par `:has()` — survoler un département
+  met en évidence sa ligne de légende, et réciproquement. Les règles sont
+  générées par le composant à partir des données, et chargées uniquement sur
+  les pages qui affichent la carte.
+- **Accessible** : `<title>` et `<desc>` sur le SVG, `aria-label` par
+  département, et la même liste disponible en texte dans la légende.
+- **Données réelles** : contours IGN via france-geojson, Licence Ouverte
+  (voir `data/SOURCE.md`). Aucun tracé dessiné à la main.
+
+Le tracé est produit hors ligne par `scripts/build-map.mjs` : projection
+équirectangulaire corrigée par `cos(latitude)`, simplification de
+Douglas-Peucker, coordonnées entières et commandes relatives. 5 559 points
+source deviennent 1 053 points, soit 7,8 Ko de données.
+
+```bash
+npm run build:map   # régénère src/data/idf-map.ts depuis le GeoJSON
+```
+
+Le fichier généré est versionné : le build normal n'a pas besoin du GeoJSON.
 
 ### Accessibilité
 
 - Contrastes vérifiés : tous les couples texte/fond du design system sont au
-  minimum à 4,5:1 (voir `--amber-ink`, variante sombre de l'ambre réservée au
-  texte et aux éléments d'interface sur fond clair).
+  minimum à 4,5:1 (voir le tableau de palette ci-dessus).
 - Navigation clavier complète, `:focus-visible` visible sur fond clair et
   sombre, lien d'évitement vers le contenu.
 - Structure sémantique : un seul `<h1>` par page, hiérarchie de titres sans
@@ -177,6 +231,11 @@ toutes les paires de pages indexables.
 
 - Seuil d'alerte : 0,30 · Seuil bloquant : 0,50
 - Rapport détaillé écrit dans `docs/anti-duplication.md`
+
+### `scripts/build-map.mjs`
+
+Convertit `data/departements-ile-de-france.geojson` en `src/data/idf-map.ts`.
+À relancer uniquement si la source géographique change.
 
 ### `scripts/check-config.mjs`
 
